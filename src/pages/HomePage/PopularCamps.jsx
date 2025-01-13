@@ -28,7 +28,7 @@ const PopularCamps = () => {
               50
             </p>
           </div>
-          <div className="card-body space-y-1">
+          <div className="card-body pt-0">
             <div className="flex items-center justify-between text-description">
               <p className="flex items-center gap-1">
                 <FaCalendarAlt /> 15-02-2025
@@ -53,6 +53,14 @@ const PopularCamps = () => {
             <p className="text-description flex items-center gap-1">
               <FaLocationDot className="text-xl" /> Rajshahi, Bangladesh
             </p>
+            <button className="text-end">
+              <Link
+                to={"/camp-details"}
+                className="btn bg-primary hover:bg-primary-hover"
+              >
+                See More
+              </Link>
+            </button>
           </div>
         </div>
         {/* demo cards */}
@@ -66,7 +74,7 @@ const PopularCamps = () => {
               50
             </p>
           </div>
-          <div className="card-body space-y-1">
+          <div className="card-body pt-0">
             <div className="flex items-center justify-between text-description">
               <p className="flex items-center gap-1">
                 <FaCalendarAlt /> 15-02-2025
@@ -91,6 +99,14 @@ const PopularCamps = () => {
             <p className="text-description flex items-center gap-1">
               <FaLocationDot className="text-xl" /> Rajshahi, Bangladesh
             </p>
+            <button className="text-end">
+              <Link
+                to={"/camp-details"}
+                className="btn bg-primary hover:bg-primary-hover"
+              >
+                See More
+              </Link>
+            </button>
           </div>
         </div>
         <div className="card bg-white shadow-card-shadow">
@@ -103,7 +119,7 @@ const PopularCamps = () => {
               50
             </p>
           </div>
-          <div className="card-body space-y-1">
+          <div className="card-body pt-0">
             <div className="flex items-center justify-between text-description">
               <p className="flex items-center gap-1">
                 <FaCalendarAlt /> 15-02-2025
@@ -128,6 +144,14 @@ const PopularCamps = () => {
             <p className="text-description flex items-center gap-1">
               <FaLocationDot className="text-xl" /> Rajshahi, Bangladesh
             </p>
+            <button className="text-end">
+              <Link
+                to={"/camp-details"}
+                className="btn bg-primary hover:bg-primary-hover"
+              >
+                See More
+              </Link>
+            </button>
           </div>
         </div>
         <div className="card bg-white shadow-card-shadow">
@@ -140,7 +164,7 @@ const PopularCamps = () => {
               50
             </p>
           </div>
-          <div className="card-body space-y-1">
+          <div className="card-body pt-0">
             <div className="flex items-center justify-between text-description">
               <p className="flex items-center gap-1">
                 <FaCalendarAlt /> 15-02-2025
@@ -165,6 +189,14 @@ const PopularCamps = () => {
             <p className="text-description flex items-center gap-1">
               <FaLocationDot className="text-xl" /> Rajshahi, Bangladesh
             </p>
+            <button className="text-end">
+              <Link
+                to={"/camp-details"}
+                className="btn bg-primary hover:bg-primary-hover"
+              >
+                See More
+              </Link>
+            </button>
           </div>
         </div>
         <div className="card bg-white shadow-card-shadow">
@@ -177,7 +209,7 @@ const PopularCamps = () => {
               50
             </p>
           </div>
-          <div className="card-body space-y-1">
+          <div className="card-body pt-0">
             <div className="flex items-center justify-between text-description">
               <p className="flex items-center gap-1">
                 <FaCalendarAlt /> 15-02-2025
@@ -202,6 +234,14 @@ const PopularCamps = () => {
             <p className="text-description flex items-center gap-1">
               <FaLocationDot className="text-xl" /> Rajshahi, Bangladesh
             </p>
+            <button className="text-end">
+              <Link
+                to={"/camp-details"}
+                className="btn bg-primary hover:bg-primary-hover"
+              >
+                See More
+              </Link>
+            </button>
           </div>
         </div>
         <div className="card bg-white shadow-card-shadow">
@@ -214,7 +254,7 @@ const PopularCamps = () => {
               50
             </p>
           </div>
-          <div className="card-body space-y-1">
+          <div className="card-body pt-0">
             <div className="flex items-center justify-between text-description">
               <p className="flex items-center gap-1">
                 <FaCalendarAlt /> 15-02-2025
@@ -239,6 +279,14 @@ const PopularCamps = () => {
             <p className="text-description flex items-center gap-1">
               <FaLocationDot className="text-xl" /> Rajshahi, Bangladesh
             </p>
+            <button className="text-end">
+              <Link
+                to={"/camp-details"}
+                className="btn bg-primary hover:bg-primary-hover"
+              >
+                See More
+              </Link>
+            </button>
           </div>
         </div>
       </div>
