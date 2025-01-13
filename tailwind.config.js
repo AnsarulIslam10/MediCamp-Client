@@ -11,6 +11,7 @@ export default {
         'description': '#6B7280',
         'background': '#f5f5f5',
         'primary': '#01dfdf',
+        'primary-hover': '#04cfcf',
         'secondary': '#003366',
         'accent': '#1ddd1d',
        },
