@@ -33,19 +33,19 @@ const Carousel = () => {
       >
         <SwiperSlide>
           <img
-            className="object-cover h-[30vh] sm:h-[60vh] md:h-[70vh] lg:h-[60vh] xl:h-[40vh] w-full"
+            className="object-cover h-[30vh] sm:h-[60vh] md:h-[70vh] w-full"
             src={image1}
           />
         </SwiperSlide>
         <SwiperSlide>
           <img
-            className="object-cover h-[30vh] sm:h-[60vh] md:h-[70vh] lg:h-[60vh] xl:h-[40vh] w-full"
+            className="object-cover h-[30vh] sm:h-[60vh] md:h-[70vh] w-full"
             src={image2}
           />
         </SwiperSlide>
         <SwiperSlide>
           <img
-            className="object-cover h-[30vh] sm:h-[60vh] md:h-[70vh] lg:h-[60vh] xl:h-[40vh] w-full"
+            className="object-cover h-[30vh] sm:h-[60vh] md:h-[70vh] w-full"
             src={image3}
           />
         </SwiperSlide>

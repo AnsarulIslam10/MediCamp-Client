@@ -1,7 +1,9 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Container from "../Container";
+import useAuth from "../../../hooks/useAuth";
 
 const Navbar = () => {
+  const {user, signOutUser} = useAuth()
   const links = (
     <>
       <li>
@@ -58,8 +60,9 @@ const Navbar = () => {
             >
               <div className="w-10 rounded-full">
                 <img
-                  alt="Tailwind CSS Navbar component"
-                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                referrerPolicy="no-referrer"
+                  alt=""
+                  src={user?.photoURL}
                 />
               </div>
             </div>
@@ -69,19 +72,19 @@ const Navbar = () => {
             >
               <li>
                 <a className="justify-between">
-                  Name
+                  {user?.displayName}
                 </a>
               </li>
               <li>
                 <a>Dashboard</a>
               </li>
               <li>
-                <a>Logout</a>
+                <button onClick={signOutUser}>Logout</button>
               </li>
             </ul>
           </div>
           {/* Join Us Button */}
-          <a className="btn bg-primary font-bold">Join Us</a>
+          <Link to={'/signUp'} className="btn bg-primary font-bold">Join Us</Link>
         </div>
       </nav>
     </Container>
