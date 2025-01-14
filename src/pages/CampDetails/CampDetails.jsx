@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import React from "react";
 import { Link, useParams } from "react-router-dom";
-import Container from "../../components/Shared/Container";
 import { FaLocationDot, FaUserDoctor } from "react-icons/fa6";
 import { FaCalendarAlt, FaClock, FaDollarSign, FaUsers } from "react-icons/fa";
 import { MdCampaign } from "react-icons/md";
@@ -73,7 +72,7 @@ const CampDetails = () => {
             to={`/camp-details/${_id}`}
             className="btn bg-primary hover:bg-primary-hover"
           >
-            Join Now
+            Join Camp
           </Link>
         </div>
       </div>

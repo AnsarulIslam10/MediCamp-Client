@@ -5,14 +5,18 @@ import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import CampCard from "../../components/Shared/CampCard/CampCard";
+import Loading from "../../components/Shared/Loading";
 const PopularCamps = () => {
-  const { data: popularCamps = [] } = useQuery({
+  const { data: popularCamps = [], isLoading } = useQuery({
     queryKey: ["popularCamp"],
     queryFn: async () => {
       const res = await axios.get(`http://localhost:5000/popular-camps`);
       return res.data;
     },
   });
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
   return (
     <section className="my-16">
       <h1 className="text-4xl text-center mb-8 text-title font-bold">
