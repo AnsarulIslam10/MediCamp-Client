@@ -5,6 +5,8 @@ import AvailableCamps from "../pages/AvailableCamps/AvailableCamps";
 import CampDetails from "../pages/CampDetails/CampDetails";
 import Login from "../pages/Auth/Login/Login";
 import SignUp from "../pages/Auth/SignUp/SignUp";
+import Dashboard from "../Layout/Dashboard/Dashboard";
+import OrganizerProfile from "../pages/Dashboard/OrganizerProfile/OrganizerProfile";
 
 export const router = createBrowserRouter([
   {
@@ -33,4 +35,15 @@ export const router = createBrowserRouter([
       }
     ],
   },
+  {
+    path: 'dashboard',
+    element: <Dashboard></Dashboard>,
+    children: [
+      {
+        path: 'organizer-profile',
+        element: <OrganizerProfile></OrganizerProfile>
+      }
+    ]
+
+  }
 ]);

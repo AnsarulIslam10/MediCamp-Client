@@ -74,7 +74,7 @@ const Navbar = () => {
                   <a>{user?.displayName}</a>
                 </button>
                 <li>
-                  <a>Dashboard</a>
+                  <Link to={'/dashboard'}>Dashboard</Link>
                 </li>
                 <li>
                   <button onClick={signOutUser}>Logout</button>
