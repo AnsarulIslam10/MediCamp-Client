@@ -143,10 +143,10 @@ const SignUp = () => {
               </button>
             </div>
 
-            <p className="text-[#d1a054] text-center text-lg">
-              Already registered?{" "}
-              <Link to={"/login"} className="font-semibold">
-                Go to log in
+            <p className="text-center text-lg">
+              Already have an account?{" "}
+              <Link to={"/logIn"} className="font-semibold underline">
+                Log In
               </Link>
             </p>
             <p className="text-center my-4 text-xl font-medium text-[#444444]">
