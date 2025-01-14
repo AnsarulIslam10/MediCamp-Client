@@ -3,7 +3,7 @@ import Container from "../Container";
 import useAuth from "../../../hooks/useAuth";
 
 const Navbar = () => {
-  const {user, signOutUser} = useAuth()
+  const { user, signOutUser } = useAuth();
   const links = (
     <>
       <li>
@@ -51,40 +51,41 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">{links}</ul>
         </div>
         <div className="navbar-end">
-          {/* Profile picture */}
-          <div className="dropdown dropdown-end">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle avatar"
-            >
-              <div className="w-10 rounded-full">
-                <img
-                referrerPolicy="no-referrer"
-                  alt=""
-                  src={user?.photoURL}
-                />
+          {user ? (
+            <div className="dropdown dropdown-end">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost btn-circle avatar"
+              >
+                <div className="w-10 rounded-full">
+                  <img
+                    referrerPolicy="no-referrer"
+                    alt=""
+                    src={user?.photoURL}
+                  />
+                </div>
               </div>
+              <ul
+                tabIndex={0}
+                className="menu menu-sm dropdown-content rounded-box bg-white mt-3 w-32 p-2 shadow z-50"
+              >
+                <button disabled>
+                  <a>{user?.displayName}</a>
+                </button>
+                <li>
+                  <a>Dashboard</a>
+                </li>
+                <li>
+                  <button onClick={signOutUser}>Logout</button>
+                </li>
+              </ul>
             </div>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content rounded-box bg-white mt-3 w-32 p-2 shadow z-50"
-            >
-              <li>
-                <a className="justify-between">
-                  {user?.displayName}
-                </a>
-              </li>
-              <li>
-                <a>Dashboard</a>
-              </li>
-              <li>
-                <button onClick={signOutUser}>Logout</button>
-              </li>
-            </ul>
-          </div>
-          {/* Join Us Button */}
-          <Link to={'/signUp'} className="btn bg-primary font-bold">Join Us</Link>
+          ) : (
+            <Link to={"/signUp"} className="btn bg-primary font-bold">
+              Join Us
+            </Link>
+          )}
         </div>
       </nav>
     </Container>
