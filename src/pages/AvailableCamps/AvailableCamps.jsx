@@ -6,14 +6,18 @@ import Container from "../../components/Shared/Container";
 import { TfiLayoutGrid2Alt, TfiLayoutGrid3Alt } from "react-icons/tfi";
 
 const AvailableCamps = () => {
-  const [camp, loading, refetch, search, setSearch] = useCamp();
   const [viewLayout, setViewLayout] = useState("three");
+  const [sortBy, setSortBy] = useState("");
+  const [camp, loading, refetch, search, setSearch] = useCamp(sortBy);
   const [searchInput, setSearchInput] = useState(search);
   const handleInputChange = (e) => {
     setSearchInput(e.target.value);
   };
   const handleSearch = () => {
     setSearch(searchInput);
+  };
+  const handleSort = (e) => {
+    setSortBy(e.target.value);
   };
   const toggleView = () => {
     setViewLayout((prev) => (prev === "three" ? "two" : "three"));
@@ -58,6 +62,18 @@ const AvailableCamps = () => {
               className={`${viewLayout === "three" ? "text-primary" : ""}`}
             />
           </button>
+          <select
+            onChange={handleSort}
+            value={sortBy}
+            className="select select-bordered max-w-xs"
+          >
+            <option value="" disabled>
+              Sort By
+            </option>
+            <option value={"most-registered"}>Most Registered</option>
+            <option value={"camp-fees"}>Camp Fees</option>
+            <option value={"alphabetical"}>A-Z</option>
+          </select>
         </div>
         {viewLayout === "three" ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
