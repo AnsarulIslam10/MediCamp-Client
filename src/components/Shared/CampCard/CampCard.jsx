@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 
 const CampCard = ({ item }) => {
   const {
+    _id,
     campName,
     image,
     campFees,
@@ -23,7 +24,7 @@ const CampCard = ({ item }) => {
     description,
   } = item || {};
   return (
-    <div className="card bg-white shadow-card-shadow">
+    <div className="card flex bg-white shadow-card-shadow">
       <div className="relative">
         <figure>
           <img className="rounded-t-2xl" src={image} alt="camp" />
@@ -33,7 +34,7 @@ const CampCard = ({ item }) => {
           {campFees}
         </p>
       </div>
-      <div className="p-6 space-y-1 pt-0">
+      <div className="p-6 flex-1 space-y-1 pt-0">
         <div className="flex justify-between text-description">
           <p className="flex items-center gap-1">
             <FaCalendarAlt /> {date}
@@ -58,14 +59,14 @@ const CampCard = ({ item }) => {
         <p className="text-description flex items-center gap-1">
           <FaLocationDot className="text-xl" /> {location}
         </p>
-        <div className="flex justify-end">
-          <Link
-            to={"/camp-details"}
-            className="btn bg-primary hover:bg-primary-hover"
-          >
-            Details
-          </Link>
-        </div>
+      </div>
+      <div className="flex justify-end px-6 pb-6">
+        <Link
+          to={`/camp-details/${_id}`}
+          className="btn bg-primary hover:bg-primary-hover"
+        >
+          Details
+        </Link>
       </div>
     </div>
   );
