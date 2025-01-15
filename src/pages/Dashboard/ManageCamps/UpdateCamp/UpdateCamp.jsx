@@ -1,53 +1,6 @@
-import { useForm } from "react-hook-form";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import useAxiosPublic from "../../../hooks/useAxiosPublic";
-import Swal from "sweetalert2";
-import useAuth from "../../../hooks/useAuth";
+import React from "react";
 
-const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
-const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
-const AddCamp = () => {
-  const {user} = useAuth()
-  const axiosSecure = useAxiosSecure();
-  const axiosPublic = useAxiosPublic();
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm();
-  const onSubmit = async (data) => {
-    const imageFile = { image: data.image[0] };
-    const res = await axiosPublic.post(image_hosting_api, imageFile, {
-      headers: {
-        "content-type": "multipart/form-data",
-      },
-    });
-    if (res.data.success) {
-      const campData = {
-        campName: data.campName,
-        campFees: parseFloat(data.campFees),
-        dateTime: data.dateTime,
-        participantCount: parseInt(data.participantCount),
-        healthcareProfessionalName: data.healthcareProfessionalName,
-        location: data.location,
-        image: res.data.data.display_url,
-        description: data.description,
-        email: user?.email
-      };
-      const campRes = await axiosSecure.post("/add-camp", campData);
-      if (campRes.data.insertedId) {
-        reset();
-        Swal.fire({
-          title: `Camp is added`,
-          icon: "success",
-          showCancelButton: false,
-          timer: 1500,
-        });
-      }
-    }
-  };
-
+const UpdateCamp = () => {
   return (
     <div className="flex w-full max-w-5xl justify-center items-center min-h-screen text-[#444444] px-10">
       <div className="card p-10 w-full border">
@@ -194,4 +147,4 @@ const AddCamp = () => {
   );
 };
 
-export default AddCamp;
+export default UpdateCamp;

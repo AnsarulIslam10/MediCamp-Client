@@ -8,6 +8,7 @@ import SignUp from "../pages/Auth/SignUp/SignUp";
 import Dashboard from "../Layout/Dashboard/Dashboard";
 import OrganizerProfile from "../pages/Dashboard/OrganizerProfile/OrganizerProfile";
 import AddCamp from "../pages/Dashboard/AddCamp/AddCamp";
+import ManageCamps from "../pages/Dashboard/ManageCamps/ManageCamps";
 
 export const router = createBrowserRouter([
   {
@@ -27,28 +28,31 @@ export const router = createBrowserRouter([
         element: <CampDetails></CampDetails>,
       },
       {
-        path: '/signUp',
-        element: <SignUp></SignUp>
+        path: "/signUp",
+        element: <SignUp></SignUp>,
       },
       {
-        path: '/logIn',
-        element: <Login></Login>
-      }
+        path: "/logIn",
+        element: <Login></Login>,
+      },
     ],
   },
   {
-    path: 'dashboard',
+    path: "dashboard",
     element: <Dashboard></Dashboard>,
     children: [
       {
-        path: 'organizer-profile',
-        element: <OrganizerProfile></OrganizerProfile>
+        path: "organizer-profile",
+        element: <OrganizerProfile></OrganizerProfile>,
       },
       {
-        path:'add-camp',
-        element: <AddCamp></AddCamp>
-      }
-    ]
-
-  }
+        path: "add-camp",
+        element: <AddCamp></AddCamp>,
+      },
+      {
+        path: "manage-camps",
+        element: <ManageCamps></ManageCamps>,
+      },
+    ],
+  },
 ]);
