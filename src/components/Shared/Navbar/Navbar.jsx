@@ -82,7 +82,7 @@ const Navbar = () => {
               </ul>
             </div>
           ) : (
-            <Link to={"/signUp"} className="btn bg-primary font-bold">
+            <Link to={"/logIn"} className="btn bg-primary font-bold">
               Join Us
             </Link>
           )}

@@ -7,12 +7,17 @@ import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Loading from "../../../components/Shared/Loading";
+import Swal from "sweetalert2";
 
 const ManageCamps = () => {
   const { user } = useAuth();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const axiosSecure = useAxiosSecure();
-  const { data: manageCamps = [], isLoading, refetch } = useQuery({
+  const {
+    data: manageCamps = [],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["manage-camps", `${user?.email}`],
     queryFn: async () => {
       const res = await axiosSecure.get(`/camps/organizer/${user?.email}`);
@@ -22,6 +27,31 @@ const ManageCamps = () => {
   if (isLoading) {
     return <Loading></Loading>;
   }
+
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await axiosSecure.delete(`/camp/${id}`);
+        if (res.data.deletedCount > 0) {
+          Swal.fire({
+            title: "Deleted!",
+            text: `Camp has been deleted.`,
+            icon: "success",
+          });
+          refetch();
+        }
+      }
+    });
+  };
+
   console.log(manageCamps);
   return (
     <div className="p-10">
@@ -55,7 +85,7 @@ const ManageCamps = () => {
                   </Link>
                 </td>
                 <td>
-                  <button>
+                  <button onClick={() => handleDelete(camp._id)}>
                     <FaTrash />
                   </button>
                 </td>
