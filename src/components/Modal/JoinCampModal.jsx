@@ -6,7 +6,7 @@ import { IoClose } from "react-icons/io5";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 
-export default function JoinCampModal({ camp }) {
+export default function JoinCampModal({ camp, refetch }) {
   let [isOpen, setIsOpen] = useState(false);
   const { user } = useAuth();
   const axiosPublic = useAxiosPublic();
@@ -46,7 +46,9 @@ export default function JoinCampModal({ camp }) {
       registeredCampData
     );
     if (campRes.data.insertedId) {
-      setIsOpen(false)
+      reset();
+      refetch();
+      setIsOpen(false);
       Swal.fire({
         title: `Camp is added`,
         icon: "success",

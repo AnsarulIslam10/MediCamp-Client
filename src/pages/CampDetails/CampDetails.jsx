@@ -10,7 +10,7 @@ import JoinCampModal from "../../components/Modal/JoinCampModal";
 
 const CampDetails = () => {
   const { id } = useParams();
-  const { data: camp = [] } = useQuery({
+  const { data: camp = [], refetch } = useQuery({
     queryKey: ["camp", id],
     queryFn: async () => {
       const res = await axios.get(`http://localhost:5000/camp/${id}`);
@@ -71,7 +71,7 @@ const CampDetails = () => {
           </div>
         </div>
         <div className="flex justify-end px-6 pb-6">
-          <JoinCampModal camp={camp}></JoinCampModal>
+          <JoinCampModal camp={camp} refetch={refetch}></JoinCampModal>
         </div>
       </div>
     </section>
