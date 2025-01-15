@@ -2,12 +2,14 @@ import { Button, Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
-import { FaLock } from "react-icons/fa6";
 import { IoClose } from "react-icons/io5";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import Swal from "sweetalert2";
 
 export default function JoinCampModal({ camp }) {
   let [isOpen, setIsOpen] = useState(false);
   const { user } = useAuth();
+  const axiosPublic = useAxiosPublic();
 
   const {
     _id: campId,
@@ -31,8 +33,27 @@ export default function JoinCampModal({ camp }) {
     formState: { errors },
   } = useForm();
   const onSubmit = async (data) => {
-    console.log({campId, campName, campFees, location, healthcareProfessionalName, ...data})
-    
+    const registeredCampData = {
+      campId,
+      campName,
+      campFees,
+      location,
+      healthcareProfessionalName,
+      ...data,
+    };
+    const campRes = await axiosPublic.post(
+      `/registered-camps`,
+      registeredCampData
+    );
+    if (campRes.data.insertedId) {
+      setIsOpen(false)
+      Swal.fire({
+        title: `Camp is added`,
+        icon: "success",
+        showCancelButton: false,
+        timer: 1500,
+      });
+    }
   };
   return (
     <>
@@ -121,7 +142,6 @@ export default function JoinCampModal({ camp }) {
                       defaultValue={location}
                       readOnly
                       placeholder="Location"
-                     
                       className="input input-bordered"
                     />
                     {errors.location && (
@@ -175,10 +195,8 @@ export default function JoinCampModal({ camp }) {
                       placeholder="Enter your age"
                       className="input input-bordered"
                     />
-                     {errors.age && (
-                      <span className="text-red-500">
-                        Age is required*
-                      </span>
+                    {errors.age && (
+                      <span className="text-red-500">Age is required*</span>
                     )}
                   </div>
                   <div className="form-control">
@@ -206,15 +224,18 @@ export default function JoinCampModal({ camp }) {
                     <label className="label">
                       <span className="text-lg font-semibold">Gender</span>
                     </label>
-                    <select  {...register("gendar", { required: true })} className="select-bordered select">
-                      <option selected disabled value="">Select your gendar</option>
+                    <select
+                      {...register("gendar", { required: true })}
+                      className="select-bordered select"
+                    >
+                      <option selected disabled value="">
+                        Select your gendar
+                      </option>
                       <option value="male">Male</option>
                       <option value="female">Female</option>
                     </select>
                     {errors.gendar && (
-                      <span className="text-red-500">
-                        Gendar is required*
-                      </span>
+                      <span className="text-red-500">Gendar is required*</span>
                     )}
                   </div>
                   <div className="form-control">
