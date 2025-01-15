@@ -39,6 +39,8 @@ export default function JoinCampModal({ camp, refetch }) {
       campFees,
       location,
       healthcareProfessionalName,
+      paymentStatus: "unpaid",
+      confirmationStatus: "panding",
       ...data,
     };
     const campRes = await axiosPublic.post(
@@ -164,6 +166,7 @@ export default function JoinCampModal({ camp, refetch }) {
                       type="text"
                       disabled
                       defaultValue={user?.displayName}
+                      {...register("participantName", { required: true })}
                       readOnly
                       placeholder="Enter Healthcare Professional Name"
                       className="input input-bordered"
@@ -178,6 +181,7 @@ export default function JoinCampModal({ camp, refetch }) {
                     <input
                       type="text"
                       defaultValue={user?.email}
+                      {...register("participantEmail", { required: true })}
                       readOnly
                       placeholder="Location"
                       disabled

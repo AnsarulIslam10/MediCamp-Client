@@ -10,6 +10,8 @@ import OrganizerProfile from "../pages/Dashboard/OrganizerProfile/OrganizerProfi
 import AddCamp from "../pages/Dashboard/AddCamp/AddCamp";
 import ManageCamps from "../pages/Dashboard/ManageCamps/ManageCamps";
 import UpdateCamp from "../pages/Dashboard/ManageCamps/UpdateCamp/UpdateCamp";
+import Analytics from "../pages/Dashboard/Analytics/Analytics";
+import RegisteredCamps from "../pages/Dashboard/RegisteredCamps/RegisteredCamps";
 
 export const router = createBrowserRouter([
   {
@@ -58,6 +60,14 @@ export const router = createBrowserRouter([
         path: "update-camp/:id",
         element: <UpdateCamp></UpdateCamp>,
       },
+      {
+        path: 'analytics',
+        element: <Analytics></Analytics>
+      },
+      {
+        path: 'registered-camps',
+        element: <RegisteredCamps></RegisteredCamps>
+      }
     ],
   },
 ]);

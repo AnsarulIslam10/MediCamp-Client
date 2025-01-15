@@ -44,6 +44,40 @@ const Dashboard = () => {
               Home
             </NavLink>
           </li>
+          {/* participant */}
+          <div className="divider divider-info">Participant</div>
+          <li>
+            <NavLink
+              to={"/dashboard/analytics"}
+              className={navLinkStyles}
+            >
+              Analytics
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to={"/dashboard/participant-profile"}
+              className={navLinkStyles}
+            >
+              Participant Profile
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to={"/dashboard/registered-camps"}
+              className={navLinkStyles}
+            >
+              Registered Camps
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to={"/dashboard/payment-history"}
+              className={navLinkStyles}
+            >
+              Payment History
+            </NavLink>
+          </li>
         </ul>
       </div>
       <div className="flex-1 ml-72 flex justify-center items-center overflow-auto">
