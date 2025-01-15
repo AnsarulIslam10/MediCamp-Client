@@ -1,15 +1,18 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import Loading from "../../../components/Shared/Loading";
-import useAuth from "../../../hooks/useAuth";
+
 import moment from "moment";
 import { FaEdit, FaTrash } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../../../hooks/useAuth";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Loading from "../../../components/Shared/Loading";
 
 const ManageCamps = () => {
   const { user } = useAuth();
+  const navigate = useNavigate()
   const axiosSecure = useAxiosSecure();
-  const { data: manageCamps = [], isLoading } = useQuery({
+  const { data: manageCamps = [], isLoading, refetch } = useQuery({
     queryKey: ["manage-camps", `${user?.email}`],
     queryFn: async () => {
       const res = await axiosSecure.get(`/camps/organizer/${user?.email}`);
@@ -47,9 +50,9 @@ const ManageCamps = () => {
                 <td>{moment(camp.dateTime).format("L, LT")}</td>
                 <td>{camp.healthcareProfessionalName}</td>
                 <td>
-                  <button>
+                  <Link to={`/dashboard/update-camp/${camp._id}`}>
                     <FaEdit />
-                  </button>
+                  </Link>
                 </td>
                 <td>
                   <button>
