@@ -36,6 +36,14 @@ const Dashboard = () => {
               Manage Registered Camps
             </NavLink>
           </li>
+          <li>
+            <NavLink
+              to={"/"}
+              className={navLinkStyles}
+            >
+              Home
+            </NavLink>
+          </li>
         </ul>
       </div>
       <div className="flex-1 ml-72 flex justify-center items-center overflow-auto">

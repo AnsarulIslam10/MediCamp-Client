@@ -1,8 +1,13 @@
 import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import Swal from "sweetalert2";
 
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 const AddCamp = () => {
   const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic();
   const {
     register,
     handleSubmit,
@@ -10,7 +15,34 @@ const AddCamp = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = async (data) => {
-    console.log(data);
+    const imageFile = { image: data.image[0] };
+    const res = await axiosPublic.post(image_hosting_api, imageFile, {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    });
+    if (res.data.success) {
+      const campData = {
+        campName: data.campName,
+        campFees: parseFloat(data.campFees),
+        dateTime: data.dateTime,
+        participantCount: parseInt(data.participantCount),
+        healthcareProfessionalName: data.healthcareProfessionalName,
+        location: data.location,
+        image: res.data.data.display_url,
+        description: data.description,
+      };
+      const campRes = await axiosSecure.post("/add-camp", campData);
+      if (campRes.data.insertedId) {
+        reset();
+        Swal.fire({
+          title: `Camp is added`,
+          icon: "success",
+          showCancelButton: false,
+          timer: 1500,
+        });
+      }
+    }
   };
 
   return (
@@ -18,23 +50,41 @@ const AddCamp = () => {
       <div className="card p-10 w-full border">
         <h1 className="text-4xl text-center font-bold mb-8">Add A Camp</h1>
         <form onSubmit={handleSubmit(onSubmit)} className="">
-          <div className="form-control">
-            <label className="label">
-              <span className="text-lg font-semibold">Camp Name</span>
-            </label>
-            <input
-              type="text"
-              placeholder="Enter camp name"
-              {...register("campName", { required: true })}
-              name="campName"
-              className="input input-bordered"
-            />
-            {errors.campName && (
-              <span className="text-red-500">Camp Name is required*</span>
-            )}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+            <div className="form-control">
+              <label className="label">
+                <span className="text-lg font-semibold">Camp Name</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Enter camp name"
+                {...register("campName", { required: true })}
+                name="campName"
+                className="input input-bordered"
+              />
+              {errors.campName && (
+                <span className="text-red-500">Camp Name is required*</span>
+              )}
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="text-lg font-semibold">Camp Fees</span>
+              </label>
+              <input
+                type="number"
+                placeholder="Enter camp Fee"
+                {...register("campFees", { required: true })}
+                name="campFees"
+                min={1}
+                className="input input-bordered"
+              />
+              {errors.campFees && (
+                <span className="text-red-500">Camp Fees is required*</span>
+              )}
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
             <div className="form-control">
               <label className="label">
                 <span className="text-lg font-semibold">Date & Time</span>
@@ -64,7 +114,7 @@ const AddCamp = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
             <div className="form-control">
               <label className="label">
                 <span className="text-lg font-semibold">
@@ -74,7 +124,9 @@ const AddCamp = () => {
               <input
                 type="text"
                 placeholder="Enter Healthcare Professional Name"
-                {...register("healthcareProfessionalName", { required: true })}
+                {...register("healthcareProfessionalName", {
+                  required: true,
+                })}
                 className="input input-bordered"
               />
               {errors.healthcareProfessionalName && (
