@@ -5,6 +5,8 @@ import { Link, useParams } from "react-router-dom";
 import { FaLocationDot, FaUserDoctor } from "react-icons/fa6";
 import { FaCalendarAlt, FaClock, FaDollarSign, FaUsers } from "react-icons/fa";
 import { MdCampaign } from "react-icons/md";
+import moment from "moment";
+import JoinCampModal from "../../components/Modal/JoinCampModal";
 
 const CampDetails = () => {
   const { id } = useParams();
@@ -20,13 +22,14 @@ const CampDetails = () => {
     campName,
     image,
     campFees,
-    date,
-    time,
+    dateTime,
     location,
-    healthcareProfessional,
+    healthcareProfessionalName,
     participantCount,
     description,
   } = camp;
+  const formatedDate = moment(dateTime).format("L");
+  const formatedTime = moment(dateTime).format("LT");
   return (
     <section className="my-16 max-w-6xl mx-auto px-2">
       <div className="card flex bg-white shadow-card-shadow">
@@ -37,10 +40,10 @@ const CampDetails = () => {
           <div className="p-6 flex-1 space-y-2 pt-0">
             <div className="flex justify-between text-2xl text-description">
               <p className="flex items-center gap-1">
-                <FaCalendarAlt /> {date}
+                <FaCalendarAlt /> {formatedDate}
               </p>
               <p className="flex items-center gap-1">
-                <FaClock /> {time}
+                <FaClock /> {formatedTime}
               </p>
             </div>
             <h2 className="card-title text-4xl flex items-center gap-1">
@@ -57,7 +60,7 @@ const CampDetails = () => {
 
             <p className="flex items-center gap-1 text-3xl">
               <FaUserDoctor className="text-description" />
-              {healthcareProfessional}
+              {healthcareProfessionalName}
             </p>
             <p className="flex items-center gap-1 text-3xl">
               <FaUsers className="text-description" />
@@ -68,12 +71,7 @@ const CampDetails = () => {
           </div>
         </div>
         <div className="flex justify-end px-6 pb-6">
-          <Link
-            to={`/camp-details/${_id}`}
-            className="btn bg-primary hover:bg-primary-hover"
-          >
-            Join Camp
-          </Link>
+          <JoinCampModal camp={camp}></JoinCampModal>
         </div>
       </div>
     </section>
