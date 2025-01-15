@@ -23,7 +23,7 @@ const CampCard = ({ item }) => {
     participantCount,
     description,
   } = item || {};
-  const formatedDateTime = moment(dateTime).format('MMMM Do YYYY, h:mm a')
+  const formatedDateTime = moment(dateTime).format('L, LT')
   return (
     <div className="card flex bg-white shadow-card-shadow">
       <div className="relative">
