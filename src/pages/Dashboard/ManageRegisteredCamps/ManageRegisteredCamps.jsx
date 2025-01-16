@@ -51,17 +51,17 @@ const ManageRegisteredCamps = () => {
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
-    //   if (result.isConfirmed) {
-    //     const res = await axiosSecure.delete(`/camp/${id}`);
-    //     if (res.data.deletedCount > 0) {
-    //       Swal.fire({
-    //         title: "Deleted!",
-    //         text: `Camp has been deleted.`,
-    //         icon: "success",
-    //       });
-    //       refetch();
-    //     }
-    //   }
+      if (result.isConfirmed) {
+        const res = await axiosSecure.delete(`/registered-camps/${id}`);
+        if (res.data.deletedCount > 0) {
+          Swal.fire({
+            title: "Deleted!",
+            text: `Camp has been deleted.`,
+            icon: "success",
+          });
+          refetch();
+        }
+      }
     });
   };
   return (
@@ -103,7 +103,7 @@ const ManageRegisteredCamps = () => {
                   </button>
                 </td>
                 <td>
-                  <button onClick={() => handleDelete(camp._id)}>
+                  <button disabled={camp.paymentStatus === 'paid' && camp.confirmationStatus === 'confirmed'} onClick={() => handleDelete(camp._id)} className="disabled:text-gray-300 text-2xl">
                     <BiX />
                   </button>
                 </td>
