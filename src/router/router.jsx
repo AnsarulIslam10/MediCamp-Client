@@ -13,6 +13,7 @@ import UpdateCamp from "../pages/Dashboard/ManageCamps/UpdateCamp/UpdateCamp";
 import Analytics from "../pages/Dashboard/Analytics/Analytics";
 import RegisteredCamps from "../pages/Dashboard/RegisteredCamps/RegisteredCamps";
 import Payment from "../pages/Dashboard/Payment/Payment";
+import PaymentHistory from "../pages/Dashboard/PaymentHistory/PaymentHistory";
 
 export const router = createBrowserRouter([
   {
@@ -46,16 +47,20 @@ export const router = createBrowserRouter([
     element: <Dashboard></Dashboard>,
     children: [
       {
-        path: 'analytics',
-        element: <Analytics></Analytics>
+        path: "analytics",
+        element: <Analytics></Analytics>,
       },
       {
-        path: 'registered-camps',
-        element: <RegisteredCamps></RegisteredCamps>
+        path: "registered-camps",
+        element: <RegisteredCamps></RegisteredCamps>,
       },
       {
-        path: 'payment',
-        element: <Payment></Payment>
+        path: "payment",
+        element: <Payment></Payment>,
+      },
+      {
+        path: "payment-history",
+        element: <PaymentHistory></PaymentHistory>,
       },
 
       //organizer route

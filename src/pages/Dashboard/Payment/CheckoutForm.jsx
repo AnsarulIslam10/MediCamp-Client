@@ -2,7 +2,7 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 
 const CheckoutForm = () => {
@@ -14,9 +14,12 @@ const CheckoutForm = () => {
   const elements = useElements();
   const axiosSecure = useAxiosSecure();
   const location = useLocation();
+  const navigate = useNavigate()
+  const campName = location.state?.campName;
   const campFees = location.state?.campFees;
   const registeredCampId = location.state?.registeredCampId;
   const campId = location.state?.campId;
+  const confirmationStatus = location.state?.confirmationStatus;
 
   useEffect(() => {
     axiosSecure
@@ -73,6 +76,7 @@ const CheckoutForm = () => {
 
         // save the payment in the database
         const payment = {
+          campName: campName,
           email: user?.email,
           campFee: campFees,
           transactionId: paymentIntent.id,
@@ -80,11 +84,13 @@ const CheckoutForm = () => {
           registeredCampId: registeredCampId,
           campId: campId,
           status: "paid",
+          confirmationStatus: confirmationStatus,
         };
         const res = await axiosSecure.post("/payments", payment);
         console.log("payment saved", res);
         if (res.data?.insertedId) {
           toast.success("Payment Successful");
+          navigate('/dashboard/payment-history')
         }
       }
     }
