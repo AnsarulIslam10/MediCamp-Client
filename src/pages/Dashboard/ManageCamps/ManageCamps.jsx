@@ -58,7 +58,7 @@ const ManageCamps = () => {
       <h1 className="text-4xl font-bold text-center mb-8 mt-16">
         Manage Camps
       </h1>
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto shadow-card-shadow">
         <table className="table">
           {/* head */}
           <thead>

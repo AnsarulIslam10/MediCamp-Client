@@ -1,7 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import Container from "../Container";
 import useAuth from "../../../hooks/useAuth";
-
+import logo from "../../../assets/Logo/MediCamp.svg"
 const Navbar = () => {
   const { user, signOutUser } = useAuth();
   const links = (
@@ -42,10 +42,7 @@ const Navbar = () => {
               {links}
             </ul>
           </div>
-          <a className="text-4xl font-bold">
-            <span className="text-primary">M</span>edi
-            <span className="text-primary">C</span>amp
-          </a>
+          <img className="drop-shadow-2xl w-60" src={logo} alt="" />
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{links}</ul>
