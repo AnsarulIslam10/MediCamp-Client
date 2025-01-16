@@ -30,7 +30,7 @@ const Dashboard = () => {
           </li>
           <li>
             <NavLink
-              to={"/dashboard/manage-resigtered-camps"}
+              to={"/dashboard/manage-registered-camps"}
               className={navLinkStyles}
             >
               Manage Registered Camps
