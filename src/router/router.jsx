@@ -16,6 +16,7 @@ import Payment from "../pages/Dashboard/Payment/Payment";
 import PaymentHistory from "../pages/Dashboard/PaymentHistory/PaymentHistory";
 import PrivateRoute from "./privateRoute";
 import AdminRoute from "./AdminRoute";
+import ParticipantProfile from "../pages/Dashboard/ParticipantProfile/ParticipantProfile";
 
 export const router = createBrowserRouter([
   {
@@ -55,6 +56,10 @@ export const router = createBrowserRouter([
       {
         path: "analytics",
         element: <Analytics></Analytics>,
+      },
+      {
+        path: "participant-profile",
+        element: <ParticipantProfile></ParticipantProfile>
       },
       {
         path: "registered-camps",

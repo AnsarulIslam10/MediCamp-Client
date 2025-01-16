@@ -49,7 +49,7 @@ const AddCamp = () => {
   };
 
   return (
-    <div className="flex w-full max-w-5xl justify-center items-center min-h-screen text-[#444444] px-10">
+    <div className="flex justify-center items-center min-h-screen w-full max-w-5xl mx-auto text-[#444444] px-10">
       <div className="card p-10 w-full border">
         <h1 className="text-4xl text-center font-bold mb-8">Add A Camp</h1>
         <form onSubmit={handleSubmit(onSubmit)} className="">
