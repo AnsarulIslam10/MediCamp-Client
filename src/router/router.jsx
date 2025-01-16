@@ -15,6 +15,7 @@ import RegisteredCamps from "../pages/Dashboard/RegisteredCamps/RegisteredCamps"
 import Payment from "../pages/Dashboard/Payment/Payment";
 import PaymentHistory from "../pages/Dashboard/PaymentHistory/PaymentHistory";
 import PrivateRoute from "./privateRoute";
+import AdminRoute from "./AdminRoute";
 
 export const router = createBrowserRouter([
   {
@@ -45,7 +46,11 @@ export const router = createBrowserRouter([
   },
   {
     path: "dashboard",
-    element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+    element: (
+      <PrivateRoute>
+        <Dashboard></Dashboard>
+      </PrivateRoute>
+    ),
     children: [
       {
         path: "analytics",
@@ -67,19 +72,36 @@ export const router = createBrowserRouter([
       //organizer route
       {
         path: "organizer-profile",
-        element: <OrganizerProfile></OrganizerProfile>,
+        element: (
+          <AdminRoute>
+            <OrganizerProfile></OrganizerProfile>
+          </AdminRoute>
+        ),
       },
       {
         path: "add-camp",
-        element: <AddCamp></AddCamp>,
+        element: (
+          <AdminRoute>
+            <AddCamp></AddCamp>
+          </AdminRoute>
+        ),
       },
       {
         path: "manage-camps",
-        element: <ManageCamps></ManageCamps>,
+        element: (
+          <AdminRoute>
+            {" "}
+            <ManageCamps></ManageCamps>
+          </AdminRoute>
+        ),
       },
       {
         path: "update-camp/:id",
-        element: <UpdateCamp></UpdateCamp>,
+        element: (
+          <AdminRoute>
+            <UpdateCamp></UpdateCamp>
+          </AdminRoute>
+        ),
       },
     ],
   },
