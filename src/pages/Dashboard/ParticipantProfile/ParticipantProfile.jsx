@@ -1,6 +1,5 @@
 import React from "react";
 import useAuth from "../../../hooks/useAuth";
-import { FaEdit } from "react-icons/fa";
 import UpdateProfileModal from "../../../components/Modal/UpdateProfileModal";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
