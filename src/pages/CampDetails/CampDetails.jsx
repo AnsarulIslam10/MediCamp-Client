@@ -7,8 +7,10 @@ import { FaCalendarAlt, FaClock, FaDollarSign, FaUsers } from "react-icons/fa";
 import { MdCampaign } from "react-icons/md";
 import moment from "moment";
 import JoinCampModal from "../../components/Modal/JoinCampModal";
+import useAuth from "../../hooks/useAuth";
 
 const CampDetails = () => {
+  const {user} = useAuth()
   const { id } = useParams();
   const { data: camp = [], refetch } = useQuery({
     queryKey: ["camp", id],
