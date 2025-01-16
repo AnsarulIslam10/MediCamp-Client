@@ -19,6 +19,10 @@ const CheckoutForm = () => {
   console.log(user?.email);
 
   const campFees = location.state?.campFees;
+  const registeredCampId = location.state?.registeredCampId;
+  const campId = location.state?.campId;
+  console.log(campId);
+  console.log(registeredCampId);
 
   console.log(campFees);
 
@@ -75,6 +79,19 @@ const CheckoutForm = () => {
       if (paymentIntent.status === "succeeded") {
         console.log("transaction id", paymentIntent.id);
         setTransactionId(paymentIntent.id);
+
+        // save the payment in the database
+        const payment = {
+          email: user?.email,
+          campFee: campFees,
+          transactionId: paymentIntent.id,
+          date: new Date(),
+          registeredCampId: registeredCampId,
+          campId: campId,
+          status: 'paid'
+        };
+        const res = await axiosSecure.post('/payments', payment)
+        console.log('payment saved', res)
       }
     }
   };

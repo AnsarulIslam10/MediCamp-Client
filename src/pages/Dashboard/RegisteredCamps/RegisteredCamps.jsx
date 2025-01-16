@@ -81,7 +81,7 @@ const RegisteredCamps = () => {
                   <Link
                     disabled={camp.paymentStatus === "paid"}
                     to={{ pathname: "/dashboard/payment" }}
-                    state={{campFees: camp.campFees}}
+                    state={{campFees: camp.campFees, registeredCampId: camp._id, campId: camp.campId}}
                     className={`${camp.paymentStatus === "unpaid" && "btn"}`}
                   >
                     {camp.paymentStatus === "unpaid" ? "Pay" : "Paid"}
