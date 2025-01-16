@@ -1,32 +1,82 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { useLocation } from "react-router-dom";
+import useAuth from "../../../hooks/useAuth";
 
 const CheckoutForm = () => {
-    const stripe = useStripe()
-    const elements = useElements()
+  const { user } = useAuth();
+  const [error, setError] = useState("");
+  const [clientSecret, setClientSecret] = useState("");
+  const [transactionId, setTransactionId] = useState("");
+  const stripe = useStripe();
+  const elements = useElements();
+
+  const axiosSecure = useAxiosSecure();
+  const location = useLocation();
+
+  console.log(user?.email);
+
+  const campFees = location.state?.campFees;
+
+  console.log(campFees);
+
+  useEffect(() => {
+    axiosSecure
+      .post("/create-payment-intent", {
+        campFees: campFees,
+      })
+      .then((res) => {
+        console.log(res.data.clientSecret);
+        setClientSecret(res.data.clientSecret);
+      });
+  }, [axiosSecure, campFees]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!stripe || !elements) {
-        return
+      return;
     }
-    const card = elements.getElement(CardElement)
+    const card = elements.getElement(CardElement);
     if (card === null) {
-        return
+      return;
     }
 
-    const {error, paymentMethod} = await stripe.createPaymentMethod({
-        type: 'card',
-        card
-    })
+    const { error, paymentMethod } = await stripe.createPaymentMethod({
+      type: "card",
+      card,
+    });
     if (error) {
-        console.log('payment error', error)
-        toast.error(error.message)
-    }
-    else{
-        console.log('payment method', paymentMethod)
+      console.log("payment error", error);
+      setError(error.message);
+    } else {
+      console.log("payment method", paymentMethod);
+      toast.success("Payment Successful");
+      setError("");
     }
 
+    //confirm payment
+    const { paymentIntent, error: confirmError } =
+      await stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: card,
+          billing_details: {
+            email: user?.email || "anonymous",
+            name: user?.displayName || "anonymous",
+          },
+        },
+      });
+
+    if (confirmError) {
+      console.log("confirm error", confirmError);
+    } else {
+      console.log("payment intent", paymentIntent);
+      if (paymentIntent.status === "succeeded") {
+        console.log("transaction id", paymentIntent.id);
+        setTransactionId(paymentIntent.id);
+      }
+    }
   };
   return (
     <div>
@@ -39,7 +89,7 @@ const CheckoutForm = () => {
                 color: "#424770",
                 "::placeholder": {
                   color: "#aab7c4",
-                },                
+                },
               },
               invalid: {
                 color: "#9e2146",
@@ -47,10 +97,21 @@ const CheckoutForm = () => {
             },
           }}
         />
+        {transactionId && (
+          <p className="font-semibold">
+            Transaction ID:{" "}
+            <span className="text-green-600">{transactionId}</span>
+          </p>
+        )}
+        <p className="text-red-500">{error}</p>
         <div className="text-center">
-        <button className="btn btn-wide bg-primary hover:bg-primary-hover mt-6" type="submit" disabled={!stripe}>
-          Pay
-        </button>
+          <button
+            className="btn btn-wide bg-primary hover:bg-primary-hover mt-6"
+            type="submit"
+            disabled={!stripe || !clientSecret}
+          >
+            Pay
+          </button>
         </div>
       </form>
     </div>
