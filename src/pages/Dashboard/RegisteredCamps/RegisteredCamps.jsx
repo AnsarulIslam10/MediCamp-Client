@@ -9,7 +9,6 @@ import { Link } from "react-router-dom";
 
 const RegisteredCamps = () => {
   const { user } = useAuth();
-  console.log(user.email)
   const axiosSecure = useAxiosSecure();
   const {
     data: registeredCamps,
@@ -82,7 +81,7 @@ const RegisteredCamps = () => {
                     disabled={camp.paymentStatus === "paid"}
                     to={{ pathname: "/dashboard/payment" }}
                     state={{campFees: camp.campFees, registeredCampId: camp._id, campId: camp.campId}}
-                    className={`${camp.paymentStatus === "unpaid" && "btn"}`}
+                    className={`btn`}
                   >
                     {camp.paymentStatus === "unpaid" ? "Pay" : "Paid"}
                   </Link>

@@ -12,19 +12,11 @@ const CheckoutForm = () => {
   const [transactionId, setTransactionId] = useState("");
   const stripe = useStripe();
   const elements = useElements();
-
   const axiosSecure = useAxiosSecure();
   const location = useLocation();
-
-  console.log(user?.email);
-
   const campFees = location.state?.campFees;
   const registeredCampId = location.state?.registeredCampId;
   const campId = location.state?.campId;
-  console.log(campId);
-  console.log(registeredCampId);
-
-  console.log(campFees);
 
   useEffect(() => {
     axiosSecure
@@ -56,7 +48,6 @@ const CheckoutForm = () => {
       setError(error.message);
     } else {
       console.log("payment method", paymentMethod);
-      toast.success("Payment Successful");
       setError("");
     }
 
@@ -88,10 +79,13 @@ const CheckoutForm = () => {
           date: new Date(),
           registeredCampId: registeredCampId,
           campId: campId,
-          status: 'paid'
+          status: "paid",
         };
-        const res = await axiosSecure.post('/payments', payment)
-        console.log('payment saved', res)
+        const res = await axiosSecure.post("/payments", payment);
+        console.log("payment saved", res);
+        if (res.data?.insertedId) {
+          toast.success("Payment Successful");
+        }
       }
     }
   };
