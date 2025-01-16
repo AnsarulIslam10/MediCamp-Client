@@ -80,7 +80,7 @@ const Dashboard = () => {
           </li>
         </ul>
       </div>
-      <div className="flex-1 ml-72 flex justify-center items-center overflow-auto">
+      <div className="flex-1 ml-72 max-w-7xl mx-auto overflow-auto">
         <Outlet></Outlet>
       </div>
     </div>

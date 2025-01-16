@@ -5,11 +5,16 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Loading from "../../../components/Shared/Loading";
 import { FcCancel } from "react-icons/fc";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const RegisteredCamps = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-  const { data: registeredCamps, isLoading, refetch } = useQuery({
+  const {
+    data: registeredCamps,
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["registeredCamps", `${user?.email}`],
     queryFn: async () => {
       const res = await axiosSecure.get(`/registered-camps/${user?.email}`);
@@ -46,7 +51,7 @@ const RegisteredCamps = () => {
   return (
     <div className="p-10">
       <h1 className="text-4xl font-bold text-center mb-8 mt-16">
-        Manage Camps
+        Registered Camps
       </h1>
       <div className="overflow-x-auto">
         <table className="table">
@@ -72,11 +77,13 @@ const RegisteredCamps = () => {
                 <td>${camp.campFees}</td>
                 <td>{camp.participantName}</td>
                 <td>
-                  <button
+                  <Link
+                    disabled={camp.paymentStatus === "paid"}
+                    to={"/dashboard/payment"}
                     className={`${camp.paymentStatus === "unpaid" && "btn"}`}
                   >
                     {camp.paymentStatus === "unpaid" ? "Pay" : "Paid"}
-                  </button>
+                  </Link>
                 </td>
                 <td>{camp.confirmationStatus}</td>
                 <td>
