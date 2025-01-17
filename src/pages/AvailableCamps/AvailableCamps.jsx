@@ -1,42 +1,37 @@
 import React, { useState } from "react";
 import useCamp from "../../hooks/useCamp";
 import CampCard from "../../components/Shared/CampCard/CampCard";
-import Loading from "../../components/Shared/Loading";
 import Container from "../../components/Shared/Container";
 import { TfiLayoutGrid2Alt, TfiLayoutGrid3Alt } from "react-icons/tfi";
 
 const AvailableCamps = () => {
   const [viewLayout, setViewLayout] = useState("three");
   const [sortBy, setSortBy] = useState("");
-  const [camp, loading, refetch, search, setSearch] = useCamp(sortBy);
-  const [searchInput, setSearchInput] = useState(search);
-  const handleInputChange = (e) => {
-    setSearchInput(e.target.value);
+  const [camp, , , search, setSearch] = useCamp(sortBy);
+
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
   };
-  const handleSearch = () => {
-    setSearch(searchInput);
-  };
+
   const handleSort = (e) => {
     setSortBy(e.target.value);
   };
   const toggleView = () => {
     setViewLayout((prev) => (prev === "three" ? "two" : "three"));
   };
-  if (loading) {
-    return <Loading></Loading>;
-  }
+
   return (
     <Container>
       <div className="my-16">
         <label className="input input-bordered flex items-center gap-2 max-w-lg mx-auto">
           <input
-            value={searchInput}
-            onChange={handleInputChange}
+            value={search}
+            onChange={handleSearch}
             type="text"
             className="grow"
             placeholder="Search"
           />
-          <button onClick={handleSearch}>
+          <button>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 16 16"

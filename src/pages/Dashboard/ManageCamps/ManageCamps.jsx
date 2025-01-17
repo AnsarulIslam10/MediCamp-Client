@@ -59,7 +59,7 @@ const ManageCamps = () => {
 
   console.log(manageCamps);
   return (
-    <div className="p-10">
+    <div className="px-4">
       <h1 className="text-4xl font-bold text-center mb-4 mt-16">
         Manage Camps
       </h1>
@@ -86,46 +86,43 @@ const ManageCamps = () => {
           </svg>
         </label>
       </div>
-      {isLoading ? (
-        <Loading></Loading>
-      ) : (
-        <div className="overflow-x-auto shadow-card-shadow">
-          <table className="table">
-            {/* head */}
-            <thead>
-              <tr className="bg-primary">
-                <th></th>
-                <th>Camp Name</th>
-                <th>Date & Time</th>
-                <th>Healthcare Professional</th>
-                <th>Update</th>
-                <th>Delete</th>
+
+      <div className="overflow-x-auto shadow-card-shadow">
+        <table className="table">
+          {/* head */}
+          <thead>
+            <tr className="bg-primary">
+              <th></th>
+              <th>Camp Name</th>
+              <th>Date & Time</th>
+              <th>Healthcare Professional</th>
+              <th>Update</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {/* row 1 */}
+            {manageCamps.result?.map((camp, idx) => (
+              <tr key={camp._id} className="hover">
+                <th>{idx + 1}</th>
+                <td>{camp.campName}</td>
+                <td>{moment(camp.dateTime).format("L, LT")}</td>
+                <td>{camp.healthcareProfessionalName}</td>
+                <td>
+                  <Link to={`/dashboard/update-camp/${camp._id}`}>
+                    <FaEdit />
+                  </Link>
+                </td>
+                <td>
+                  <button onClick={() => handleDelete(camp._id)}>
+                    <FaTrash />
+                  </button>
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {/* row 1 */}
-              {manageCamps.result?.map((camp, idx) => (
-                <tr key={camp._id} className="hover">
-                  <th>{idx + 1}</th>
-                  <td>{camp.campName}</td>
-                  <td>{moment(camp.dateTime).format("L, LT")}</td>
-                  <td>{camp.healthcareProfessionalName}</td>
-                  <td>
-                    <Link to={`/dashboard/update-camp/${camp._id}`}>
-                      <FaEdit />
-                    </Link>
-                  </td>
-                  <td>
-                    <button onClick={() => handleDelete(camp._id)}>
-                      <FaTrash />
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+            ))}
+          </tbody>
+        </table>
+      </div>
 
       <div className="flex justify-center items-center mt-6 space-x-4">
         <button

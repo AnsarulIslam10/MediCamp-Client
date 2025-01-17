@@ -2,9 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+/* body {
     background-color: #f5f5f5;
-}
+} */
 
 
 .StripeElement,
