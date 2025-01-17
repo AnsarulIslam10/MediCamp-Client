@@ -11,10 +11,23 @@ import { Autoplay, Navigation } from "swiper/modules";
 import { Rating } from "@smastrom/react-rating";
 
 import "@smastrom/react-rating/style.css";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 const FeedbackAndRatings = () => {
+  const axiosPublic = useAxiosPublic();
+  const { data: feedback } = useQuery({
+    queryKey: ["feedback"],
+    queryFn: async () => {
+      const res = await axiosPublic.get("/feedback");
+      return res.data;
+    },
+  });
+  console.log(feedback);
   return (
     <div className="my-16">
-      <h1 className="text-center text-4xl font-bold mb-8">Feedback And Ratings</h1>
+      <h1 className="text-center text-4xl font-bold mb-8">
+        Feedback And Ratings
+      </h1>
       <Swiper
         navigation={true}
         autoplay={{
@@ -25,63 +38,21 @@ const FeedbackAndRatings = () => {
         modules={[Navigation, Autoplay]}
         className="mySwiper"
       >
-        <SwiperSlide>
-          <div className="text-center flex items-center justify-center flex-col">
-            <div className="avatar mb-3 p-2">
-              <div className="ring-primary ring-offset-base-100 w-24 rounded-full ring ring-offset-2">
-                <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+        {feedback.map((item) => (
+          <SwiperSlide key={item._id}>
+            <div className="text-center flex items-center justify-center flex-col">
+              <div className="avatar flex-col mb-3 p-2">
+                <div className="ring-primary ring-offset-base-100 w-24 rounded-full ring ring-offset-2">
+                  <img src={item.photo} />
+                </div>
+              <h2 className="mt-2 font-semibold">{item.name}</h2>
               </div>
+              <h2 className="text-xl font-semibold">{item.campName}</h2>
+              <Rating style={{ maxWidth: 120 }} value={item.rating} readOnly />
+              <p className="max-w-lg mt-3">{item.feedback}</p>
             </div>
-            <Rating style={{ maxWidth: 150 }} value={3} readOnly />
-            <p className="max-w-lg mt-3">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Voluptatibus labore id ab eveniet excepturi, minima obcaecati quos
-              soluta repellat pariatur, deserunt expedita quae dolor ducimus,
-              culpa harum a nemo deleniti aspernatur necessitatibus accusantium
-              architecto maxime mollitia recusandae. Minima, illo enim fugiat
-              suscipit similique recusandae, maiores ut obcaecati est id
-              quisquam.
-            </p>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="text-center flex items-center justify-center flex-col">
-            <div className="avatar mb-3 p-2">
-              <div className="ring-primary ring-offset-base-100 w-24 rounded-full ring ring-offset-2">
-                <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
-              </div>
-            </div>
-            <Rating style={{ maxWidth: 150 }} value={3} readOnly />
-            <p className="max-w-lg mt-3">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Voluptatibus labore id ab eveniet excepturi, minima obcaecati quos
-              soluta repellat pariatur, deserunt expedita quae dolor ducimus,
-              culpa harum a nemo deleniti aspernatur necessitatibus accusantium
-              architecto maxime mollitia recusandae. Minima, illo enim fugiat
-              suscipit similique recusandae, maiores ut obcaecati est id
-              quisquam.
-            </p>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="text-center flex items-center justify-center flex-col">
-            <div className="avatar mb-3 p-2">
-              <div className="ring-primary ring-offset-base-100 w-24 rounded-full ring ring-offset-2">
-                <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
-              </div>
-            </div>
-            <Rating style={{ maxWidth: 150 }} value={3} readOnly />
-            <p className="max-w-lg mt-3">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Voluptatibus labore id ab eveniet excepturi, minima obcaecati quos
-              soluta repellat pariatur, deserunt expedita quae dolor ducimus,
-              culpa harum a nemo deleniti aspernatur necessitatibus accusantium
-              architecto maxime mollitia recusandae. Minima, illo enim fugiat
-              suscipit similique recusandae, maiores ut obcaecati est id
-              quisquam.
-            </p>
-          </div>
-        </SwiperSlide>
+          </SwiperSlide>
+        ))}
       </Swiper>
     </div>
   );
