@@ -38,7 +38,7 @@ const FeedbackAndRatings = () => {
         modules={[Navigation, Autoplay]}
         className="mySwiper"
       >
-        {feedback.map((item) => (
+        {feedback?.map((item) => (
           <SwiperSlide key={item._id}>
             <div className="text-center flex items-center justify-center flex-col">
               <div className="avatar flex-col mb-3 p-2">

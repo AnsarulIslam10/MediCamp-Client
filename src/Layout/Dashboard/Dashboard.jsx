@@ -1,4 +1,5 @@
 import React from "react";
+import { FaBars } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
@@ -7,9 +8,25 @@ const Dashboard = () => {
       isActive ? "text-primary" : "text-white"
     }`;
   return (
-    <div className="flex absolute left-0 w-full mx-auto">
-      <div className="w-72 h-screen bg-slate-800 text-white px-4 fixed">
-        <ul className="space-y-4 mt-6">
+    <div className="drawer lg:drawer-open">
+      <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
+      <div className="drawer-content flex flex-col items-center justify-center">
+        <Outlet></Outlet>
+        <label
+          htmlFor="my-drawer-2"
+          className="lg:hidden"
+        >
+          <FaBars className="absolute text-3xl top-1 left-1"/>
+        </label>
+      </div>
+      <div className="drawer-side">
+        <label
+          htmlFor="my-drawer-2"
+          aria-label="close sidebar"
+          className="drawer-overlay"
+        ></label>
+        <ul className="menu bg-slate-800 text-base-content min-h-full w-80 p-4">
+          {/* Sidebar content here */}
           <li>
             <NavLink
               to={"/dashboard/organizer-profile"}
@@ -37,20 +54,14 @@ const Dashboard = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink
-              to={"/"}
-              className={navLinkStyles}
-            >
+            <NavLink to={"/"} className={navLinkStyles}>
               Home
             </NavLink>
           </li>
           {/* participant */}
           <div className="divider divider-info">Participant</div>
           <li>
-            <NavLink
-              to={"/dashboard/analytics"}
-              className={navLinkStyles}
-            >
+            <NavLink to={"/dashboard/analytics"} className={navLinkStyles}>
               Analytics
             </NavLink>
           </li>
@@ -79,9 +90,6 @@ const Dashboard = () => {
             </NavLink>
           </li>
         </ul>
-      </div>
-      <div className="flex-1 ml-72  overflow-auto">
-        <Outlet></Outlet>
       </div>
     </div>
   );

@@ -16,7 +16,7 @@ const ManageCamps = () => {
 
   const [page, setPage] = useState(1);
   const [limit] = useState(10);
-  const [search, setSearch] = useState("")
+  const [search, setSearch] = useState("");
 
   const {
     data: manageCamps = [],
@@ -30,11 +30,8 @@ const ManageCamps = () => {
       );
       return res.data;
     },
-    enabled: !!user?.email
+    enabled: !!user?.email,
   });
-  if (isLoading) {
-    return <Loading></Loading>;
-  }
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -68,7 +65,13 @@ const ManageCamps = () => {
       </h1>
       <div className="flex justify-end mb-2">
         <label className="input input-bordered flex items-center gap-2">
-          <input value={search} onChange={(e)=> setSearch(e.target.value)} type="text" className="grow" placeholder="Search" />
+          <input
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            type="text"
+            className="grow"
+            placeholder="Search"
+          />
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 16 16"
@@ -83,42 +86,46 @@ const ManageCamps = () => {
           </svg>
         </label>
       </div>
-      <div className="overflow-x-auto shadow-card-shadow">
-        <table className="table">
-          {/* head */}
-          <thead>
-            <tr className="bg-primary">
-              <th></th>
-              <th>Camp Name</th>
-              <th>Date & Time</th>
-              <th>Healthcare Professional</th>
-              <th>Update</th>
-              <th>Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* row 1 */}
-            {manageCamps.result?.map((camp, idx) => (
-              <tr key={camp._id} className="hover">
-                <th>{idx + 1}</th>
-                <td>{camp.campName}</td>
-                <td>{moment(camp.dateTime).format("L, LT")}</td>
-                <td>{camp.healthcareProfessionalName}</td>
-                <td>
-                  <Link to={`/dashboard/update-camp/${camp._id}`}>
-                    <FaEdit />
-                  </Link>
-                </td>
-                <td>
-                  <button onClick={() => handleDelete(camp._id)}>
-                    <FaTrash />
-                  </button>
-                </td>
+      {isLoading ? (
+        <Loading></Loading>
+      ) : (
+        <div className="overflow-x-auto shadow-card-shadow">
+          <table className="table">
+            {/* head */}
+            <thead>
+              <tr className="bg-primary">
+                <th></th>
+                <th>Camp Name</th>
+                <th>Date & Time</th>
+                <th>Healthcare Professional</th>
+                <th>Update</th>
+                <th>Delete</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody>
+              {/* row 1 */}
+              {manageCamps.result?.map((camp, idx) => (
+                <tr key={camp._id} className="hover">
+                  <th>{idx + 1}</th>
+                  <td>{camp.campName}</td>
+                  <td>{moment(camp.dateTime).format("L, LT")}</td>
+                  <td>{camp.healthcareProfessionalName}</td>
+                  <td>
+                    <Link to={`/dashboard/update-camp/${camp._id}`}>
+                      <FaEdit />
+                    </Link>
+                  </td>
+                  <td>
+                    <button onClick={() => handleDelete(camp._id)}>
+                      <FaTrash />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
 
       <div className="flex justify-center items-center mt-6 space-x-4">
         <button
