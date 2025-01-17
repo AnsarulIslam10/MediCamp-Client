@@ -6,6 +6,7 @@ import Loading from "../../../components/Shared/Loading";
 import { FcCancel } from "react-icons/fc";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import FeedbackModal from "../../../components/Modal/FeedbackModal";
 
 const RegisteredCamps = () => {
   const { user } = useAuth();
@@ -98,7 +99,9 @@ const RegisteredCamps = () => {
                     <FcCancel />
                   </button>
                 </td>
-                <td>{camp.paymentStatus === "unpaid" ? "N/A" : "Feedback"}</td>
+                <td>
+                  <FeedbackModal camp={camp}></FeedbackModal>
+                </td>
               </tr>
             ))}
           </tbody>

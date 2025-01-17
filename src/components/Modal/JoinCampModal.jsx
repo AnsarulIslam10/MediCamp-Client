@@ -40,7 +40,7 @@ export default function JoinCampModal({ camp, refetch }) {
       location,
       healthcareProfessionalName,
       paymentStatus: "unpaid",
-      confirmationStatus: "panding",
+      confirmationStatus: "pending",
       ...data,
     };
     const campRes = await axiosPublic.post(

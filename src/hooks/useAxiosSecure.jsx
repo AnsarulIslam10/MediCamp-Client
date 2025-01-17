@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import useAuth from "./useAuth";
 
 const axiosSecure = axios.create({
@@ -7,8 +8,8 @@ const axiosSecure = axios.create({
 });
 
 const useAxiosSecure = () => {
-  const { signOutUser } = useAuth();
   const navigate = useNavigate()
+  const { signOutUser } = useAuth();
   axiosSecure.interceptors.request.use(
     function (config) {
       const token = localStorage.getItem("access-token");
@@ -29,7 +30,8 @@ const useAxiosSecure = () => {
       const status = error.response.status;
       if (status === 401 || status === 403) {
         await signOutUser();
-        navigate("/login");
+        toast.warning(status)
+        navigate("/logIn");
       }
       return Promise.reject(error);
     }
