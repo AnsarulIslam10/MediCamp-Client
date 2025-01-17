@@ -1,6 +1,7 @@
 import React from "react";
 import { FaUserDoctor } from "react-icons/fa6";
 import Container from "../Container";
+import logo from "../../../assets/Logo/MediCamp.svg"
 
 const Footer = () => {
   return (
@@ -8,7 +9,7 @@ const Footer = () => {
       <Container>
         <section className="footer">
           <aside>
-            <FaUserDoctor className="text-8xl text-primary" />
+            <img src={logo} alt="" />
             <p>
               Medical Camp Management
               <br />

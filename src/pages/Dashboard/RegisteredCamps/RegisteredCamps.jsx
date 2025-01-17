@@ -7,6 +7,7 @@ import { FcCancel } from "react-icons/fc";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import FeedbackModal from "../../../components/Modal/FeedbackModal";
+import { BiX } from "react-icons/bi";
 
 const RegisteredCamps = () => {
   const { user } = useAuth();
@@ -95,8 +96,12 @@ const RegisteredCamps = () => {
                 </td>
                 <td>{camp.confirmationStatus}</td>
                 <td>
-                  <button onClick={() => handleDelete(camp._id)}>
-                    <FcCancel />
+                  <button
+                    disabled={camp.paymentStatus === "paid"}
+                    className="disabled:text-gray-500 text-xl"
+                    onClick={() => handleDelete(camp._id)}
+                  >
+                    <BiX />
                   </button>
                 </td>
                 <td>

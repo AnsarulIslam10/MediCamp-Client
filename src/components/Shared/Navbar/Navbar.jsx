@@ -67,7 +67,7 @@ const Navbar = () => {
                 tabIndex={0}
                 className="menu menu-sm dropdown-content rounded-box bg-white mt-3 w-32 p-2 shadow z-50"
               >
-                <button disabled>
+                <button disabled className="text-start ml-3">
                   <a>{user?.displayName}</a>
                 </button>
                 <li>
