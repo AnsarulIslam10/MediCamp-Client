@@ -43,8 +43,7 @@ const CampDetails = () => {
           </div>
           <div>
             <div className="p-6 flex-1 text-2xl font-semibold space-y-4 pt-0">
-              <h2 className="card-title text-4xl flex items-center gap-1">
-                <MdCampaign />
+              <h2 className="card-title text-4xl mt-2">
                 {campName}
               </h2>
               <p className="flex items-center gap-1">
@@ -67,7 +66,7 @@ const CampDetails = () => {
                 <span className="font-medium text-description">{location}</span>
               </p>
               <p className="font-semibold flex items-center">
-                <FaDollarSign />
+                <FaDollarSign className="text-[28px]" />
                 Camp Fee:
                 <span className="font-medium text-description ml-1">
                   ${campFees}/per person
