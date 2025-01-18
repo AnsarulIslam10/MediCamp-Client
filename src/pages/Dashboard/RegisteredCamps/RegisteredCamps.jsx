@@ -26,7 +26,7 @@ const RegisteredCamps = () => {
   if (isLoading) {
     return <Loading></Loading>;
   }
-  console.log(registeredCamps);
+
   const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",

@@ -14,7 +14,7 @@ const CheckoutForm = () => {
   const elements = useElements();
   const axiosSecure = useAxiosSecure();
   const location = useLocation();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const campName = location.state?.campName;
   const campFees = location.state?.campFees;
   const registeredCampId = location.state?.registeredCampId;
@@ -27,7 +27,6 @@ const CheckoutForm = () => {
         campFees: campFees,
       })
       .then((res) => {
-        console.log(res.data.clientSecret);
         setClientSecret(res.data.clientSecret);
       });
   }, [axiosSecure, campFees]);
@@ -47,10 +46,8 @@ const CheckoutForm = () => {
       card,
     });
     if (error) {
-      console.log("payment error", error);
       setError(error.message);
     } else {
-      console.log("payment method", paymentMethod);
       setError("");
     }
 
@@ -67,13 +64,10 @@ const CheckoutForm = () => {
       });
 
     if (confirmError) {
-      console.log("confirm error", confirmError);
+      toast.error(confirmError);
     } else {
-      console.log("payment intent", paymentIntent);
       if (paymentIntent.status === "succeeded") {
-        console.log("transaction id", paymentIntent.id);
         setTransactionId(paymentIntent.id);
-
         // save the payment in the database
         const payment = {
           campName: campName,
@@ -87,10 +81,9 @@ const CheckoutForm = () => {
           confirmationStatus: confirmationStatus,
         };
         const res = await axiosSecure.post("/payments", payment);
-        console.log("payment saved", res);
         if (res.data?.insertedId) {
           toast.success("Payment Successful");
-          navigate('/dashboard/payment-history')
+          navigate("/dashboard/payment-history");
         }
       }
     }

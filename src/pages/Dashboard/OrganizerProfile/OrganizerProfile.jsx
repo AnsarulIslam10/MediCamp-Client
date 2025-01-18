@@ -22,7 +22,7 @@ const OrganizerProfile = () => {
   if (isLoading) {
     return <Loading></Loading>;
   }
-  console.log(userData);
+
   return (
     <div className="min-h-screen flex flex-col justify-center items-center">
       <div className="text-center mt-16 shadow-card-shadow max-w-xl mx-auto p-10">

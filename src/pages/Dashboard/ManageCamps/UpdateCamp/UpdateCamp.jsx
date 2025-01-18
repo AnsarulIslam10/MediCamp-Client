@@ -46,7 +46,6 @@ const UpdateCamp = () => {
       axiosSecure
         .patch(`/update-camp/${id}`, updateCampData)
         .then((res) => {
-          console.log(res);
           if (res.data.modifiedCount > 0) {
             reset()
             Swal.fire({

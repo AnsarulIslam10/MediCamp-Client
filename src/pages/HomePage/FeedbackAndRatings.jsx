@@ -22,7 +22,7 @@ const FeedbackAndRatings = () => {
       return res.data;
     },
   });
-  console.log(feedback);
+
   return (
     <div className="my-16">
       <h1 className="text-center text-4xl font-bold mb-8">

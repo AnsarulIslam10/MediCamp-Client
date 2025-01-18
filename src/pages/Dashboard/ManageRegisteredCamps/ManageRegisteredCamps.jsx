@@ -32,7 +32,6 @@ const ManageRegisteredCamps = () => {
       confirmationStatus: "confirmed",
       campId: campId
     });
-    console.log(res)
     if (res.data.modifiedCount > 0) {
       toast.success("Confirmation status updated");
       refetch();

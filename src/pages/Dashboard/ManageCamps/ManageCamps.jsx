@@ -57,7 +57,6 @@ const ManageCamps = () => {
     });
   };
 
-  console.log(manageCamps);
   return (
     <div className="px-4">
       <h1 className="text-4xl font-bold text-center mb-4 mt-16">

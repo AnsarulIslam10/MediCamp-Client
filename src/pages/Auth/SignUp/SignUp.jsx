@@ -19,11 +19,9 @@ const SignUp = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
     createUser(data.email, data.password)
       .then((result) => {
         const user = result.user;
-        console.log(user);
         updateUserProfile({
           displayName: data.name,
           photoURL: data.photoURL,
@@ -35,7 +33,6 @@ const SignUp = () => {
 
         axiosPublic.post("/users", userInfo).then((res) => {
           if (res.data.insertedId) {
-            console.log("user added to database");
             reset();
 
             toast.success("Sign Up successful");

@@ -7,7 +7,7 @@ const useCamp = (sortBy) => {
     const {data: camp = [], isLoading: loading, refetch} = useQuery({
         queryKey: ['camp', search, sortBy],
         queryFn: async ()=>{
-            const res = await axios.get(`http://localhost:5000/all-camps?search=${search}&sortBy=${sortBy}`)
+            const res = await axios.get(`https://medi-camp-server-opal.vercel.app/all-camps?search=${search}&sortBy=${sortBy}`)
             return res.data;
         }
     })
