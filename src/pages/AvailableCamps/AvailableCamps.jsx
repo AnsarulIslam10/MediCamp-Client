@@ -7,7 +7,7 @@ import { TfiLayoutGrid2Alt, TfiLayoutGrid3Alt } from "react-icons/tfi";
 const AvailableCamps = () => {
   const [viewLayout, setViewLayout] = useState("three");
   const [sortBy, setSortBy] = useState("");
-  const [camp, , , search, setSearch] = useCamp(sortBy);
+  const [camp, , , search, setSearch, page, setPage, limit] = useCamp(sortBy);
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
@@ -72,17 +72,40 @@ const AvailableCamps = () => {
         </div>
         {viewLayout === "three" ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {camp.map((item) => (
+            {camp.result?.map((item) => (
               <CampCard key={item._id} item={item}></CampCard>
             ))}
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {camp.map((item) => (
+            {camp.result?.map((item) => (
               <CampCard key={item._id} item={item}></CampCard>
             ))}
           </div>
         )}
+      </div>
+      <div className="flex justify-center items-center my-6 space-x-4">
+        <button
+          className="btn bg-primary border-none px-6 py-2 rounded-lg shadow-md hover:bg-primary-hover disabled:opacity-50"
+          onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+          disabled={page === 1}
+        >
+          <span className="text-lg font-semibold">Previous</span>
+        </button>
+        <span className="text-lg font-medium text-gray-700">
+          Page {page} of {camp.totalPages}
+        </span>
+        <button
+          className="btn bg-primary border-none px-6 py-2 rounded-lg shadow-md hover:bg-primary-hover disabled:opacity-50"
+          onClick={() =>
+            setPage((prev) =>
+              camp.totalPages ? Math.min(prev + 1, camp.totalPages) : prev
+            )
+          }
+          disabled={page === camp.totalPages}
+        >
+          <span className="text-lg font-semibold">Next</span>
+        </button>
       </div>
     </Container>
   );
