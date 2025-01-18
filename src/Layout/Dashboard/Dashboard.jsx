@@ -1,12 +1,18 @@
 import React from "react";
-import { FaBars, FaListAlt, FaPlusCircle, FaUserCircle } from "react-icons/fa";
+import { FaBars, FaHome, FaListAlt, FaPlusCircle, FaUserCircle } from "react-icons/fa";
 import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import useAdmin from "../../hooks/useAdmin";
 import { MdExitToApp } from "react-icons/md";
 import useAuth from "../../hooks/useAuth";
 import logo from "../../assets/Logo/MediCamp.svg";
-import { IoListCircle } from "react-icons/io5";
-import { FaChartBar, FaCreditCard, FaList, FaListCheck, FaPlus, FaUser } from "react-icons/fa6";
+import {
+  FaChartBar,
+  FaCreditCard,
+  FaList,
+  FaListCheck,
+  FaPlus,
+  FaUser,
+} from "react-icons/fa6";
 const Dashboard = () => {
   const [isAdmin] = useAdmin();
   const { signOutUser } = useAuth();
@@ -22,7 +28,7 @@ const Dashboard = () => {
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content flex flex-col items-center justify-center">
+      <div className="drawer-content flex flex-col lg:px-10">
         <Outlet></Outlet>
         <label htmlFor="my-drawer-2" className="lg:hidden">
           <FaBars className="absolute text-3xl top-1 left-1" />
@@ -35,7 +41,9 @@ const Dashboard = () => {
           className="drawer-overlay"
         ></label>
         <ul className="menu bg-slate-800 min-h-screen w-70 p-4">
-          <Link to={'/'}><img className="mt-4 w-56 drop-shadow-xl" src={logo} alt="" /></Link>
+          <Link to={"/"}>
+            <img className="mt-4 w-56 drop-shadow-xl" src={logo} alt="" />
+          </Link>
           <div className="divider divider-info mb-10"></div>
           {/* Sidebar content here */}
           {isAdmin ? (
@@ -76,7 +84,7 @@ const Dashboard = () => {
             <>
               <li>
                 <NavLink to={"/dashboard/analytics"} className={navLinkStyles}>
-                <FaChartBar className="text-3xl"/> Analytics
+                  <FaChartBar className="text-3xl" /> Analytics
                 </NavLink>
               </li>
               <li>
@@ -84,7 +92,7 @@ const Dashboard = () => {
                   to={"/dashboard/participant-profile"}
                   className={navLinkStyles}
                 >
-                  <FaUser className="text-3xl"/> Participant Profile
+                  <FaUser className="text-3xl" /> Participant Profile
                 </NavLink>
               </li>
               <li>
@@ -92,7 +100,8 @@ const Dashboard = () => {
                   to={"/dashboard/registered-camps"}
                   className={navLinkStyles}
                 >
-                   <FaListCheck className="text-3xl" />Registered Camps
+                  <FaListCheck className="text-3xl" />
+                  Registered Camps
                 </NavLink>
               </li>
               <li>
@@ -100,16 +109,23 @@ const Dashboard = () => {
                   to={"/dashboard/payment-history"}
                   className={navLinkStyles}
                 >
-                 <FaCreditCard className="text-3xl" /> Payment History
+                  <FaCreditCard className="text-3xl" /> Payment History
                 </NavLink>
               </li>
             </>
           )}
-          <li className="absolute bottom-6" onClick={handleLogOut}>
-            <NavLink className="btn btn-outline hover:border-primary-hover hover:text-primary-hover text-primary text-2xl uppercase font-bold">
-              <MdExitToApp className="text-3xl" /> Logout
-            </NavLink>
-          </li>
+          <>
+            <li className="absolute bottom-20">
+              <NavLink to={'/'} className="btn btn-outline hover:border-primary-hover hover:text-primary-hover text-primary text-2xl uppercase font-bold">
+                <FaHome className="text-3xl" /> Home
+              </NavLink>
+            </li>
+            <li className="absolute bottom-6" onClick={handleLogOut}>
+              <NavLink className="btn btn-outline hover:border-primary-hover hover:text-primary-hover text-primary text-2xl uppercase font-bold">
+                <MdExitToApp className="text-3xl" /> Logout
+              </NavLink>
+            </li>
+          </>
         </ul>
       </div>
     </div>

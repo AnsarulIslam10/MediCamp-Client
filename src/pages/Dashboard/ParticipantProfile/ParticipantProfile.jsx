@@ -24,8 +24,8 @@ const ParticipantProfile = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center">
-      <div className="text-center mt-16 shadow-card-shadow max-w-xl mx-auto p-10">
+    <div className="">
+      <div className="text-center mt-16 shadow-card-shadow p-10">
         <div className="avatar mb-4">
           <div className="ring-primary ring-offset-base-100 w-24 rounded-full ring ring-offset-2">
             <img src={userData.photoURL} />
