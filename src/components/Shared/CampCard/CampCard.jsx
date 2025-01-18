@@ -23,8 +23,8 @@ const CampCard = ({ item }) => {
     participantCount,
     description,
   } = item || {};
-  const formatedDate = moment(dateTime).format('L')
-  const formatedTime = moment(dateTime).format('LT')
+  const formatedDate = moment(dateTime).format("L");
+  const formatedTime = moment(dateTime).format("LT");
   return (
     <div className="card flex bg-white shadow-card-shadow">
       <div className="relative">
@@ -41,7 +41,7 @@ const CampCard = ({ item }) => {
         </p>
       </div>
       <div className="p-6 flex-1 space-y-1 pt-0">
-      <div className="flex justify-between text-description">
+        <div className="flex justify-between text-description">
           <p className="flex items-center gap-1">
             <FaCalendarAlt /> {formatedDate}
           </p>
@@ -64,6 +64,9 @@ const CampCard = ({ item }) => {
         </p>
         <p className="text-description flex items-center gap-1">
           <FaLocationDot className="text-xl" /> {location}
+        </p>
+        <p className="text-description text-lg">
+          {description.slice(0, 60)}...
         </p>
       </div>
       <div className="flex justify-end px-6 pb-6">

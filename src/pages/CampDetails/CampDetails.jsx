@@ -10,12 +10,12 @@ import JoinCampModal from "../../components/Modal/JoinCampModal";
 import useAuth from "../../hooks/useAuth";
 
 const CampDetails = () => {
-  const {user} = useAuth()
+  const { user } = useAuth();
   const { id } = useParams();
   const { data: camp = [], refetch } = useQuery({
     queryKey: ["camp", id],
     queryFn: async () => {
-      const res = await axios.get(`https://medi-camp-server-opal.vercel.app/camp/${id}`);
+      const res = await axios.get(`http://localhost:5000/camp/${id}`);
       return res.data;
     },
   });
@@ -33,47 +33,71 @@ const CampDetails = () => {
   const formatedDate = moment(dateTime).format("L");
   const formatedTime = moment(dateTime).format("LT");
   return (
-    <section className="my-16 max-w-6xl mx-auto px-2">
+    <section className="my-16 max-w-7xl mx-auto px-2">
       <div className="card flex bg-white shadow-card-shadow">
-        <figure>
-          <img className="rounded-t-2xl" src={image} alt="camp" />
-        </figure>
-        <div>
-          <div className="p-6 flex-1 space-y-2 pt-0">
-            <div className="flex justify-between text-2xl text-description">
+        <div className="grid grid-cols-1 sm:grid-cols-2">
+          <div>
+            <figure>
+              <img className="rounded-t-2xl" src={image} alt="camp" />
+            </figure>
+          </div>
+          <div>
+            <div className="p-6 flex-1 text-2xl font-semibold space-y-4 pt-0">
+              <h2 className="card-title text-4xl flex items-center gap-1">
+                <MdCampaign />
+                {campName}
+              </h2>
               <p className="flex items-center gap-1">
-                <FaCalendarAlt /> {formatedDate}
+                <FaCalendarAlt />
+                Date:{" "}
+                <span className="font-medium text-description">
+                  {formatedDate}
+                </span>
               </p>
               <p className="flex items-center gap-1">
-                <FaClock /> {formatedTime}
+                <FaClock />
+                Time:{" "}
+                <span className="font-medium text-description">
+                  {formatedTime}
+                </span>
+              </p>
+              <p className="flex items-center gap-1">
+                <FaLocationDot />
+                Location:{" "}
+                <span className="font-medium text-description">{location}</span>
+              </p>
+              <p className="font-semibold flex items-center">
+                <FaDollarSign />
+                Camp Fee:
+                <span className="font-medium text-description ml-1">
+                  ${campFees}/per person
+                </span>
+              </p>
+
+              <p className="flex items-center gap-1">
+                <FaUserDoctor />
+                Medic:{" "}
+                <span className="font-medium text-description">
+                  {healthcareProfessionalName}
+                </span>
+              </p>
+              <p className="flex items-center gap-1">
+                <FaUsers />
+                Participant:{" "}
+                <span className="font-medium text-description">
+                  {participantCount}
+                </span>
               </p>
             </div>
-            <h2 className="card-title text-4xl flex items-center gap-1">
-              <MdCampaign className="text-description" />
-              {campName}
-            </h2>
-            <p className="text-description flex items-center gap-1">
-              <FaLocationDot className="text-3xl" /> {location}
-            </p>
-            <p className="text-3xl font-semibold flex items-center">
-              <FaDollarSign />
-              {campFees} / per person
-            </p>
-
-            <p className="flex items-center gap-1 text-3xl">
-              <FaUserDoctor className="text-description" />
-              {healthcareProfessionalName}
-            </p>
-            <p className="flex items-center gap-1 text-3xl">
-              <FaUsers className="text-description" />
-              {participantCount}
-            </p>
-
-            <p className="text-3xl">{description}</p>
+            <div className="flex justify-end px-6">
+              <JoinCampModal camp={camp} refetch={refetch}></JoinCampModal>
+            </div>
           </div>
         </div>
-        <div className="flex justify-end px-6 pb-6">
-          <JoinCampModal camp={camp} refetch={refetch}></JoinCampModal>
+        <div className="divider px-5"></div>
+        <div className="p-6 pt-0">
+          <p className="text-3xl font-semibold">Description:</p>
+          <p className="text-description text-xl mt-2">{description}</p>
         </div>
       </div>
     </section>

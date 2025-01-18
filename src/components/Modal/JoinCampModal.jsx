@@ -64,10 +64,9 @@ export default function JoinCampModal({ camp, refetch }) {
       <Button
         disabled={!user}
         onClick={open}
-        className="rounded-md disabled:bg-gray-300 bg-primary hover:bg-primary-hover py-2 px-4 text-sm font-medium text-white focus:outline-none  data-[focus]:outline-1 data-[focus]:outline-white"
+        className="rounded-md disabled:bg-gray-300 bg-primary hover:bg-primary-hover py-2 px-4 text-sm font-medium text-black focus:outline-none  data-[focus]:outline-1 data-[focus]:outline-white"
       >
         {user === null ? "Login to join camp" : "Join Camp"}
-        
       </Button>
 
       <Dialog
