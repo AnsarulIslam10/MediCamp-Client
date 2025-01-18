@@ -1,9 +1,11 @@
 import { Link, NavLink } from "react-router-dom";
 import Container from "../Container";
 import useAuth from "../../../hooks/useAuth";
-import logo from "../../../assets/Logo/MediCamp.svg"
+import logo from "../../../assets/Logo/MediCamp.svg";
+import useAdmin from "../../../hooks/useAdmin";
 const Navbar = () => {
   const { user, signOutUser } = useAuth();
+  const [isAdmin] = useAdmin();
   const links = (
     <>
       <li>
@@ -70,9 +72,16 @@ const Navbar = () => {
                 <button disabled className="text-start ml-3">
                   <a>{user?.displayName}</a>
                 </button>
-                <li>
-                  <Link to={'/dashboard'}>Dashboard</Link>
-                </li>
+                {user && isAdmin && (
+                  <li>
+                    <Link to={"/dashboard/organizer-profile"}>Dashboard</Link>
+                  </li>
+                )}
+                {user && !isAdmin && (
+                  <li>
+                    <Link to={"/dashboard/participant-profile"}>Dashboard</Link>
+                  </li>
+                )}
                 <li>
                   <button onClick={signOutUser}>Logout</button>
                 </li>
