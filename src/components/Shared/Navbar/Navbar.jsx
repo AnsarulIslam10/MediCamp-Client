@@ -3,16 +3,35 @@ import Container from "../Container";
 import useAuth from "../../../hooks/useAuth";
 import logo from "../../../assets/Logo/MediCamp.svg";
 import useAdmin from "../../../hooks/useAdmin";
+import { MdExitToApp } from "react-icons/md";
 const Navbar = () => {
   const { user, signOutUser } = useAuth();
   const [isAdmin] = useAdmin();
   const links = (
     <>
       <li>
-        <NavLink to={"/"}>Home</NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            `btn btn-sm btn-ghost text-xl hover:bg-primary-hover mr-2 ${
+              isActive ? "bg-primary" : ""
+            }`
+          }
+          to={"/"}
+        >
+          Home
+        </NavLink>
       </li>
       <li>
-        <NavLink to={"/available-camps"}>Available Camps</NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            `btn btn-sm btn-ghost text-xl hover:bg-primary-hover ${
+              isActive ? "bg-primary" : ""
+            }`
+          }
+          to={"/available-camps"}
+        >
+          Available Camps
+        </NavLink>
       </li>
     </>
   );
@@ -39,7 +58,7 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-50 mt-3 w-52 p-2 shadow"
             >
               {links}
             </ul>
@@ -67,23 +86,23 @@ const Navbar = () => {
               </div>
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content rounded-box bg-white mt-3 w-32 p-2 shadow z-50"
+                className="menu menu-sm font-semibold dropdown-content rounded-box bg-white mt-3 space-y-2 w-40 p-2 text-xl shadow z-50"
               >
                 <button disabled className="text-start ml-3">
                   <a>{user?.displayName}</a>
                 </button>
                 {user && isAdmin && (
                   <li>
-                    <Link to={"/dashboard/organizer-profile"}>Dashboard</Link>
+                    <Link className="text-xl" to={"/dashboard/organizer-profile"}>Dashboard</Link>
                   </li>
                 )}
                 {user && !isAdmin && (
                   <li>
-                    <Link to={"/dashboard/participant-profile"}>Dashboard</Link>
+                    <Link className="text-xl" to={"/dashboard/participant-profile"}>Dashboard</Link>
                   </li>
                 )}
                 <li>
-                  <button onClick={signOutUser}>Logout</button>
+                  <button className="text-xl uppercase" onClick={signOutUser}><MdExitToApp/> Logout</button>
                 </li>
               </ul>
             </div>

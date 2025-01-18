@@ -30,7 +30,7 @@ const PopularCamps = () => {
       <div className="flex justify-end">
         <Link
           to={"/available-camps"}
-          className="flex items-center font-bold text-xl bg-primary hover:bg-primary-hover btn mt-4"
+          className="flex items-center font-semibold text-xl bg-primary hover:bg-primary-hover btn mt-4"
         >
           See All Camps <FaArrowRight />
         </Link>
