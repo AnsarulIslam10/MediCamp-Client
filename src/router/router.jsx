@@ -18,6 +18,7 @@ import PrivateRoute from "./privateRoute";
 import AdminRoute from "./AdminRoute";
 import ParticipantProfile from "../pages/Dashboard/ParticipantProfile/ParticipantProfile";
 import ManageRegisteredCamps from "../pages/Dashboard/ManageRegisteredCamps/ManageRegisteredCamps";
+import ParticipantRoute from "./ParticipantRoute";
 
 export const router = createBrowserRouter([
   {
@@ -56,23 +57,43 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "analytics",
-        element: <Analytics></Analytics>,
+        element: (
+          <ParticipantRoute>
+            <Analytics></Analytics>
+          </ParticipantRoute>
+        ),
       },
       {
         path: "participant-profile",
-        element: <ParticipantProfile></ParticipantProfile>,
+        element: (
+          <ParticipantRoute>
+            <ParticipantProfile></ParticipantProfile>
+          </ParticipantRoute>
+        ),
       },
       {
         path: "registered-camps",
-        element: <RegisteredCamps></RegisteredCamps>,
+        element: (
+          <ParticipantRoute>
+            <RegisteredCamps></RegisteredCamps>
+          </ParticipantRoute>
+        ),
       },
       {
         path: "payment",
-        element: <Payment></Payment>,
+        element: (
+          <ParticipantRoute>
+            <Payment></Payment>
+          </ParticipantRoute>
+        ),
       },
       {
         path: "payment-history",
-        element: <PaymentHistory></PaymentHistory>,
+        element: (
+          <ParticipantRoute>
+            <PaymentHistory></PaymentHistory>
+          </ParticipantRoute>
+        ),
       },
 
       //organizer route
