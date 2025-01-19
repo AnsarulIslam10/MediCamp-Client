@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import useAuth from "./useAuth";
 
 const axiosSecure = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://medi-camp-server-opal.vercel.app",
 });
 
 const useAxiosSecure = () => {

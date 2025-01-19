@@ -16,7 +16,7 @@ const CampDetails = () => {
   const { data: camp = [], refetch } = useQuery({
     queryKey: ["camp", id],
     queryFn: async () => {
-      const res = await axios.get(`http://localhost:5000/camp/${id}`);
+      const res = await axios.get(`https://medi-camp-server-opal.vercel.app/camp/${id}`);
       return res.data;
     },
   });
