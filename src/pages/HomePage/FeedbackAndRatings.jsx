@@ -24,7 +24,7 @@ const FeedbackAndRatings = () => {
   });
 
   return (
-    <div className="my-16">
+    <div id="feedback-ratings" className="my-16">
       <h1 className="text-center text-4xl font-bold mb-8">
         Feedback And Ratings
       </h1>

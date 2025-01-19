@@ -18,7 +18,7 @@ const PopularCamps = () => {
     return <Loading></Loading>;
   }
   return (
-    <section className="my-16">
+    <section id="popular-camps" className="my-16">
       <h1 className="text-4xl text-center mb-8 text-title font-bold">
         Popular Medical Camps
       </h1>

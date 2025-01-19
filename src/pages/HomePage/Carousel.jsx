@@ -14,7 +14,7 @@ import image3 from "../../assets/carousel/health-checkup.jpg";
 
 const Carousel = () => {
   return (
-    <>
+    <div id="banner">
       <Swiper
         spaceBetween={30}
         centeredSlides={true}
@@ -94,7 +94,7 @@ const Carousel = () => {
           </div>
         </SwiperSlide>
       </Swiper>
-    </>
+    </div>
   );
 };
 
