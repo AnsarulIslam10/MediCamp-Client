@@ -34,11 +34,11 @@ const CampDetails = () => {
   const formatedTime = moment(dateTime).format("LT");
   return (
     <section className="my-16 max-w-7xl mx-auto px-2">
-      <div className="card flex bg-white shadow-card-shadow">
+      <div className="card rounded-none flex bg-white shadow-card-shadow">
         <div className="grid grid-cols-1 sm:grid-cols-2">
           <div>
             <figure>
-              <img className="rounded-t-2xl" src={image} alt="camp" />
+              <img className="" src={image} alt="camp" />
             </figure>
           </div>
           <div>

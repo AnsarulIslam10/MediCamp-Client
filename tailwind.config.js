@@ -16,9 +16,8 @@ export default {
         'accent': '#1ddd1d',
        },
        boxShadow: {
-        "card-shadow": 'rgba(0, 0, 0, 0.1) 0px 4px 12px;'
+        "card-shadow": 'rgba(149, 157, 165, 0.2) 0px 8px 24px'
        }
-       
     },
   },
   plugins: [

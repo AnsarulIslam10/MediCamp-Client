@@ -26,17 +26,17 @@ const CampCard = ({ item }) => {
   const formatedDate = moment(dateTime).format("L");
   const formatedTime = moment(dateTime).format("LT");
   return (
-    <div className="card flex bg-white shadow-card-shadow">
+    <div className="card rounded-none flex bg-white shadow-card-shadow">
       <div className="relative">
         <figure>
           <img
-            className="rounded-t-2xl object-cover w-full mb-2"
+            className=" object-cover w-full mb-2"
             src={image}
             alt="camp"
           />
         </figure>
-        <p className="absolute top-4 right-4 bg-primary text-3xl px-3 drop-shadow-md rounded-xl font-semibold flex items-center">
-          <FaDollarSign />
+        <p className="absolute top-4 right-4 bg-primary text-2xl px-3 drop-shadow-md rounded-full font-medium flex items-center">
+          <FaDollarSign className="text-xl mt-[2px]" />
           {campFees}
         </p>
       </div>
