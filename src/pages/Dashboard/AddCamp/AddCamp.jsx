@@ -49,8 +49,8 @@ const AddCamp = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen w-full max-w-5xl mx-auto text-[#444444] px-10">
-      <div className="card p-10 w-full border">
+    <div className="flex justify-center items-center min-h-screen w-full max-w-5xl mx-auto text-[#444444] px-1 my-16">
+      <div className="card p-4 lg:p-10 w-full border">
         <h1 className="text-4xl text-center font-bold mb-8">Add A Camp</h1>
         <form onSubmit={handleSubmit(onSubmit)} className="">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2">

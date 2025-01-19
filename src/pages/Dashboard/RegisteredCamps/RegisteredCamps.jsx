@@ -55,8 +55,8 @@ const RegisteredCamps = () => {
     });
   };
   return (
-    <div className="p-10">
-      <h1 className="text-4xl font-bold text-center mb-8 mt-16">
+    <div className="p-1 mb-8 mt-16">
+      <h1 className="text-4xl font-bold text-center mb-4">
         Registered Camps
       </h1>
       <div className="flex justify-end mb-2">

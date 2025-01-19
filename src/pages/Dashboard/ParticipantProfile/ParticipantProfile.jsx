@@ -24,7 +24,7 @@ const ParticipantProfile = () => {
   }
 
   return (
-    <div className="">
+    <div className="px-1">
       <div className="text-center mt-16 shadow-card-shadow p-10">
         <div className="avatar mb-4">
           <div className="ring-primary ring-offset-base-100 w-24 rounded-full ring ring-offset-2">

@@ -41,15 +41,15 @@ const FeedbackAndRatings = () => {
         {feedback?.map((item) => (
           <SwiperSlide key={item._id}>
             <div className="text-center flex items-center justify-center flex-col">
-              <div className="avatar flex-col mb-3 p-2">
-                <div className="ring-primary ring-offset-base-100 w-24 rounded-full ring ring-offset-2">
+              <div className="avatar p-2 pb-0">
+                <div className="ring-primary ring-offset-base-100 w-12 sm:w-16 rounded-full ring ring-offset-2">
                   <img src={item.photo} />
                 </div>
-              <h2 className="mt-2 font-semibold">{item.name}</h2>
               </div>
+              <h2 className="mt-2 font-semibold">{item.name}</h2>
               <h2 className="text-xl font-semibold">{item.campName}</h2>
-              <Rating style={{ maxWidth: 120 }} value={item.rating} readOnly />
-              <p className="max-w-lg mt-3">{item.feedback}</p>
+              <Rating style={{ maxWidth: 100 }} value={item.rating} readOnly />
+              <p className="max-w-xs sm:max-w-md md:max-w-lg text-xs mt-3 px-10 sm:px-0">{item.feedback}</p>
             </div>
           </SwiperSlide>
         ))}

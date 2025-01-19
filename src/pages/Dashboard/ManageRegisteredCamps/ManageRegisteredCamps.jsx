@@ -64,8 +64,8 @@ const ManageRegisteredCamps = () => {
     });
   };
   return (
-    <div className="p-10">
-      <h1 className="text-4xl font-bold text-center mb-8 mt-16">
+    <div className="p-1 mb-8 mt-16">
+      <h1 className="text-4xl font-bold text-center mb-8">
         Manage Registered Camps
       </h1>
       <div className="flex justify-end mb-2">
@@ -150,7 +150,7 @@ const ManageRegisteredCamps = () => {
           onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
           disabled={page === 1}
         >
-          <span className="text-lg font-semibold">Previous</span>
+          <span className="text-lg font-semibold">Prev</span>
         </button>
         <span className="text-lg font-medium text-gray-700">
           Page {page} of {manageRegisteredCamps.totalPages}

@@ -23,7 +23,7 @@ const AvailableCamps = () => {
   return (
     <Container>
       <div className="my-16">
-        <label className="input input-bordered flex items-center gap-2 max-w-lg mx-auto">
+        <label className="input input-bordered flex items-center gap-2 max-w-lg mx-auto mb-2">
           <input
             value={search}
             onChange={handleSearch}

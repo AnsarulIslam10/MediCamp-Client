@@ -50,7 +50,7 @@ const CampCard = ({ item }) => {
           </p>
         </div>
 
-        <h2 className="card-title text-2xl flex items-center gap-1">
+        <h2 className="card-title sm:text-xl lg:text-2xl flex items-center gap-1">
           <MdCampaign className="text-description text-lg" />
           {campName}
         </h2>

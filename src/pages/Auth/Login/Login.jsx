@@ -31,14 +31,14 @@ const Login = () => {
 
   return (
     <div className="max-w-6xl mx-auto flex justify-center items-center min-h-screen text-[#444444] px-2">
-      <div className="hero-content flex-col shadow-custom-dark lg:flex-row shadow-card-shadow">
-        <div className="text-center lg:text-left">
+      <div className="hero-content flex-col shadow-custom-dark md:flex-row shadow-card-shadow">
+        <div className="text-center hidden md:block lg:text-left">
           <img src={sideImg} alt="" />
         </div>
         <div className="card w-full max-w-md shrink-0 ">
           <form onSubmit={handleSubmit(onSubmit)} className="card-body">
             <h2 className="text-center text-[40px] font-bold mb-5 text-[#151515]">
-              Log In
+              Sign In
             </h2>
             <div className="form-control">
               <label className="label">
@@ -87,7 +87,7 @@ const Login = () => {
             </div>
 
             <div className="form-control mt-6">
-              <button className="btn rounded-lg font-bold bg-primary mb-2">
+              <button className="btn rounded-lg font-bold bg-primary hover:bg-primary-hover">
                 Sign In
               </button>
             </div>
@@ -98,8 +98,8 @@ const Login = () => {
                 Sign Up
               </Link>
             </p>
-            <p className="text-center my-4 text-xl font-medium text-[#444444]">
-              Or Login with
+            <p className="px-6 divider text-center text-xl font-medium text-[#444444]">
+              Or Sign In with
             </p>
             <SocialLogin></SocialLogin>
           </form>

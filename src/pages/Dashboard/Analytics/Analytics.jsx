@@ -42,7 +42,7 @@ const Analytics = () => {
   });
 
   return (
-    <ResponsiveContainer width="100%" height={500}>
+    <ResponsiveContainer width="100%" height={500} className={"mt-16"}>
       <h2 className="text-4xl font-bold text-center mb-8">Analytics</h2>
       <BarChart
         data={analyticsData}
@@ -50,11 +50,11 @@ const Analytics = () => {
           top: 20,
           right: 30,
           left: 20,
-          bottom: 100,
+          bottom: 120,
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="campName" angle={-30} textAnchor="end" />
+        <XAxis dataKey="campName" angle={-50} textAnchor="end" />
         <YAxis />
         <Bar
           dataKey="amountPaid"
