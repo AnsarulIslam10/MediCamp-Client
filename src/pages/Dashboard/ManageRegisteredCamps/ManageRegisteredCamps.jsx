@@ -116,13 +116,14 @@ const ManageRegisteredCamps = () => {
                 <td>{camp.paymentStatus}</td>
                 <td>
                   <button
+                  disabled={camp.confirmationStatus === "confirmed"}
                     onClick={() =>
                       handleConfirmationStatus(
                         camp.participantEmail,
                         camp.campId
                       )
                     }
-                    className="btn btn-xs bg-primary hover:bg-primary-hover"
+                    className="btn btn-xs disabled:bg-primary disabled:text-gray-400 bg-primary hover:bg-primary-hover"
                   >
                     {camp.confirmationStatus}
                   </button>

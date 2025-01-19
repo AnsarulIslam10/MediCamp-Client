@@ -7,6 +7,7 @@ import useAxiosPublic from "../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { FaEdit } from "react-icons/fa";
 
 export default function UpdateProfileModal({userData, refetch}) {
   let [isOpen, setIsOpen] = useState(false);
@@ -44,9 +45,9 @@ export default function UpdateProfileModal({userData, refetch}) {
       <Button
         disabled={!user}
         onClick={open}
-        className="rounded-md disabled:bg-gray-300 bg-primary hover:bg-primary-hover py-2 px-4 text-sm font-medium text-white focus:outline-none  data-[focus]:outline-1 data-[focus]:outline-white"
+        className="rounded-md btn disabled:bg-gray-300 bg-primary hover:bg-primary-hover py-2 px-4 text-sm font-medium text-white focus:outline-none  data-[focus]:outline-1 data-[focus]:outline-white"
       >
-        Update Profile
+        <FaEdit/> Update Profile
       </Button>
 
       <Dialog

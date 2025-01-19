@@ -90,7 +90,7 @@ const AvailableCamps = () => {
           onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
           disabled={page === 1}
         >
-          <span className="text-lg font-semibold">Previous</span>
+          <span className="text-lg font-semibold">Prev</span>
         </button>
         <span className="text-lg font-medium text-gray-700">
           Page {page} of {camp.totalPages}
