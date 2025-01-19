@@ -3,6 +3,7 @@ import useCamp from "../../hooks/useCamp";
 import CampCard from "../../components/Shared/CampCard/CampCard";
 import Container from "../../components/Shared/Container";
 import { TfiLayoutGrid2Alt, TfiLayoutGrid3Alt } from "react-icons/tfi";
+import { Helmet } from "react-helmet-async";
 
 const AvailableCamps = () => {
   const [viewLayout, setViewLayout] = useState("three");
@@ -22,6 +23,9 @@ const AvailableCamps = () => {
 
   return (
     <Container>
+      <Helmet>
+        <title>MediCamp | Available Camps</title>
+      </Helmet>
       <div className="my-16">
         <label className="input input-bordered flex items-center gap-2 max-w-lg mx-auto mb-2">
           <input

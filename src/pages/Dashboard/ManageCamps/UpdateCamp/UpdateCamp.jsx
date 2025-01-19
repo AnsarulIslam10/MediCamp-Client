@@ -8,12 +8,13 @@ import { useNavigate, useParams } from "react-router-dom";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import useAxiosPublic from "../../../../hooks/useAxiosPublic";
 import Loading from "../../../../components/Shared/Loading";
+import { Helmet } from "react-helmet-async";
 
 const UpdateCamp = () => {
   const axiosSecure = useAxiosSecure();
   const axiosPublic = useAxiosPublic();
   const { id } = useParams();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -47,14 +48,14 @@ const UpdateCamp = () => {
         .patch(`/update-camp/${id}`, updateCampData)
         .then((res) => {
           if (res.data.modifiedCount > 0) {
-            reset()
+            reset();
             Swal.fire({
               title: `Camp details Updated`,
               icon: "success",
               showCancelButton: false,
               timer: 1500,
             });
-            navigate('/dashboard/manage-camps')
+            navigate("/dashboard/manage-camps");
           }
         })
         .catch((err) => {
@@ -64,6 +65,9 @@ const UpdateCamp = () => {
   };
   return (
     <div className="flex w-full max-w-5xl justify-center items-center min-h-screen text-[#444444] px-10">
+      <Helmet>
+        <title>MediCamp | Update Camp</title>
+      </Helmet>
       <div className="card p-10 w-full border">
         <h1 className="text-4xl text-center font-bold mb-8">
           Update Camp Details

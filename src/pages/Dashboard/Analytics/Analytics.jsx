@@ -12,6 +12,7 @@ import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import SectionTitle from "../../../components/Shared/SectionTitle/SectionTitle";
+import { Helmet } from "react-helmet-async";
 
 const colors = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "red", "pink"];
 const getPath = (x, y, width, height) => {
@@ -44,6 +45,9 @@ const Analytics = () => {
 
   return (
     <ResponsiveContainer width="100%" height={500} className={"mt-16"}>
+      <Helmet>
+        <title>MediCamp | Analytics</title>
+      </Helmet>
       <SectionTitle
         title={"Analytics"}
         sub={"Your Camp Journey and Payments"}

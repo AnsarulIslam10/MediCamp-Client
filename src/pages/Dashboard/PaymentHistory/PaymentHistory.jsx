@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Loading from "../../../components/Shared/Loading";
 import SectionTitle from "../../../components/Shared/SectionTitle/SectionTitle";
+import { Helmet } from "react-helmet-async";
 
 const PaymentHistory = () => {
   const { user } = useAuth();
@@ -24,6 +25,9 @@ const PaymentHistory = () => {
 
   return (
     <div className="p-1 mb-8 mt-16">
+      <Helmet>
+        <title>MediCamp | Payment History</title>
+      </Helmet>
       <SectionTitle
         title={"Payment History"}
         sub={"Track All Your Camp Payments"}

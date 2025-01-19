@@ -8,6 +8,7 @@ import { MdCampaign } from "react-icons/md";
 import moment from "moment";
 import JoinCampModal from "../../components/Modal/JoinCampModal";
 import useAuth from "../../hooks/useAuth";
+import { Helmet } from "react-helmet-async";
 
 const CampDetails = () => {
   const { user } = useAuth();
@@ -34,6 +35,9 @@ const CampDetails = () => {
   const formatedTime = moment(dateTime).format("LT");
   return (
     <section className="my-16 max-w-7xl mx-auto px-2">
+      <Helmet>
+        <title>MediCamp | Camp Details</title>
+      </Helmet>
       <div className="card rounded-none flex bg-white shadow-card-shadow">
         <div className="grid grid-cols-1 sm:grid-cols-2">
           <div>
@@ -43,9 +47,7 @@ const CampDetails = () => {
           </div>
           <div>
             <div className="p-6 flex-1 text-2xl font-semibold space-y-4 pt-0">
-              <h2 className="card-title text-4xl mt-2">
-                {campName}
-              </h2>
+              <h2 className="card-title text-4xl mt-2">{campName}</h2>
               <p className="flex items-center gap-1">
                 <FaCalendarAlt />
                 Date:{" "}

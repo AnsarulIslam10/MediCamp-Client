@@ -9,6 +9,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Loading from "../../../components/Shared/Loading";
 import Swal from "sweetalert2";
 import SectionTitle from "../../../components/Shared/SectionTitle/SectionTitle";
+import { Helmet } from "react-helmet-async";
 
 const ManageCamps = () => {
   const { user } = useAuth();
@@ -60,6 +61,9 @@ const ManageCamps = () => {
 
   return (
     <div className="p-1 mb-8 mt-16">
+      <Helmet>
+        <title>MediCamp | Manage Camps</title>
+      </Helmet>
       <SectionTitle
         title={"Manage Camps"}
         sub={"Overview and Control of Your Camps"}

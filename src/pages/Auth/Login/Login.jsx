@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import useAuth from "../../../hooks/useAuth";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
   const { signInUser } = useAuth();
@@ -31,6 +32,9 @@ const Login = () => {
 
   return (
     <div className="max-w-6xl mx-auto flex justify-center items-center min-h-screen text-[#444444] px-2">
+      <Helmet>
+        <title>MediCamp | Sign In</title>
+      </Helmet>
       <div className="hero-content flex-col shadow-custom-dark md:flex-row shadow-card-shadow">
         <div className="text-center hidden md:block lg:text-left">
           <img src={sideImg} alt="" />

@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import { BiX } from "react-icons/bi";
 import { toast } from "react-toastify";
 import SectionTitle from "../../../components/Shared/SectionTitle/SectionTitle";
+import { Helmet } from "react-helmet-async";
 
 const ManageRegisteredCamps = () => {
   const { user } = useAuth();
@@ -68,6 +69,9 @@ const ManageRegisteredCamps = () => {
   };
   return (
     <div className="p-1 mb-8 mt-16">
+      <Helmet>
+        <title>MediCamp | Manage Registered Camps</title>
+      </Helmet>
       <SectionTitle
         title={"Manage Registered Camps"}
         sub={"Track and Manage All The Registered Camps"}

@@ -9,6 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 import FeedbackModal from "../../../components/Modal/FeedbackModal";
 import { BiX } from "react-icons/bi";
 import SectionTitle from "../../../components/Shared/SectionTitle/SectionTitle";
+import { Helmet } from "react-helmet-async";
 
 const RegisteredCamps = () => {
   const { user } = useAuth();
@@ -59,6 +60,9 @@ const RegisteredCamps = () => {
   };
   return (
     <div className="p-1 mb-8 mt-16">
+      <Helmet>
+        <title>MediCamp | Registered Camps</title>
+      </Helmet>
       <SectionTitle
         title={"Registered Camps"}
         sub={"All Your Camp Registrations in One Place"}

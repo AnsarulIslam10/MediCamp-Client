@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { AuthContext } from "../../../providers/AuthProvider";
 import SocialLogin from "../../../components/SocialLogin/SocialLogin";
 import sideImg from "../../../assets/Login-rafiki.png";
+import { Helmet } from "react-helmet-async";
 const SignUp = () => {
   const axiosPublic = useAxiosPublic();
   const location = useLocation();
@@ -49,6 +50,9 @@ const SignUp = () => {
 
   return (
     <div className="max-w-6xl mx-auto flex justify-center items-center min-h-screen text-[#444444] px-2">
+      <Helmet>
+        <title>MediCamp | Sign Up</title>
+      </Helmet>
       <div className="hero-content flex-col shadow-custom-dark md:flex-row shadow-card-shadow">
         <div className="text-center hidden md:block lg:text-left">
           <img src={sideImg} alt="" />

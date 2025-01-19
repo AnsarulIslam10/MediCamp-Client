@@ -3,11 +3,12 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 import useAuth from "../../../hooks/useAuth";
+import { Helmet } from "react-helmet-async";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 const AddCamp = () => {
-  const {user} = useAuth()
+  const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const axiosPublic = useAxiosPublic();
   const {
@@ -33,7 +34,7 @@ const AddCamp = () => {
         location: data.location,
         image: res.data.data.display_url,
         description: data.description,
-        email: user?.email
+        email: user?.email,
       };
       const campRes = await axiosSecure.post("/add-camp", campData);
       if (campRes.data.insertedId) {
@@ -50,6 +51,9 @@ const AddCamp = () => {
 
   return (
     <div className="flex justify-center items-center min-h-screen w-full max-w-5xl mx-auto text-[#444444] px-1 my-16">
+      <Helmet>
+        <title>MediCamp | Add Camp</title>
+      </Helmet>
       <div className="card p-4 lg:p-10 w-full border">
         <h1 className="text-4xl text-center font-bold mb-8">Add A Camp</h1>
         <form onSubmit={handleSubmit(onSubmit)} className="">
