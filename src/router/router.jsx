@@ -19,11 +19,13 @@ import AdminRoute from "./AdminRoute";
 import ParticipantProfile from "../pages/Dashboard/ParticipantProfile/ParticipantProfile";
 import ManageRegisteredCamps from "../pages/Dashboard/ManageRegisteredCamps/ManageRegisteredCamps";
 import ParticipantRoute from "./ParticipantRoute";
+import ErrorPage from "../components/Shared/ErrorPage/ErrorPage";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout></MainLayout>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
@@ -54,6 +56,7 @@ export const router = createBrowserRouter([
         <Dashboard></Dashboard>
       </PrivateRoute>
     ),
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "analytics",
