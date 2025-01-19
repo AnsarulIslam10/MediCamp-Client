@@ -3,6 +3,7 @@ import useAuth from "../../../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Loading from "../../../components/Shared/Loading";
+import SectionTitle from "../../../components/Shared/SectionTitle/SectionTitle";
 
 const PaymentHistory = () => {
   const { user } = useAuth();
@@ -23,9 +24,10 @@ const PaymentHistory = () => {
 
   return (
     <div className="p-1 mb-8 mt-16">
-      <h1 className="text-4xl font-bold text-center mb-4">
-        Payment History
-      </h1>
+      <SectionTitle
+        title={"Payment History"}
+        sub={"Track All Your Camp Payments"}
+      ></SectionTitle>
       <div className="flex justify-end mb-2">
         <label className="input input-bordered flex items-center gap-2">
           <input

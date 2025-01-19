@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 import { Link, useNavigate } from "react-router-dom";
 import FeedbackModal from "../../../components/Modal/FeedbackModal";
 import { BiX } from "react-icons/bi";
+import SectionTitle from "../../../components/Shared/SectionTitle/SectionTitle";
 
 const RegisteredCamps = () => {
   const { user } = useAuth();
@@ -58,7 +59,10 @@ const RegisteredCamps = () => {
   };
   return (
     <div className="p-1 mb-8 mt-16">
-      <h1 className="text-4xl font-bold text-center mb-4">Registered Camps</h1>
+      <SectionTitle
+        title={"Registered Camps"}
+        sub={"All Your Camp Registrations in One Place"}
+      ></SectionTitle>
       <div className="flex justify-end mb-2">
         <label className="input input-bordered flex items-center gap-2">
           <input

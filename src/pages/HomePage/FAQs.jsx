@@ -1,9 +1,13 @@
 import React from "react";
 import faq from "../../assets/animation/FAQs.gif";
+import SectionTitle from "../../components/Shared/SectionTitle/SectionTitle";
 const FAQs = () => {
   return (
     <section className=" my-16">
-      <h2 className="text-4xl font-bold text-center">FAQs</h2>
+      <SectionTitle
+        title={"Frequently Asked Questions"}
+        sub={"Got Questions? We’ve Got Answers"}
+      ></SectionTitle>
       <div className="grid grid-cols-1 md:grid-cols-2 items-center justify-items-center">
         <img src={faq} alt="" />
         <div className="space-y-1">

@@ -8,6 +8,7 @@ import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Loading from "../../../components/Shared/Loading";
 import Swal from "sweetalert2";
+import SectionTitle from "../../../components/Shared/SectionTitle/SectionTitle";
 
 const ManageCamps = () => {
   const { user } = useAuth();
@@ -59,9 +60,10 @@ const ManageCamps = () => {
 
   return (
     <div className="p-1 mb-8 mt-16">
-      <h1 className="text-4xl font-bold text-center mb-4">
-        Manage Camps
-      </h1>
+      <SectionTitle
+        title={"Manage Camps"}
+        sub={"Overview and Control of Your Camps"}
+      ></SectionTitle>
       <div className="flex justify-end mb-2">
         <label className="input input-bordered flex items-center gap-2">
           <input

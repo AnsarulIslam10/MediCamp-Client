@@ -13,6 +13,7 @@ import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import SectionTitle from "../../components/Shared/SectionTitle/SectionTitle";
 const FeedbackAndRatings = () => {
   const axiosPublic = useAxiosPublic();
   const { data: feedback } = useQuery({
@@ -25,9 +26,7 @@ const FeedbackAndRatings = () => {
 
   return (
     <div id="feedback-ratings" className="my-16">
-      <h1 className="text-center text-4xl font-bold mb-8">
-        Feedback And Ratings
-      </h1>
+      <SectionTitle title={"Feedback & Ratings"} sub={"What Our Participants Are Saying"}></SectionTitle>
       <Swiper
         navigation={true}
         autoplay={{

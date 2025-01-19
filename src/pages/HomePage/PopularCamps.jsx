@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import CampCard from "../../components/Shared/CampCard/CampCard";
 import Loading from "../../components/Shared/Loading";
+import SectionTitle from "../../components/Shared/SectionTitle/SectionTitle";
 const PopularCamps = () => {
   const { data: popularCamps = [], isLoading } = useQuery({
     queryKey: ["popularCamp"],
@@ -19,9 +20,10 @@ const PopularCamps = () => {
   }
   return (
     <section id="popular-camps" className="my-16">
-      <h1 className="text-4xl text-center mb-8 text-title font-bold">
-        Popular Medical Camps
-      </h1>
+      <SectionTitle
+        title={"Popular Medical Camps"}
+        sub={"Top Medical Camps with the Highest Participation"}
+      ></SectionTitle>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {popularCamps.map((item) => (
           <CampCard key={item._id} item={item}></CampCard>

@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import { BiX } from "react-icons/bi";
 import { toast } from "react-toastify";
+import SectionTitle from "../../../components/Shared/SectionTitle/SectionTitle";
 
 const ManageRegisteredCamps = () => {
   const { user } = useAuth();
@@ -22,7 +23,9 @@ const ManageRegisteredCamps = () => {
   } = useQuery({
     queryKey: ["manage-registered-camps", page, limit, search],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/registered-camps?page=${page}&limit=${limit}&search=${search}`);
+      const res = await axiosSecure.get(
+        `/registered-camps?page=${page}&limit=${limit}&search=${search}`
+      );
       return res.data;
     },
   });
@@ -65,9 +68,10 @@ const ManageRegisteredCamps = () => {
   };
   return (
     <div className="p-1 mb-8 mt-16">
-      <h1 className="text-4xl font-bold text-center mb-8">
-        Manage Registered Camps
-      </h1>
+      <SectionTitle
+        title={"Manage Registered Camps"}
+        sub={"Track and Manage All The Registered Camps"}
+      ></SectionTitle>
       <div className="flex justify-end mb-2">
         <label className="input input-bordered flex items-center gap-2">
           <input
@@ -116,7 +120,7 @@ const ManageRegisteredCamps = () => {
                 <td>{camp.paymentStatus}</td>
                 <td>
                   <button
-                  disabled={camp.confirmationStatus === "confirmed"}
+                    disabled={camp.confirmationStatus === "confirmed"}
                     onClick={() =>
                       handleConfirmationStatus(
                         camp.participantEmail,
