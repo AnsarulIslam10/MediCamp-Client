@@ -7,6 +7,10 @@ import { AuthContext } from "../../../providers/AuthProvider";
 import SocialLogin from "../../../components/SocialLogin/SocialLogin";
 import sideImg from "../../../assets/Login-rafiki.png";
 import { Helmet } from "react-helmet-async";
+
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
+
 const SignUp = () => {
   const axiosPublic = useAxiosPublic();
   const location = useLocation();
@@ -19,17 +23,25 @@ const SignUp = () => {
     reset,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
+    const imageFile = { image: data.image[0] };
+    const res = await axiosPublic.post(image_hosting_api, imageFile, {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    });
+
     createUser(data.email, data.password)
       .then((result) => {
         const user = result.user;
         updateUserProfile({
           displayName: data.name,
-          photoURL: data.photoURL,
+          photoURL: res.data.data.display_url,
         });
         const userInfo = {
           name: data.name,
           email: data.email,
+          photoURL: res.data.data.display_url,
         };
 
         axiosPublic.post("/users", userInfo).then((res) => {
@@ -79,17 +91,18 @@ const SignUp = () => {
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="text-lg font-semibold">Photo URL</span>
+                <span className="text-lg font-semibold">Profile Picture</span>
               </label>
               <input
-                type="text"
-                placeholder="Type here"
-                {...register("photoURL", { required: true })}
-                name="photoURL"
-                className="input input-bordered"
+          
+                {...register("image", { required: true })}
+                type="file"
+                className="file-input p-1 w-full max-w-xs"
               />
               {errors.photoURL && (
-                <span className="text-red-500">Photo URL is required*</span>
+                <span className="text-red-500">
+                  Profile picture is required*
+                </span>
               )}
             </div>
             <div className="form-control">

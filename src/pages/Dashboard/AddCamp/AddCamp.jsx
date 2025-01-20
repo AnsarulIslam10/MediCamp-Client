@@ -166,9 +166,8 @@ const AddCamp = () => {
               type="file"
               className="file-input p-1 w-full max-w-xs"
             />
-
-            {errors.description && (
-              <span className="text-red-500">Description is required*</span>
+            {errors.image && (
+              <span className="text-red-500">Image is required*</span>
             )}
           </div>
 

@@ -8,12 +8,14 @@ import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { FaEdit } from "react-icons/fa";
-
-export default function UpdateProfileModal({userData, refetch}) {
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
+export default function UpdateProfileModal({ userData, refetch }) {
   let [isOpen, setIsOpen] = useState(false);
   const { user, updateUserProfile } = useAuth();
   const axiosSecure = useAxiosSecure();
-    const {phoneNumber, address} = userData
+  const axiosPublic = useAxiosPublic();
+  const { phoneNumber, address } = userData;
   function open() {
     setIsOpen(true);
   }
@@ -28,16 +30,42 @@ export default function UpdateProfileModal({userData, refetch}) {
     formState: { errors },
   } = useForm();
   const onSubmit = async (data) => {
+    console.log(data);
+    let imageUrl = user?.photoURL;
+    if (data.image && data.image[0]) {
+      const formData = new FormData();
+      formData.append("image", data.image[0]);
+      const imgRes = await axiosPublic.post(image_hosting_api, formData, {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      });
+      if (imgRes.data.error) {
+        throw new Error("Image upload failed");
+      }
+      imageUrl = imgRes.data.data.display_url;
+    }
+
     updateUserProfile({
       displayName: data.name,
-      photoURL: data.photoURL,
+      photoURL: imageUrl,
     });
-    setIsOpen(false);
 
-    const res = await axiosSecure.patch(`/update-user/${user?.email}`, data);
+    const updateProfileInfo = {
+      name: data.name,
+      email: data.email,
+      address: data.address || "",
+      phoneNumber: data.phoneNumber || "",
+      photoURL: imageUrl,
+    };
+    const res = await axiosSecure.patch(
+      `/update-user/${user?.email}`,
+      updateProfileInfo
+    );
     if (res.data.modifiedCount > 0) {
       toast("Profile Updated");
-      refetch()
+      refetch();
+      setIsOpen(false);
     }
   };
   return (
@@ -47,7 +75,7 @@ export default function UpdateProfileModal({userData, refetch}) {
         onClick={open}
         className="rounded-md btn disabled:bg-gray-300 bg-primary hover:bg-primary-hover py-2 px-4 text-sm font-medium text-white focus:outline-none  data-[focus]:outline-1 data-[focus]:outline-white"
       >
-        <FaEdit/> Update Profile
+        <FaEdit /> Update Profile
       </Button>
 
       <Dialog
@@ -88,11 +116,10 @@ export default function UpdateProfileModal({userData, refetch}) {
                       <span className="text-lg font-semibold">Image</span>
                     </label>
                     <input
-                      type="url"
-                      defaultValue={user.photoURL}
-                      {...register("photoURL")}
+                      type="file"
+                      {...register("image")}
                       placeholder="Enter Your Photo URL"
-                      className="input input-bordered"
+                      className="file-input p-1 w-full max-w-xs"
                     />
                   </div>
                 </div>
