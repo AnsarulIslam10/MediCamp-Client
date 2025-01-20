@@ -46,3 +46,11 @@
 .StripeElementFpx {
     padding: 0;
 }
+
+.swiper-button-next,
+.swiper-button-prev {
+    right: 10px;
+    color: #01dfdf !important;
+    fill: #01dfdf !important;
+    stroke: #01dfdf !important;
+}
