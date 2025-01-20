@@ -26,7 +26,7 @@ const CampCard = ({ item }) => {
   const formatedDate = moment(dateTime).format("L");
   const formatedTime = moment(dateTime).format("LT");
   return (
-    <div className="card rounded-none flex bg-white shadow-card-shadow">
+    <div className="card h-[100%] rounded-none flex bg-white shadow-card-shadow">
       <div className="relative">
         <figure>
           <img

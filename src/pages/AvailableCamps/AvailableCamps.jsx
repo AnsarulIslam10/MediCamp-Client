@@ -4,6 +4,7 @@ import CampCard from "../../components/Shared/CampCard/CampCard";
 import Container from "../../components/Shared/Container";
 import { TfiLayoutGrid2Alt, TfiLayoutGrid3Alt } from "react-icons/tfi";
 import { Helmet } from "react-helmet-async";
+import { Fade, Zoom } from "react-awesome-reveal";
 
 const AvailableCamps = () => {
   const [viewLayout, setViewLayout] = useState("three");
@@ -53,12 +54,16 @@ const AvailableCamps = () => {
         <div className="flex items-center gap-2 justify-end mb-4">
           <button onClick={toggleView}>
             <TfiLayoutGrid2Alt
-              className={`text-[32px] mt-[3px] ${viewLayout === "two" ? "text-primary" : ""}`}
+              className={`text-[32px] mt-[3px] ${
+                viewLayout === "two" ? "text-primary" : ""
+              }`}
             />
           </button>
           <button onClick={toggleView}>
             <TfiLayoutGrid3Alt
-              className={`text-3xl ${viewLayout === "three" ? "text-primary" : ""}`}
+              className={`text-3xl ${
+                viewLayout === "three" ? "text-primary" : ""
+              }`}
             />
           </button>
           <select
@@ -77,13 +82,17 @@ const AvailableCamps = () => {
         {viewLayout === "three" ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {camp.result?.map((item) => (
-              <CampCard key={item._id} item={item}></CampCard>
+              <Fade key={item._id}>
+                <CampCard item={item}></CampCard>
+              </Fade>
             ))}
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {camp.result?.map((item) => (
-              <CampCard key={item._id} item={item}></CampCard>
+              <Fade key={item._id}>
+                <CampCard item={item}></CampCard>
+              </Fade>
             ))}
           </div>
         )}

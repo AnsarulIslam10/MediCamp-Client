@@ -7,11 +7,14 @@ import axios from "axios";
 import CampCard from "../../components/Shared/CampCard/CampCard";
 import Loading from "../../components/Shared/Loading";
 import SectionTitle from "../../components/Shared/SectionTitle/SectionTitle";
+import { Fade } from "react-awesome-reveal";
 const PopularCamps = () => {
   const { data: popularCamps = [], isLoading } = useQuery({
     queryKey: ["popularCamp"],
     queryFn: async () => {
-      const res = await axios.get(`https://medi-camp-server-opal.vercel.app/popular-camps`);
+      const res = await axios.get(
+        `https://medi-camp-server-opal.vercel.app/popular-camps`
+      );
       return res.data;
     },
   });
@@ -26,7 +29,9 @@ const PopularCamps = () => {
       ></SectionTitle>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {popularCamps.map((item) => (
-          <CampCard key={item._id} item={item}></CampCard>
+          <Fade key={item._id}>
+            <CampCard item={item}></CampCard>
+          </Fade>
         ))}
       </div>
       <div className="flex justify-end">
