@@ -6,7 +6,6 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import Loading from "../../../components/Shared/Loading";
 import Swal from "sweetalert2";
 import SectionTitle from "../../../components/Shared/SectionTitle/SectionTitle";
 import { Helmet } from "react-helmet-async";

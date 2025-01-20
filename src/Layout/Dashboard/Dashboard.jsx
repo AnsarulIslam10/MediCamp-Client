@@ -1,5 +1,5 @@
 import React from "react";
-import { FaBars, FaHome, FaListAlt, FaPlusCircle, FaUserCircle } from "react-icons/fa";
+import { FaBars, FaHome } from "react-icons/fa";
 import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import useAdmin from "../../hooks/useAdmin";
 import { MdExitToApp } from "react-icons/md";

@@ -1,10 +1,9 @@
-import { Button, Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
+import { Button, Dialog, DialogPanel } from "@headlessui/react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import { IoClose } from "react-icons/io5";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
-import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { FaEdit } from "react-icons/fa";

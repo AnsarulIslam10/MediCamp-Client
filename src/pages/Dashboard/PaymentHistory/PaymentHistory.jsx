@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import useAuth from "../../../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import Loading from "../../../components/Shared/Loading";
 import SectionTitle from "../../../components/Shared/SectionTitle/SectionTitle";
 import { Helmet } from "react-helmet-async";
 

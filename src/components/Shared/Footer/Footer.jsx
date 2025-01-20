@@ -1,10 +1,8 @@
 import React from "react";
 import {
-  FaDiscord,
   FaFacebook,
   FaGithub,
   FaLinkedin,
-  FaUserDoctor,
 } from "react-icons/fa6";
 import Container from "../Container";
 import logo from "../../../assets/Logo/MediCamp.svg";

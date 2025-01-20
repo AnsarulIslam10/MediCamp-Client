@@ -1,10 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import React from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { FaLocationDot, FaUserDoctor } from "react-icons/fa6";
 import { FaCalendarAlt, FaClock, FaDollarSign, FaUsers } from "react-icons/fa";
-import { MdCampaign } from "react-icons/md";
 import moment from "moment";
 import JoinCampModal from "../../components/Modal/JoinCampModal";
 import useAuth from "../../hooks/useAuth";
@@ -16,7 +15,7 @@ const CampDetails = () => {
   const { data: camp = [], refetch } = useQuery({
     queryKey: ["camp", id],
     queryFn: async () => {
-      const res = await axios.get(`http://localhost:5000/camp/${id}`);
+      const res = await axios.get(`https://medi-camp-server-opal.vercel.app/camp/${id}`);
       return res.data;
     },
   });
