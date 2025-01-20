@@ -35,7 +35,7 @@ const Login = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto flex justify-center items-center min-h-screen text-secondary px-2 my-6">
+    <div className="max-w-6xl mx-auto flex justify-center items-center min-h-screen text-secondary px-2">
       <Helmet>
         <title>MediCamp | Sign In</title>
       </Helmet>
