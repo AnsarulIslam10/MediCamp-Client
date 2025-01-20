@@ -54,7 +54,7 @@ const AvailableCamps = () => {
         <div className="flex items-center gap-2 justify-end mb-4">
           <button onClick={toggleView}>
             <TfiLayoutGrid2Alt
-              className={`text-[32px] mt-[3px] ${
+              className={`text-[32px] ${
                 viewLayout === "two" ? "text-primary" : ""
               }`}
             />

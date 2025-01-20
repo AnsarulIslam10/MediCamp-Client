@@ -56,7 +56,7 @@ const RegisteredCamps = () => {
       }
     });
   };
-  
+
   return (
     <div className="p-1 mb-8 mt-16">
       <Helmet>
@@ -89,7 +89,7 @@ const RegisteredCamps = () => {
           </svg>
         </label>
       </div>
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto shadow-card-shadow">
         <table className="table">
           {/* head */}
           <thead>
@@ -146,33 +146,31 @@ const RegisteredCamps = () => {
           </tbody>
         </table>
       </div>
-      {registeredCamps.result?.length >= 10 && (
-        <div className="flex justify-center items-center mt-6 space-x-4">
-          <button
-            className="btn bg-primary border-none px-6 py-2 rounded-lg shadow-md hover:bg-primary-hover disabled:opacity-50"
-            onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
-            disabled={page === 1}
-          >
-            <span className="text-lg font-semibold">Prev</span>
-          </button>
-          <span className="text-lg font-medium text-gray-700">
-            Page {page} of {registeredCamps.totalPages}
-          </span>
-          <button
-            className="btn bg-primary border-none px-6 py-2 rounded-lg shadow-md hover:bg-primary-hover disabled:opacity-50"
-            onClick={() =>
-              setPage((prev) =>
-                registeredCamps.totalPages
-                  ? Math.min(prev + 1, registeredCamps.totalPages)
-                  : prev
-              )
-            }
-            disabled={page === registeredCamps.totalPages}
-          >
-            <span className="text-lg font-semibold">Next</span>
-          </button>
-        </div>
-      )}
+      <div className="flex justify-center items-center mt-6 space-x-4">
+        <button
+          className="btn bg-primary border-none px-6 py-2 rounded-lg shadow-md hover:bg-primary-hover disabled:opacity-50"
+          onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+          disabled={page === 1}
+        >
+          <span className="text-lg font-semibold">Prev</span>
+        </button>
+        <span className="text-lg font-medium text-gray-700">
+          Page {page} of {registeredCamps.totalPages}
+        </span>
+        <button
+          className="btn bg-primary border-none px-6 py-2 rounded-lg shadow-md hover:bg-primary-hover disabled:opacity-50"
+          onClick={() =>
+            setPage((prev) =>
+              registeredCamps.totalPages
+                ? Math.min(prev + 1, registeredCamps.totalPages)
+                : prev
+            )
+          }
+          disabled={page === registeredCamps.totalPages}
+        >
+          <span className="text-lg font-semibold">Next</span>
+        </button>
+      </div>
     </div>
   );
 };
