@@ -5,11 +5,14 @@ import useAuth from "../../../hooks/useAuth";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Helmet } from "react-helmet-async";
+import { useState } from "react";
+import { TbFidgetSpinner } from "react-icons/tb";
 
 const Login = () => {
   const { signInUser } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const {
     register,
@@ -18,8 +21,10 @@ const Login = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
+    setLoading(true);
     signInUser(data.email, data.password)
       .then((result) => {
+        setLoading(false);
         toast.success("Login Successfully");
         navigate(location?.state ? location.state : "/");
       })
@@ -92,7 +97,11 @@ const Login = () => {
 
             <div className="form-control mt-6">
               <button className="btn rounded-lg font-bold bg-primary hover:bg-primary-hover">
-                Sign In
+                {loading ? (
+                  <TbFidgetSpinner className="animate-spin m-auto" />
+                ) : (
+                  "Sign In"
+                )}
               </button>
             </div>
 

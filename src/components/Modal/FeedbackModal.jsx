@@ -9,6 +9,7 @@ const FeedbackModal = ({ camp }) => {
   let [isOpen, setIsOpen] = useState(false);
   const { user } = useAuth();
   const axiosPublic = useAxiosPublic();
+  const [loading, setLoading] = useState(false);
   const { _id, confirmationStatus, campId, campName } = camp;
 
   function open() {
@@ -25,6 +26,7 @@ const FeedbackModal = ({ camp }) => {
     formState: { errors },
   } = useForm();
   const onSubmit = async (data) => {
+    setLoading(true);
     const feedback = {
       name: user?.displayName,
       email: user?.email,
@@ -39,6 +41,7 @@ const FeedbackModal = ({ camp }) => {
     if (campRes.data.insertedId) {
       reset();
       setIsOpen(false);
+      setLoading(false);
       Swal.fire({
         title: `Feedback added`,
         icon: "success",
@@ -114,7 +117,11 @@ const FeedbackModal = ({ camp }) => {
 
                 <div className="form-control mt-6">
                   <button className="btn rounded-lg font-bold bg-primary mb-2">
-                    Add Rating & Feedback
+                    {loading ? (
+                      <TbFidgetSpinner className="animate-spin m-auto" />
+                    ) : (
+                      " Add Rating & Feedback"
+                    )}
                   </button>
                 </div>
               </form>

@@ -1,12 +1,13 @@
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../../providers/AuthProvider";
 import SocialLogin from "../../../components/SocialLogin/SocialLogin";
 import sideImg from "../../../assets/Login-rafiki.png";
 import { Helmet } from "react-helmet-async";
+import { TbFidgetSpinner } from "react-icons/tb";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -15,6 +16,7 @@ const SignUp = () => {
   const axiosPublic = useAxiosPublic();
   const location = useLocation();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const { createUser, updateUserProfile } = useContext(AuthContext);
 
   const {
@@ -24,6 +26,7 @@ const SignUp = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = async (data) => {
+    setLoading(true);
     const imageFile = { image: data.image[0] };
     const res = await axiosPublic.post(image_hosting_api, imageFile, {
       headers: {
@@ -47,7 +50,7 @@ const SignUp = () => {
         axiosPublic.post("/users", userInfo).then((res) => {
           if (res.data.insertedId) {
             reset();
-
+            setLoading(false);
             toast.success("Sign Up successful");
             navigate(location?.state ? location.state : "/");
           }
@@ -153,7 +156,11 @@ const SignUp = () => {
 
             <div className="form-control mt-6">
               <button className="btn rounded-lg font-bold bg-primary hover:bg-primary-hover">
-                Sign Up
+              {loading ? (
+                <TbFidgetSpinner className="animate-spin m-auto" />
+              ) : (
+                "Sign Up"
+              )}
               </button>
             </div>
 

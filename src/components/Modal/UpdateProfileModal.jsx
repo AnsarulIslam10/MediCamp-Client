@@ -7,6 +7,7 @@ import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { toast } from "react-toastify";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { FaEdit } from "react-icons/fa";
+import { TbFidgetSpinner } from "react-icons/tb";
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 export default function UpdateProfileModal({ userData, refetch }) {
@@ -14,6 +15,7 @@ export default function UpdateProfileModal({ userData, refetch }) {
   const { user, updateUserProfile } = useAuth();
   const axiosSecure = useAxiosSecure();
   const axiosPublic = useAxiosPublic();
+  const [loading, setLoading] = useState(false);
   const { phoneNumber, address } = userData;
   function open() {
     setIsOpen(true);
@@ -29,6 +31,7 @@ export default function UpdateProfileModal({ userData, refetch }) {
     formState: { errors },
   } = useForm();
   const onSubmit = async (data) => {
+    setLoading(true);
     let imageUrl = user?.photoURL;
     if (data.image && data.image[0]) {
       const formData = new FormData();
@@ -61,9 +64,10 @@ export default function UpdateProfileModal({ userData, refetch }) {
       updateProfileInfo
     );
     if (res.data.modifiedCount > 0) {
-      toast("Profile Updated");
+      toast.success("Profile Updated");
       refetch();
       setIsOpen(false);
+      setLoading(false);
     }
   };
   return (
@@ -152,7 +156,11 @@ export default function UpdateProfileModal({ userData, refetch }) {
 
                 <div className="form-control mt-6">
                   <button className="btn rounded-lg font-bold bg-primary mb-2">
-                    Update
+                    {loading ? (
+                      <TbFidgetSpinner className="animate-spin m-auto" />
+                    ) : (
+                      "Update"
+                    )}
                   </button>
                 </div>
               </form>

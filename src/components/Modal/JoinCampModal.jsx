@@ -5,11 +5,13 @@ import useAuth from "../../hooks/useAuth";
 import { IoClose } from "react-icons/io5";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
+import { TbFidgetSpinner } from "react-icons/tb";
 
 export default function JoinCampModal({ camp, refetch }) {
   let [isOpen, setIsOpen] = useState(false);
   const { user } = useAuth();
   const axiosPublic = useAxiosPublic();
+  const [loading, setLoading] = useState(false);
 
   const {
     _id: campId,
@@ -33,6 +35,7 @@ export default function JoinCampModal({ camp, refetch }) {
     formState: { errors },
   } = useForm();
   const onSubmit = async (data) => {
+    setLoading(true);
     const registeredCampData = {
       campId,
       campName,
@@ -51,6 +54,7 @@ export default function JoinCampModal({ camp, refetch }) {
       reset();
       refetch();
       setIsOpen(false);
+      setLoading(false);
       Swal.fire({
         title: `Camp is added`,
         icon: "success",
@@ -267,7 +271,11 @@ export default function JoinCampModal({ camp, refetch }) {
 
                 <div className="form-control mt-6">
                   <button className="btn rounded-lg font-bold bg-primary mb-2">
-                    Join
+                    {loading ? (
+                      <TbFidgetSpinner className="animate-spin m-auto" />
+                    ) : (
+                      "Join"
+                    )}
                   </button>
                 </div>
               </form>

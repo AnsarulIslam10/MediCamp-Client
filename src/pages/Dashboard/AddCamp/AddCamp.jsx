@@ -4,6 +4,8 @@ import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 import useAuth from "../../../hooks/useAuth";
 import { Helmet } from "react-helmet-async";
+import { useState } from "react";
+import { TbFidgetSpinner } from "react-icons/tb";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -11,6 +13,7 @@ const AddCamp = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const axiosPublic = useAxiosPublic();
+  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -18,6 +21,7 @@ const AddCamp = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = async (data) => {
+    setLoading(true);
     const imageFile = { image: data.image[0] };
     const res = await axiosPublic.post(image_hosting_api, imageFile, {
       headers: {
@@ -39,6 +43,7 @@ const AddCamp = () => {
       const campRes = await axiosSecure.post("/add-camp", campData);
       if (campRes.data.insertedId) {
         reset();
+        setLoading(false);
         Swal.fire({
           title: `Camp is added`,
           icon: "success",
@@ -188,7 +193,11 @@ const AddCamp = () => {
 
           <div className="form-control mt-6">
             <button className="btn rounded-lg font-bold bg-primary mb-2">
-              Add Camp
+              {loading ? (
+                <TbFidgetSpinner className="animate-spin m-auto" />
+              ) : (
+                "Add Camp"
+              )}
             </button>
           </div>
         </form>
