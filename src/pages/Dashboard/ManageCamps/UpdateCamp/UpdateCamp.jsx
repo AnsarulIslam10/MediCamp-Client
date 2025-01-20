@@ -9,7 +9,8 @@ import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import useAxiosPublic from "../../../../hooks/useAxiosPublic";
 import Loading from "../../../../components/Shared/Loading";
 import { Helmet } from "react-helmet-async";
-
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 const UpdateCamp = () => {
   const axiosSecure = useAxiosSecure();
   const axiosPublic = useAxiosPublic();
@@ -34,6 +35,22 @@ const UpdateCamp = () => {
   }
 
   const onSubmit = async (data) => {
+    let imageUrl = campData.image;
+    if (data.image && data.image[0]) {
+      const imageFile = { image: data.image[0] };
+      try {
+        const res = await axiosPublic.post(image_hosting_api, imageFile, {
+          headers: {
+            "content-type": "multipart/form-data",
+          },
+        });
+        imageUrl = res.data.data.display_url;
+      } catch (error) {
+        console.log(error);
+        return;
+      }
+    }
+
     if (data) {
       const updateCampData = {
         campName: data.campName,
@@ -43,7 +60,9 @@ const UpdateCamp = () => {
         healthcareProfessionalName: data.healthcareProfessionalName,
         location: data.location,
         description: data.description,
+        image: imageUrl,
       };
+      console.log(updateCampData);
       axiosSecure
         .patch(`/update-camp/${id}`, updateCampData)
         .then((res) => {
@@ -178,20 +197,16 @@ const UpdateCamp = () => {
               )}
             </div>
           </div>
-          {/* <div className="form-control">
+          <div className="form-control">
             <label className="label">
               <span className="text-lg font-semibold">Image</span>
             </label>
             <input
-              {...register("image", { required: true })}
+              {...register("image")}
               type="file"
               className="file-input p-1 w-full max-w-xs"
             />
-
-            {errors.description && (
-              <span className="text-red-500">Description is required*</span>
-            )}
-          </div> */}
+          </div>
 
           <div className="form-control">
             <label className="label">

@@ -11,7 +11,7 @@ const PopularCamps = () => {
   const { data: popularCamps = [], isLoading } = useQuery({
     queryKey: ["popularCamp"],
     queryFn: async () => {
-      const res = await axios.get(`https://medi-camp-server-opal.vercel.app/popular-camps`);
+      const res = await axios.get(`http://localhost:5000/popular-camps`);
       return res.data;
     },
   });
