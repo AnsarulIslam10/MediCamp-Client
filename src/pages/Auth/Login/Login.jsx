@@ -1,5 +1,4 @@
 import SocialLogin from "../../../components/SocialLogin/SocialLogin";
-import sideImg from "../../../assets/Login-rafiki.png";
 import { useForm } from "react-hook-form";
 import useAuth from "../../../hooks/useAuth";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -7,7 +6,7 @@ import { toast } from "react-toastify";
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 import { TbFidgetSpinner } from "react-icons/tb";
-
+import signin from "../../../assets/animation/signin.gif"
 const Login = () => {
   const { signInUser } = useAuth();
   const location = useLocation();
@@ -36,17 +35,17 @@ const Login = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto flex justify-center items-center min-h-screen text-[#444444] px-2">
+    <div className="max-w-6xl mx-auto flex justify-center items-center min-h-screen text-secondary px-2 my-6">
       <Helmet>
         <title>MediCamp | Sign In</title>
       </Helmet>
       <div className="hero-content flex-col shadow-custom-dark md:flex-row shadow-card-shadow">
         <div className="text-center hidden md:block lg:text-left">
-          <img src={sideImg} alt="" />
+          <img src={signin} alt="" />
         </div>
         <div className="card w-full max-w-md shrink-0 ">
           <form onSubmit={handleSubmit(onSubmit)} className="card-body">
-            <h2 className="text-center text-[40px] font-bold mb-5 text-[#151515]">
+            <h2 className="text-center text-[40px] font-bold mb-5 text-secondary">
               Sign In
             </h2>
             <div className="form-control">

@@ -92,7 +92,7 @@ const RegisteredCamps = () => {
         <table className="table">
           {/* head */}
           <thead>
-            <tr className="bg-primary">
+            <tr className="bg-primary text-secondary">
               <th></th>
               <th>Camp Name</th>
               <th>Camp Fees</th>

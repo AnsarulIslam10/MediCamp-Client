@@ -103,7 +103,7 @@ const ManageRegisteredCamps = () => {
         <table className="table">
           {/* head */}
           <thead>
-            <tr className="bg-primary">
+            <tr className="bg-primary text-secondary">
               <th></th>
               <th>Participant Name</th>
               <th>Camp Name</th>

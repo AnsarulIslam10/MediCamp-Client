@@ -59,7 +59,7 @@ const AddCamp = () => {
       <Helmet>
         <title>MediCamp | Add Camp</title>
       </Helmet>
-      <div className="card p-4 lg:p-10 w-full border">
+      <div className="card p-4 lg:p-10 w-full border shadow-card-shadow">
         <h1 className="text-4xl text-center font-bold mb-8">Add A Camp</h1>
         <form onSubmit={handleSubmit(onSubmit)} className="">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2">

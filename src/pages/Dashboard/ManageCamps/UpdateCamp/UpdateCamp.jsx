@@ -86,11 +86,11 @@ const UpdateCamp = () => {
     }
   };
   return (
-    <div className="flex w-full max-w-5xl justify-center items-center min-h-screen text-[#444444] px-10">
+    <div className="flex w-full max-w-5xl justify-center items-center min-h-screen text-[#444444] px-1 my-16">
       <Helmet>
         <title>MediCamp | Update Camp</title>
       </Helmet>
-      <div className="card p-10 w-full border">
+      <div className="card p-4 lg:p-10 w-full border shadow-card-shadow">
         <h1 className="text-4xl text-center font-bold mb-8">
           Update Camp Details
         </h1>
@@ -228,7 +228,7 @@ const UpdateCamp = () => {
           </div>
 
           <div className="form-control mt-6">
-            <button className="btn rounded-lg font-bold bg-primary mb-2">
+            <button className="btn rounded-lg font-bold bg-primary hover:bg-primary-hover mb-2">
               {loading ? (
                 <TbFidgetSpinner className="animate-spin m-auto" />
               ) : (
