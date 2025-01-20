@@ -62,7 +62,6 @@ const UpdateCamp = () => {
         description: data.description,
         image: imageUrl,
       };
-      console.log(updateCampData);
       axiosSecure
         .patch(`/update-camp/${id}`, updateCampData)
         .then((res) => {

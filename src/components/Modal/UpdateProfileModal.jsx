@@ -29,7 +29,6 @@ export default function UpdateProfileModal({ userData, refetch }) {
     formState: { errors },
   } = useForm();
   const onSubmit = async (data) => {
-    console.log(data);
     let imageUrl = user?.photoURL;
     if (data.image && data.image[0]) {
       const formData = new FormData();
