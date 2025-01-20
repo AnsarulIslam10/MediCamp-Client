@@ -10,7 +10,7 @@ import "swiper/css/navigation";
 import { EffectFade, Autoplay, Pagination, Navigation } from "swiper/modules";
 import image1 from "../../assets/carousel/dental.jpg";
 import image2 from "../../assets/carousel/eye-checkup.jpg";
-import image3 from "../../assets/carousel/health-checkup.jpg";
+import image3 from "../../assets/carousel/health.jpg";
 
 const Carousel = () => {
   return (
