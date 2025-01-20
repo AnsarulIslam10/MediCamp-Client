@@ -26,7 +26,7 @@ const AvailableCamps = () => {
       <Helmet>
         <title>MediCamp | Available Camps</title>
       </Helmet>
-      <div className="my-16">
+      <div className="my-8 lg:my-16">
         <label className="input input-bordered flex items-center gap-2 max-w-lg mx-auto mb-2">
           <input
             value={search}
@@ -50,15 +50,15 @@ const AvailableCamps = () => {
             </svg>
           </button>
         </label>
-        <div className="flex items-center gap-2  text-3xl justify-end mb-4">
+        <div className="flex items-center gap-2 justify-end mb-4">
           <button onClick={toggleView}>
             <TfiLayoutGrid2Alt
-              className={`${viewLayout === "two" ? "text-primary" : ""}`}
+              className={`text-[32px] mt-[3px] ${viewLayout === "two" ? "text-primary" : ""}`}
             />
           </button>
           <button onClick={toggleView}>
             <TfiLayoutGrid3Alt
-              className={`${viewLayout === "three" ? "text-primary" : ""}`}
+              className={`text-3xl ${viewLayout === "three" ? "text-primary" : ""}`}
             />
           </button>
           <select

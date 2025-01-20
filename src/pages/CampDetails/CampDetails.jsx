@@ -46,7 +46,7 @@ const CampDetails = () => {
           </div>
           <div>
             <div className="p-6 flex-1 text-2xl font-semibold space-y-4 pt-0">
-              <h2 className="card-title text-4xl mt-2">{campName}</h2>
+              <h2 className="card-title text-secondary text-4xl mt-2">{campName}</h2>
               <p className="flex items-center gap-1">
                 <FaCalendarAlt />
                 Date:{" "}

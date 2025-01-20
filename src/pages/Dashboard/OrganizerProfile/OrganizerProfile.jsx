@@ -35,8 +35,8 @@ const OrganizerProfile = () => {
             <img referrerPolicy="no-referrer" src={userData.photoURL} />
           </div>
         </div>
-        <div className="mb-8">
-          <h2 className="text-xl font-semibold">{userData.name}</h2>
+        <div className="mb-8 text-description">
+          <h2 className="text-xl font-semibold text-secondary">{userData.name}</h2>
           <p>{userData.email}</p>
           {userData?.phoneNumber && <p>{userData.phoneNumber}</p>}
           {userData?.address && <p>{userData.address}</p>}
