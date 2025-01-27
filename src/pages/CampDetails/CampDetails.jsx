@@ -37,16 +37,16 @@ const CampDetails = () => {
       <Helmet>
         <title>MediCamp | Camp Details</title>
       </Helmet>
-      <div className="card rounded-none flex bg-white shadow-card-shadow">
-        <div className="grid grid-cols-1 sm:grid-cols-2">
+      <div className="card rounded-none flex bg-white shadow-card-shadow p-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <figure>
               <img className="" src={image} alt="camp" />
             </figure>
           </div>
           <div>
-            <div className="p-6 flex-1 text-2xl font-semibold space-y-4 pt-0">
-              <h2 className="card-title text-secondary text-4xl mt-2">{campName}</h2>
+            <div className="flex-1 text-2xl font-semibold space-y-4 pt-0">
+              <h2 className="card-title text-secondary text-4xl">{campName}</h2>
               <p className="flex items-center gap-1">
                 <FaCalendarAlt />
                 Date:{" "}
@@ -95,7 +95,7 @@ const CampDetails = () => {
           </div>
         </div>
         <div className="divider px-5"></div>
-        <div className="p-6 pt-0">
+        <div>
           <p className="text-3xl font-semibold">Description:</p>
           <p className="text-description text-xl mt-2">{description}</p>
         </div>
