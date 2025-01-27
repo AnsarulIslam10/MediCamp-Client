@@ -12,7 +12,7 @@ const Navbar = () => {
       <li>
         <NavLink
           className={({ isActive }) =>
-            `btn btn-sm btn-ghost text-xl hover:bg-primary-hover mr-2 ${
+            `btn btn-sm btn-ghost text-xl rounded-none hover:bg-primary-hover mr-2 ${
               isActive ? "bg-primary" : ""
             }`
           }
@@ -24,7 +24,7 @@ const Navbar = () => {
       <li>
         <NavLink
           className={({ isActive }) =>
-            `btn btn-sm btn-ghost text-xl hover:bg-primary-hover ${
+            `btn btn-sm btn-ghost text-xl rounded-none hover:bg-primary-hover ${
               isActive ? "bg-primary" : ""
             }`
           }
@@ -53,7 +53,9 @@ const Navbar = () => {
             {links}
           </ul>
         </div>
-        <img className="drop-shadow-2xl w-60" src={logo} alt="" />
+        <Link to={"/"}>
+          <img className="drop-shadow-2xl w-60" src={logo} alt="" />
+        </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{links}</ul>

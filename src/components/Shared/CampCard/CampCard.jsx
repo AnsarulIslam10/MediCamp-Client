@@ -21,12 +21,11 @@ const CampCard = ({ item }) => {
     location,
     healthcareProfessionalName,
     participantCount,
-    description,
   } = item || {};
   const formatedDate = moment(dateTime).format("L");
   const formatedTime = moment(dateTime).format("LT");
   return (
-    <div className="card h-[100%] rounded-none flex bg-white shadow-card-shadow">
+    <div className="card h-[100%] rounded-none flex bg-white shadow-card-shadow hover:scale-105 transition-all duration-300">
       <div className="relative">
         <figure>
           <img
@@ -64,9 +63,6 @@ const CampCard = ({ item }) => {
         </p>
         <p className="text-description flex items-center gap-1">
           <FaLocationDot className="text-xl" /> {location}
-        </p>
-        <p className="text-description text-lg">
-          {description.slice(0, 60)}...
         </p>
       </div>
       <div className="flex justify-end px-6 pb-6">
