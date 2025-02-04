@@ -2,7 +2,7 @@
 
 MediCamp is a Medical Camp Management System (MCMS) platform that connects individuals to medical camps, enabling participants to discover, join, and manage their camps, while allowing organizers to post and manage their camps and participants.
 
-![MediCamp](https://i.ibb.co.com/DD2dF8xv/medicamp-image.png)
+![MediCamp](https://i.postimg.cc/7hJrbTcQ/medicamp-image.png)
 
 
 ## Organizer Login Info
