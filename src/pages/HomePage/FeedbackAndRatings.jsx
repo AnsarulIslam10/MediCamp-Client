@@ -56,7 +56,7 @@ const FeedbackAndRatings = () => {
               <div className="text-center text-white flex items-center justify-center flex-col">
                 <div className="avatar p-2 pb-0">
                   <div className="ring-primary ring-offset-base-100 w-12 sm:w-16 rounded-full ring ring-offset-2">
-                    <img src={item.photo} />
+                    <img referrerPolicy="no-referrer" src={item.photo} />
                   </div>
                 </div>
                 <h2 className="mt-2 font-semibold">{item.name}</h2>

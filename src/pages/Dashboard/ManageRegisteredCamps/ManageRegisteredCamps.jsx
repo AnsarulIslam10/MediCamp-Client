@@ -8,6 +8,7 @@ import { BiX } from "react-icons/bi";
 import { toast } from "react-toastify";
 import SectionTitle from "../../../components/Shared/SectionTitle/SectionTitle";
 import { Helmet } from "react-helmet-async";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 
 const ManageRegisteredCamps = () => {
   const { user } = useAuth();
@@ -155,17 +156,17 @@ const ManageRegisteredCamps = () => {
       </div>
       <div className="flex justify-center items-center mt-6 space-x-4">
         <button
-          className="btn bg-primary border-none px-6 py-2 rounded-lg shadow-md hover:bg-primary-hover disabled:opacity-50"
+          className="btn bg-primary border-none px-6 py-2 btn-circle shadow-md hover:bg-primary-hover disabled:opacity-50"
           onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
           disabled={page === 1}
         >
-          <span className="text-lg font-semibold">Prev</span>
+          <span className="text-lg font-semibold"><FaChevronLeft /></span>
         </button>
-        <span className="text-lg font-medium text-gray-700">
-          Page {page} of {manageRegisteredCamps.totalPages}
+        <span className="text-lg btn rounded-none font-bold text-gray-700">
+          {page}
         </span>
         <button
-          className="btn bg-primary border-none px-6 py-2 rounded-lg shadow-md hover:bg-primary-hover disabled:opacity-50"
+          className="btn bg-primary border-none px-6 py-2 btn-circle shadow-md hover:bg-primary-hover disabled:opacity-50"
           onClick={() =>
             setPage((prev) =>
               manageRegisteredCamps.totalPages
@@ -175,7 +176,7 @@ const ManageRegisteredCamps = () => {
           }
           disabled={page === manageRegisteredCamps.totalPages}
         >
-          <span className="text-lg font-semibold">Next</span>
+          <span className="text-lg font-semibold"><FaChevronRight /></span>
         </button>
       </div>
     </div>
