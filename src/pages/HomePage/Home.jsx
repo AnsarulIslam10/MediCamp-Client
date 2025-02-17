@@ -5,6 +5,7 @@ import PopularCamps from "./PopularCamps";
 import FeedbackAndRatings from "./FeedbackAndRatings";
 import FAQs from "./FAQs";
 import { Helmet } from "react-helmet-async";
+import OurServices from "./OurServices";
 
 const Home = () => {
   return (
@@ -14,6 +15,7 @@ const Home = () => {
       </Helmet>
       <Carousel></Carousel>
       <PopularCamps></PopularCamps>
+      <OurServices/>
       <FeedbackAndRatings></FeedbackAndRatings>
       <FAQs></FAQs>
     </Container>
