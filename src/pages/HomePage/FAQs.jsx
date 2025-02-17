@@ -15,7 +15,7 @@ const FAQs = () => {
         </Slide>
         <Slide direction="right" triggerOnce>
           <div className="space-y-1">
-            <div className="collapse collapse-plus bg-cyan-100 rounded-none">
+            <div className="collapse collapse-plus bg-cyan-100 dark:bg-slate-900 rounded-none">
               <input type="radio" name="my-accordion-3" />
               <div className="collapse-title text-xl font-medium">
                 How do I join a medical camp?
@@ -30,7 +30,7 @@ const FAQs = () => {
                 </p>
               </div>
             </div>
-            <div className="collapse collapse-plus bg-cyan-100 rounded-none">
+            <div className="collapse collapse-plus bg-cyan-100 dark:bg-slate-900 rounded-none">
               <input type="radio" name="my-accordion-3" defaultChecked />
               <div className="collapse-title text-xl font-medium">
                 What types of medical professionals are available at the camps?
@@ -44,7 +44,7 @@ const FAQs = () => {
                 </p>
               </div>
             </div>
-            <div className="collapse collapse-plus bg-cyan-100 rounded-none">
+            <div className="collapse collapse-plus bg-cyan-100 dark:bg-slate-900 rounded-none">
               <input type="radio" name="my-accordion-3" />
               <div className="collapse-title text-xl font-medium">
                 How do I pay for camps?
@@ -58,7 +58,7 @@ const FAQs = () => {
                 </p>
               </div>
             </div>
-            <div className="collapse collapse-plus bg-cyan-100 rounded-none">
+            <div className="collapse collapse-plus bg-cyan-100 dark:bg-slate-900 rounded-none">
               <input type="radio" name="my-accordion-3" />
               <div className="collapse-title text-xl font-medium">
                 Can I cancel my registration?
@@ -71,7 +71,7 @@ const FAQs = () => {
                 </p>
               </div>
             </div>
-            <div className="collapse collapse-plus bg-cyan-100 rounded-none">
+            <div className="collapse collapse-plus bg-cyan-100 dark:bg-slate-900 rounded-none">
               <input type="radio" name="my-accordion-3" />
               <div className="collapse-title text-xl font-medium">
                 How can I find a specific camp among all the camps?

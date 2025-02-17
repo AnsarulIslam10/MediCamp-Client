@@ -28,12 +28,12 @@ const AvailableCamps = () => {
         <title>MediCamp | Available Camps</title>
       </Helmet>
       <div className="my-8 lg:my-16">
-        <label className="input input-bordered flex items-center gap-2 max-w-lg mx-auto mb-2">
+        <label className="input input-bordered flex items-center gap-2 max-w-lg mx-auto mb-2 dark:bg-slate-800">
           <input
             value={search}
             onChange={handleSearch}
             type="text"
-            className="grow"
+            className="grow  dark:text-white"
             placeholder="Search"
           />
           <button>
@@ -69,7 +69,7 @@ const AvailableCamps = () => {
           <select
             onChange={handleSort}
             value={sortBy}
-            className="select select-bordered max-w-xs"
+            className="select select-bordered max-w-xs dark:bg-slate-800"
           >
             <option value="" disabled>
               Sort By

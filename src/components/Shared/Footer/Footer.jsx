@@ -9,7 +9,7 @@ import logo from "../../../assets/Logo/MediCamp.svg";
 
 const Footer = () => {
   return (
-    <footer className="bg-cyan-50 pt-10">
+    <footer className="bg-cyan-50 dark:bg-slate-800 pt-10">
       <Container>
         <section className="footer">
           <aside>
@@ -51,7 +51,7 @@ const Footer = () => {
           </nav>
         </section>
       </Container>
-      <p className="text-center p-2 bg-cyan-100 mt-2">
+      <p className="text-center p-2 bg-cyan-100 dark:bg-slate-700 mt-2">
         Created By{" "}
         <span className="text-blue-500 font-semibold hover:underline underline-offset-1">
           <a href="https://www.linkedin.com/in/ansarul-islam-riyad">

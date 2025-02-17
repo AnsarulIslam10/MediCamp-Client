@@ -37,7 +37,7 @@ const CampDetails = () => {
       <Helmet>
         <title>MediCamp | Camp Details</title>
       </Helmet>
-      <div className="card rounded-none flex bg-white shadow-card-shadow p-6">
+      <div className="card rounded-none flex bg-white dark:bg-slate-900 shadow-card-shadow p-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <figure>
@@ -46,30 +46,30 @@ const CampDetails = () => {
           </div>
           <div>
             <div className="flex-1 text-2xl font-semibold space-y-4 pt-0">
-              <h2 className="card-title text-secondary text-4xl">{campName}</h2>
+              <h2 className="card-title text-secondary dark:text-primary text-4xl">{campName}</h2>
               <p className="flex items-center gap-1">
                 <FaCalendarAlt />
                 Date:{" "}
-                <span className="font-medium text-description">
+                <span className="font-medium text-description dark:text-gray-200">
                   {formatedDate}
                 </span>
               </p>
               <p className="flex items-center gap-1">
                 <FaClock />
                 Time:{" "}
-                <span className="font-medium text-description">
+                <span className="font-medium text-description dark:text-gray-200">
                   {formatedTime}
                 </span>
               </p>
               <p className="flex items-center gap-1">
                 <FaLocationDot />
                 Location:{" "}
-                <span className="font-medium text-description">{location}</span>
+                <span className="font-medium text-description dark:text-gray-200">{location}</span>
               </p>
               <p className="font-semibold flex items-center">
                 <FaDollarSign className="text-[28px]" />
                 Camp Fee:
-                <span className="font-medium text-description ml-1">
+                <span className="font-medium text-description dark:text-gray-200 ml-1">
                   ${campFees}/per person
                 </span>
               </p>
@@ -77,14 +77,14 @@ const CampDetails = () => {
               <p className="flex items-center gap-1">
                 <FaUserDoctor />
                 Medic:{" "}
-                <span className="font-medium text-description">
+                <span className="font-medium text-description dark:text-gray-200">
                   {healthcareProfessionalName}
                 </span>
               </p>
               <p className="flex items-center gap-1">
                 <FaUsers />
                 Participant:{" "}
-                <span className="font-medium text-description">
+                <span className="font-medium text-description dark:text-gray-200">
                   {participantCount}
                 </span>
               </p>
@@ -97,7 +97,7 @@ const CampDetails = () => {
         <div className="divider px-5"></div>
         <div>
           <p className="text-3xl font-semibold">Description:</p>
-          <p className="text-description text-xl mt-2">{description}</p>
+          <p className="text-description dark:text-gray-200 text-xl mt-2">{description}</p>
         </div>
       </div>
     </section>
