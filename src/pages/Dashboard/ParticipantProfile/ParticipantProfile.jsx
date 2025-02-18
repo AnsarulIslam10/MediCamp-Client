@@ -9,6 +9,8 @@ import { Helmet } from "react-helmet-async";
 const ParticipantProfile = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const creationDate = new Date(user.metadata.creationTime);
+  const formattedDate = creationDate.toLocaleString();
   const {
     data: userData = [],
     isLoading,
@@ -29,22 +31,55 @@ const ParticipantProfile = () => {
       <Helmet>
         <title>MediCamp | Participant Profile</title>
       </Helmet>
-      <div className="text-center mt-16 shadow-card-shadow p-10">
-        <div className="avatar mb-4">
-          <div className="ring-primary ring-offset-base-100 w-24 rounded-full ring ring-offset-2">
-            <img src={userData.photoURL} />
+      <div className="mt-16 shadow-card-shadow p-10">
+        <div className="h-40 bg-gray-200 rounded-t-lg overflow-hidden">
+          <img
+            src={userData.coverPhoto || "https://i.postimg.cc/nLyKfVjd/banner.jpg"}
+            alt="Cover"
+            className="w-full h-full object-cover"
+          />
+        </div>
+
+        <div className="flex flex-col md:flex-row items-start md:items-center -mt-16 px-6">
+          <div className="avatar mb-4 md:mb-0">
+            <div className="ring-primary ring-offset-base-100 w-32 rounded-full ring ring-offset-2">
+              <img src={userData.photoURL} alt="Profile" />
+            </div>
           </div>
         </div>
-        <div className="mb-8">
-          <h2 className="text-xl font-semibold">{userData.name}</h2>
-          <p>{userData.email}</p>
-          {userData?.phoneNumber && <p>{userData.phoneNumber}</p>}
-          {userData?.address && <p>{userData.address}</p>}
+        <div className="px-6 pt-2">
+          <h2 className="text-2xl font-semibold">{userData.name}</h2>
+          <p className="text-gray-600">{userData.email}</p>
         </div>
-        <UpdateProfileModal
-          refetch={refetch}
-          userData={userData}
-        ></UpdateProfileModal>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8 px-6">
+          <div className="space-y-2">
+            {userData?.phoneNumber && (
+              <p>
+                <span className="font-semibold">Phone:</span>{" "}
+                {userData.phoneNumber}
+              </p>
+            )}
+            {userData?.address && (
+              <p>
+                <span className="font-semibold">Address:</span>{" "}
+                {userData.address}
+              </p>
+            )}
+          </div>
+          <div className="space-y-2">
+            <p>
+              <span className="font-semibold">Role:</span> Participant
+            </p>
+            <p>
+              <span className="font-semibold">Joined:</span> {formattedDate}
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-8 text-center">
+          <UpdateProfileModal refetch={refetch} userData={userData} />
+        </div>
       </div>
     </div>
   );
