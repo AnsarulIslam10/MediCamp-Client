@@ -50,6 +50,14 @@ const Dashboard = () => {
             <>
               <li>
                 <NavLink
+                  to={"/dashboard/organizer-overview"}
+                  className={navLinkStyles}
+                >
+                  <FaUser className="text-3xl" /> Overview
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
                   to={"/dashboard/organizer-profile"}
                   className={navLinkStyles}
                 >
@@ -82,6 +90,11 @@ const Dashboard = () => {
             </>
           ) : (
             <>
+              <li>
+                <NavLink to={"/dashboard/participant-overview"} className={navLinkStyles}>
+                  <FaChartBar className="text-3xl" /> Overview
+                </NavLink>
+              </li>
               <li>
                 <NavLink to={"/dashboard/analytics"} className={navLinkStyles}>
                   <FaChartBar className="text-3xl" /> Analytics

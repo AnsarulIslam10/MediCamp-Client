@@ -20,6 +20,8 @@ import ParticipantProfile from "../pages/Dashboard/ParticipantProfile/Participan
 import ManageRegisteredCamps from "../pages/Dashboard/ManageRegisteredCamps/ManageRegisteredCamps";
 import ParticipantRoute from "./ParticipantRoute";
 import ErrorPage from "../components/Shared/ErrorPage/ErrorPage";
+import OrganizerOverview from "../pages/Dashboard/OrganizerOverview/OrganizerOverview";
+import ParticipantOverview from "../pages/Dashboard/ParticipantOverview/ParticipantOverview";
 
 export const router = createBrowserRouter([
   {
@@ -58,6 +60,14 @@ export const router = createBrowserRouter([
     ),
     errorElement: <ErrorPage></ErrorPage>,
     children: [
+      {
+        path: "participant-overview",
+        element: (
+          <ParticipantRoute>
+            <ParticipantOverview></ParticipantOverview>
+          </ParticipantRoute>
+        ),
+      },
       {
         path: "analytics",
         element: (
@@ -100,6 +110,14 @@ export const router = createBrowserRouter([
       },
 
       //organizer route
+      {
+        path: "organizer-overview",
+        element: (
+          <AdminRoute>
+            <OrganizerOverview></OrganizerOverview>
+          </AdminRoute>
+        ),
+      },
       {
         path: "organizer-profile",
         element: (
