@@ -21,6 +21,7 @@ const CampCard = ({ item }) => {
     location,
     healthcareProfessionalName,
     participantCount,
+    description
   } = item || {};
   const formatedDate = moment(dateTime).format("L");
   const formatedTime = moment(dateTime).format("LT");
@@ -63,6 +64,9 @@ const CampCard = ({ item }) => {
         </p>
         <p className="text-description dark:text-gray-200 flex items-center gap-1">
           <FaLocationDot className="text-xl" /> {location}
+        </p>
+        <p className="text-description dark:text-gray-200">
+          {description.slice(0, 50)}...
         </p>
       </div>
       <div className="flex justify-end px-6 pb-6">
