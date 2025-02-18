@@ -69,7 +69,7 @@ const ManageCamps = () => {
         sub={"Overview and Control of Your Camps"}
       ></SectionTitle>
       <div className="flex justify-end mb-2">
-        <label className="input input-bordered flex items-center gap-2">
+        <label className="input input-bordered flex items-center gap-2 dark:bg-slate-900 dark:text-white">
           <input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -92,7 +92,7 @@ const ManageCamps = () => {
         </label>
       </div>
 
-      <div className="overflow-x-auto shadow-card-shadow">
+      <div className="overflow-x-auto shadow-card-shadow dark:shadow-none dark:bg-slate-900">
         <table className="table">
           {/* head */}
           <thead>
@@ -108,7 +108,7 @@ const ManageCamps = () => {
           <tbody>
             {/* row 1 */}
             {manageCamps.result?.map((camp, idx) => (
-              <tr key={camp._id} className="hover">
+              <tr key={camp._id} className="dark:border-gray-600">
                 <th>{idx + 1}</th>
                 <td>{camp.campName}</td>
                 <td>{moment(camp.dateTime).format("L, LT")}</td>

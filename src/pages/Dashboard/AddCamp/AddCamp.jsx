@@ -59,7 +59,7 @@ const AddCamp = () => {
       <Helmet>
         <title>MediCamp | Add Camp</title>
       </Helmet>
-      <div className="card p-4 lg:p-10 w-full border shadow-card-shadow">
+      <div className="card p-4 lg:p-10 w-full border shadow-card-shadow dark:shadow-none dark:bg-slate-900 dark:border-none dark:text-white">
         <h1 className="text-4xl text-center font-bold mb-8">Add A Camp</h1>
         <form onSubmit={handleSubmit(onSubmit)} className="">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
@@ -72,7 +72,7 @@ const AddCamp = () => {
                 placeholder="Enter camp name"
                 {...register("campName", { required: true })}
                 name="campName"
-                className="input input-bordered"
+                className="input input-bordered dark:bg-slate-800 dark:text-white"
               />
               {errors.campName && (
                 <span className="text-red-500">Camp Name is required*</span>
@@ -88,7 +88,7 @@ const AddCamp = () => {
                 {...register("campFees", { required: true })}
                 name="campFees"
                 min={1}
-                className="input input-bordered"
+                className="input input-bordered dark:bg-slate-800 dark:text-white"
               />
               {errors.campFees && (
                 <span className="text-red-500">Camp Fees is required*</span>
@@ -105,7 +105,7 @@ const AddCamp = () => {
                 type="datetime-local"
                 placeholder="datetime"
                 {...register("dateTime", { required: true })}
-                className="input input-bordered"
+                className="input input-bordered dark:bg-slate-800 dark:text-white"
               />
             </div>
             <div className="form-control">
@@ -121,7 +121,7 @@ const AddCamp = () => {
                 })}
                 defaultValue={0}
                 readOnly
-                className="input input-bordered"
+                className="input input-bordered dark:bg-slate-800 dark:text-white"
               />
             </div>
           </div>
@@ -139,7 +139,7 @@ const AddCamp = () => {
                 {...register("healthcareProfessionalName", {
                   required: true,
                 })}
-                className="input input-bordered"
+                className="input input-bordered dark:bg-slate-800 dark:text-white"
               />
               {errors.healthcareProfessionalName && (
                 <span className="text-red-500">
@@ -155,7 +155,7 @@ const AddCamp = () => {
                 type="text"
                 placeholder="Location"
                 {...register("location", { required: true })}
-                className="input input-bordered"
+                className="input input-bordered dark:bg-slate-800 dark:text-white"
               />
               {errors.location && (
                 <span className="text-red-500">Location is required*</span>
@@ -169,7 +169,7 @@ const AddCamp = () => {
             <input
               {...register("image", { required: true })}
               type="file"
-              className="file-input p-1 w-full max-w-xs"
+              className="file-input p-1 w-full max-w-xs dark:bg-slate-800 dark:text-white"
             />
             {errors.image && (
               <span className="text-red-500">Image is required*</span>
@@ -183,7 +183,7 @@ const AddCamp = () => {
             <textarea
               placeholder="description"
               {...register("description", { required: true })}
-              className="textarea h-40 textarea-bordered"
+              className="textarea h-40 textarea-bordered dark:bg-slate-800 dark:text-white"
             ></textarea>
 
             {errors.description && (

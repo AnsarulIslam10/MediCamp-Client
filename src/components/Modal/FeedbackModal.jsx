@@ -56,7 +56,7 @@ const FeedbackModal = ({ camp }) => {
       <Button
         onClick={open}
         disabled={confirmationStatus === "pending"}
-        className="rounded-md disabled:bg-gray-300 bg-primary hover:bg-primary-hover py-2 px-4 text-sm font-medium text-white focus:outline-none  data-[focus]:outline-1 data-[focus]:outline-white"
+        className="rounded-md disabled:bg-gray-300 bg-primary dark:text-secondary hover:bg-primary-hover py-2 px-4 text-sm font-medium text-white focus:outline-none  data-[focus]:outline-1 data-[focus]:outline-white"
       >
         Feedback
       </Button>
@@ -72,7 +72,7 @@ const FeedbackModal = ({ camp }) => {
           <div className="flex min-h-full items-center justify-center p-4">
             <DialogPanel
               transition
-              className="w-full max-w-2xl rounded-xl bg-white drop-shadow-2xl text-black p-6 backdrop-blur-2xl duration-300 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0"
+              className="w-full max-w-2xl rounded-xl bg-white dark:bg-slate-900 dark:text-white drop-shadow-2xl text-black p-6 backdrop-blur-2xl duration-300 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0"
             >
               <div className="flex justify-end text-gray-600">
                 <Button className="text-2xl" onClick={close}>
@@ -96,7 +96,7 @@ const FeedbackModal = ({ camp }) => {
                     max="5"
                     step="0.1"
                     placeholder="Enter rating (1-5)"
-                    className="input input-bordered"
+                    className="input input-bordered dark:bg-slate-800 dark:text-white"
                   />
                   {errors.rating && (
                     <span className="text-red-500">Rating is required*</span>
@@ -108,7 +108,7 @@ const FeedbackModal = ({ camp }) => {
                   </label>
                   <textarea
                     {...register("feedback", { required: true })}
-                    className="textarea textarea-bordered"
+                    className="textarea textarea-bordered dark:bg-slate-800 dark:text-white"
                     placeholder="Write your feedback"
                   ></textarea>
                   {errors.feedback && (

@@ -131,22 +131,22 @@ const OrganizerOverview = () => {
       </header>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <div className="bg-white p-6 rounded-lg shadow-md">
+        <div className="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-md">
           <h3 className="text-lg font-semibold">Total Camps</h3>
           <p className="text-2xl font-bold">{totalCamps}</p>
         </div>
-        <div className="bg-white p-6 rounded-lg shadow-md">
+        <div className="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-md">
           <h3 className="text-lg font-semibold">Total Participants</h3>
           <p className="text-2xl font-bold">{totalParticipants}</p>
         </div>
-        <div className="bg-white p-6 rounded-lg shadow-md">
+        <div className="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-md">
           <h3 className="text-lg font-semibold">Total Revenue</h3>
           <p className="text-2xl font-bold">${totalRevenue}</p>
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-        <div className="bg-white p-6 rounded-lg shadow-md">
+        <div className="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-md">
           <h3 className="text-lg font-semibold mb-4">Most Popular Camps</h3>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={popularCamps}>
@@ -159,7 +159,7 @@ const OrganizerOverview = () => {
           </ResponsiveContainer>
         </div>
 
-        <div className="bg-white p-6 rounded-lg shadow-md">
+        <div className="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-md">
           <h3 className="text-lg font-semibold mb-4">Payment Status</h3>
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>
@@ -183,11 +183,11 @@ const OrganizerOverview = () => {
         </div>
       </div>
 
-      <div className="bg-white p-6 rounded-lg shadow-md mb-8">
+      <div className="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-md mb-8">
         <h3 className="text-lg font-semibold mb-4">Recent Registrations</h3>
         <table className="w-full">
           <thead>
-            <tr className="bg-gray-100">
+            <tr className="bg-primary text-secondary">
               <th className="p-2">Camp Name</th>
               <th className="p-2">Participant</th>
               <th className="p-2">Status</th>
@@ -195,7 +195,7 @@ const OrganizerOverview = () => {
           </thead>
           <tbody>
             {recentActivities.map((activity) => (
-              <tr key={activity._id} className="border-b">
+              <tr key={activity._id} className="border-b dark:border-gray-600">
                 <td className="p-2">{activity.campName}</td>
                 <td className="p-2">{activity.participantName}</td>
                 <td className="p-2">{activity.confirmationStatus}</td>
@@ -205,11 +205,11 @@ const OrganizerOverview = () => {
         </table>
       </div>
 
-      <div className="bg-white p-6 rounded-lg shadow-md mb-8">
+      <div className="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-md mb-8">
         <h3 className="text-lg font-semibold mb-4">Your Camps</h3>
         <table className="w-full">
           <thead>
-            <tr className="bg-gray-100">
+            <tr className="bg-primary text-secondary">
               <th className="p-2 text-left">Camp Name</th>
               <th className="p-2 text-left">Date & Time</th>
               <th className="p-2 text-left">Location</th>
@@ -218,7 +218,7 @@ const OrganizerOverview = () => {
           </thead>
           <tbody>
             {organizerCamps.result.map((camp) => (
-              <tr key={camp._id} className="border-b hover:bg-gray-50">
+              <tr key={camp._id} className="border-b hover:bg-gray-50 dark:border-gray-600">
                 <td className="p-2">{camp.campName}</td>
                 <td className="p-2">{camp.dateTime}</td>
                 <td className="p-2">{camp.location}</td>
@@ -229,11 +229,11 @@ const OrganizerOverview = () => {
         </table>
       </div>
 
-      <div className="bg-white p-6 rounded-lg shadow-md">
+      <div className="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-md">
         <h3 className="text-lg font-semibold mb-4">Recent Feedback</h3>
         <table className="w-full">
           <thead>
-            <tr className="bg-gray-100">
+            <tr className="bg-primary text-secondary">
               <th className="p-2 text-left">Camp Name</th>
               <th className="p-2 text-left">Feedback</th>
               <th className="p-2 text-left">Rating</th>
@@ -241,7 +241,7 @@ const OrganizerOverview = () => {
           </thead>
           <tbody>
             {feedbackData.map((feedback, idx) => (
-              <tr key={idx} className="border-b hover:bg-gray-50">
+              <tr key={idx} className="border-b hover:bg-gray-50 dark:border-gray-600">
                 <td className="p-2">{feedback.campName}</td>
                 <td className="p-2">{feedback.message}</td>
                 <td className="p-2">{feedback.rating}</td>

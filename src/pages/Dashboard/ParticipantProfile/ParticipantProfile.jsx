@@ -31,7 +31,7 @@ const ParticipantProfile = () => {
       <Helmet>
         <title>MediCamp | Participant Profile</title>
       </Helmet>
-      <div className="mt-16 shadow-card-shadow p-10">
+      <div className="mt-16 shadow-card-shadow dark:shadow-none dark:bg-slate-900 p-10">
         <div className="h-40 bg-gray-200 rounded-t-lg overflow-hidden">
           <img
             src={userData.coverPhoto || "https://i.postimg.cc/nLyKfVjd/banner.jpg"}

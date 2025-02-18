@@ -70,7 +70,7 @@ const RegisteredCamps = () => {
       {registeredCamps?.result?.length > 0 ? (
         <>
           <div className="flex justify-end mb-2">
-            <label className="input input-bordered flex items-center gap-2">
+            <label className="input input-bordered flex items-center gap-2 dark:bg-slate-900 dark:text-white">
               <input
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
@@ -92,7 +92,7 @@ const RegisteredCamps = () => {
               </svg>
             </label>
           </div>
-          <div className="overflow-x-auto shadow-card-shadow">
+          <div className="overflow-x-auto shadow-card-shadow dark:shadow-none dark:bg-slate-900">
             <table className="table">
               {/* head */}
               <thead>
@@ -110,7 +110,7 @@ const RegisteredCamps = () => {
               <tbody>
                 {/* row 1 */}
                 {registeredCamps.result?.map((camp, idx) => (
-                  <tr key={camp._id} className="hover">
+                  <tr key={camp._id} className="dark:border-gray-600">
                     <th>{idx + 1}</th>
                     <td>{camp.campName}</td>
                     <td>${camp.campFees}</td>
@@ -126,7 +126,7 @@ const RegisteredCamps = () => {
                           campId: camp.campId,
                           confirmationStatus: camp.confirmationStatus,
                         }}
-                        className={`btn`}
+                        className={`btn dark:text-gray-500`}
                       >
                         {camp.paymentStatus === "unpaid" ? "Pay" : "Paid"}
                       </Link>
@@ -135,7 +135,7 @@ const RegisteredCamps = () => {
                     <td>
                       <button
                         disabled={camp.paymentStatus === "paid"}
-                        className="disabled:text-gray-500 text-xl"
+                        className="disabled:text-gray-500 dark:disabled:text-gray-200 text-xl"
                         onClick={() => handleDelete(camp._id)}
                       >
                         <BiX />

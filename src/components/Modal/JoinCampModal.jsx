@@ -84,7 +84,7 @@ export default function JoinCampModal({ camp, refetch }) {
           <div className="flex min-h-full items-center justify-center p-4">
             <DialogPanel
               transition
-              className="w-full max-w-2xl rounded-xl bg-white drop-shadow-2xl text-black p-6 backdrop-blur-2xl duration-300 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0"
+              className="w-full max-w-2xl rounded-xl bg-white dark:bg-slate-900 dark:text-white drop-shadow-2xl text-black p-6 backdrop-blur-2xl duration-300 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0"
             >
               <div className="flex justify-end text-gray-600">
                 <Button className="text-2xl" onClick={close}>
@@ -105,7 +105,7 @@ export default function JoinCampModal({ camp, refetch }) {
                       placeholder="Enter camp name"
                       readOnly
                       name="campName"
-                      className="input input-bordered"
+                      className="input input-bordered dark:bg-slate-800 dark:text-white"
                     />
                   </div>
                   <div className="form-control">
@@ -120,7 +120,7 @@ export default function JoinCampModal({ camp, refetch }) {
                       name="campFees"
                       readOnly
                       min={1}
-                      className="input input-bordered"
+                      className="input input-bordered dark:bg-slate-800 dark:text-white"
                     />
                   </div>
                 </div>
@@ -138,7 +138,7 @@ export default function JoinCampModal({ camp, refetch }) {
                       defaultValue={healthcareProfessionalName}
                       readOnly
                       placeholder="Enter Healthcare Professional Name"
-                      className="input input-bordered"
+                      className="input input-bordered dark:bg-slate-800 dark:text-white"
                     />
                   </div>
                   <div className="form-control">
@@ -151,7 +151,7 @@ export default function JoinCampModal({ camp, refetch }) {
                       defaultValue={location}
                       readOnly
                       placeholder="Location"
-                      className="input input-bordered"
+                      className="input input-bordered dark:bg-slate-800 dark:text-white"
                     />
                     {errors.location && (
                       <span className="text-red-500">
@@ -174,7 +174,7 @@ export default function JoinCampModal({ camp, refetch }) {
                       {...register("participantName", { required: true })}
                       readOnly
                       placeholder="Enter Healthcare Professional Name"
-                      className="input input-bordered"
+                      className="input input-bordered dark:bg-slate-800 dark:text-white"
                     />
                   </div>
                   <div className="form-control">
@@ -190,7 +190,7 @@ export default function JoinCampModal({ camp, refetch }) {
                       readOnly
                       placeholder="Location"
                       disabled
-                      className="input input-bordered"
+                      className="input input-bordered dark:bg-slate-800 dark:text-white"
                     />
                   </div>
                 </div>
@@ -204,7 +204,7 @@ export default function JoinCampModal({ camp, refetch }) {
                       type="number"
                       {...register("age", { required: true })}
                       placeholder="Enter your age"
-                      className="input input-bordered"
+                      className="input input-bordered dark:bg-slate-800 dark:text-white"
                     />
                     {errors.age && (
                       <span className="text-red-500">Age is required*</span>
@@ -220,7 +220,7 @@ export default function JoinCampModal({ camp, refetch }) {
                       type="number"
                       placeholder="Emter your phone number"
                       {...register("phoneNumber", { required: true })}
-                      className="input input-bordered"
+                      className="input input-bordered dark:bg-slate-800 dark:text-white"
                     />
                     {errors.phoneNumber && (
                       <span className="text-red-500">
@@ -237,7 +237,7 @@ export default function JoinCampModal({ camp, refetch }) {
                     </label>
                     <select
                       {...register("gendar", { required: true })}
-                      className="select-bordered select"
+                      className="select-bordered select dark:bg-slate-800 dark:text-white"
                     >
                       <option selected disabled value="">
                         Select your gendar
@@ -259,7 +259,7 @@ export default function JoinCampModal({ camp, refetch }) {
                       type="text"
                       placeholder="Emergency Contact"
                       {...register("emergencyContact", { required: true })}
-                      className="input input-bordered"
+                      className="input input-bordered dark:bg-slate-800 dark:text-white"
                     />
                     {errors.emergencyContact && (
                       <span className="text-red-500">

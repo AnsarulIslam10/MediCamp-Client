@@ -28,7 +28,7 @@ const Dashboard = () => {
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content flex flex-col lg:px-10">
+      <div className="drawer-content flex flex-col lg:px-10 dark:bg-[#121212] dark:text-white">
         <Outlet></Outlet>
         <label htmlFor="my-drawer-2" className="lg:hidden">
           <FaBars className="absolute text-3xl top-1 left-1" />

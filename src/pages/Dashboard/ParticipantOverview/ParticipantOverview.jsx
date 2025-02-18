@@ -18,25 +18,25 @@ import Loading from "../../../components/Shared/Loading";
 import useAuth from "../../../hooks/useAuth";
 
 const StatsCard = ({ title, value }) => (
-  <div className="bg-white p-6 rounded-lg shadow-md flex flex-col items-center">
+  <div className="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-md flex flex-col items-center">
     <h3 className="text-lg font-semibold mb-2">{title}</h3>
     <p className="text-3xl font-bold">{value}</p>
   </div>
 );
 
 const ChartCard = ({ title, children }) => (
-  <div className="bg-white p-6 rounded-lg shadow-md">
+  <div className="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-md">
     <h3 className="text-lg font-semibold mb-4 text-center">{title}</h3>
     {children}
   </div>
 );
 
 const ActivityTable = ({ activities }) => (
-  <div className="bg-white p-6 rounded-lg shadow-md overflow-x-auto">
+  <div className="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-md overflow-x-auto">
     <h3 className="text-lg font-semibold mb-4">Camp Payment Details</h3>
     <table className="min-w-full">
       <thead>
-        <tr className="bg-gray-100">
+        <tr className="bg-primary text-secondary">
           <th className="p-2 text-left">Camp Name</th>
           <th className="p-2 text-left">Camp Fee</th>
           <th className="p-2 text-left">Amount Paid</th>
@@ -45,7 +45,7 @@ const ActivityTable = ({ activities }) => (
       </thead>
       <tbody>
         {activities.map((camp, idx) => (
-          <tr key={idx} className="border-b hover:bg-gray-50">
+          <tr key={idx} className="border-b dark:border-gray-600">
             <td className="p-2">{camp.campName}</td>
             <td className="p-2">${camp.campFees}</td>
             <td className="p-2">${camp.amountPaid}</td>

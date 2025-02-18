@@ -35,7 +35,7 @@ const PaymentHistory = () => {
       {payments?.result?.length > 0 ? (
         <>
           <div className="flex justify-end mb-2">
-            <label className="input input-bordered flex items-center gap-2">
+            <label className="input input-bordered flex items-center gap-2 dark:bg-slate-900 dark:text-white">
               <input
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
@@ -57,7 +57,7 @@ const PaymentHistory = () => {
               </svg>
             </label>
           </div>
-          <div className="overflow-x-auto shadow-card-shadow">
+          <div className="overflow-x-auto shadow-card-shadow dark:shadow-none dark:bg-slate-900">
             <table className="table">
               {/* head */}
               <thead>
@@ -73,7 +73,7 @@ const PaymentHistory = () => {
               <tbody>
                 {/* row 1 */}
                 {payments.result?.map((payment, idx) => (
-                  <tr key={payment._id} className="hover">
+                  <tr key={payment._id} className="dark:border-gray-600">
                     <th>{idx + 1}</th>
                     <td>{payment.campName}</td>
                     <td>${payment.campFee}</td>
