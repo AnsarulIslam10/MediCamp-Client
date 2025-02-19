@@ -1,5 +1,5 @@
 import React from "react";
-import faq from "../../assets/animation/FAQs.gif";
+import faq from "../../assets/animation/FAQs.png";
 import SectionTitle from "../../components/Shared/SectionTitle/SectionTitle";
 import { Slide } from "react-awesome-reveal";
 const FAQs = () => {
@@ -9,9 +9,9 @@ const FAQs = () => {
         title={"Frequently Asked Questions"}
         sub={"Got Questions? We’ve Got Answers"}
       ></SectionTitle>
-      <div className="grid grid-cols-1 md:grid-cols-2 items-center justify-items-center">
+      <div className="grid grid-cols-1 md:grid-cols-2 items-center justify-items-center sm:justify-items-start">
         <Slide triggerOnce>
-          <img src={faq} alt="" />
+          <img src={faq} className="w-[500px]" alt="" />
         </Slide>
         <Slide direction="right" triggerOnce>
           <div className="space-y-1">
