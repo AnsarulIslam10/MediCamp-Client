@@ -13,6 +13,7 @@ import {
   FaPlus,
   FaUser,
 } from "react-icons/fa6";
+import { ImStatsBars } from "react-icons/im";
 const Dashboard = () => {
   const [isAdmin] = useAdmin();
   const { signOutUser } = useAuth();
@@ -53,7 +54,7 @@ const Dashboard = () => {
                   to={"/dashboard/organizer-overview"}
                   className={navLinkStyles}
                 >
-                  <FaUser className="text-3xl" /> Overview
+                  <ImStatsBars className="text-3xl" /> Overview
                 </NavLink>
               </li>
               <li>
@@ -61,7 +62,8 @@ const Dashboard = () => {
                   to={"/dashboard/organizer-profile"}
                   className={navLinkStyles}
                 >
-                  <FaUser className="text-3xl" />Profile
+                  <FaUser className="text-3xl" />
+                  Profile
                 </NavLink>
               </li>
               <li>
@@ -91,13 +93,11 @@ const Dashboard = () => {
           ) : (
             <>
               <li>
-                <NavLink to={"/dashboard/participant-overview"} className={navLinkStyles}>
-                  <FaChartBar className="text-3xl" /> Overview
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to={"/dashboard/analytics"} className={navLinkStyles}>
-                  <FaChartBar className="text-3xl" /> Analytics
+                <NavLink
+                  to={"/dashboard/participant-overview"}
+                  className={navLinkStyles}
+                >
+                  <ImStatsBars className="text-3xl" /> Overview
                 </NavLink>
               </li>
               <li>
@@ -129,7 +129,10 @@ const Dashboard = () => {
           )}
           <>
             <li className="absolute bottom-20">
-              <NavLink to={'/'} className="btn btn-outline hover:border-primary-hover hover:text-primary-hover text-primary text-2xl uppercase font-bold">
+              <NavLink
+                to={"/"}
+                className="btn btn-outline hover:border-primary-hover hover:text-primary-hover text-primary text-2xl uppercase font-bold"
+              >
                 <FaHome className="text-3xl" /> Home
               </NavLink>
             </li>

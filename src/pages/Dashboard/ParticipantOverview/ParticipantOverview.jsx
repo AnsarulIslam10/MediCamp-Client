@@ -16,23 +16,24 @@ import {
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Loading from "../../../components/Shared/Loading";
 import useAuth from "../../../hooks/useAuth";
+import SectionTitle from "../../../components/Shared/SectionTitle/SectionTitle";
 
 const StatsCard = ({ title, value }) => (
-  <div className="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-md flex flex-col items-center">
+  <div className="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-card-shadow dark:shadow-none flex flex-col items-center">
     <h3 className="text-lg font-semibold mb-2">{title}</h3>
     <p className="text-3xl font-bold">{value}</p>
   </div>
 );
 
 const ChartCard = ({ title, children }) => (
-  <div className="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-md">
+  <div className="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-card-shadow dark:shadow-none">
     <h3 className="text-lg font-semibold mb-4 text-center">{title}</h3>
     {children}
   </div>
 );
 
 const ActivityTable = ({ activities }) => (
-  <div className="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-md overflow-x-auto">
+  <div className="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-card-shadow dark:shadow-none overflow-x-auto">
     <h3 className="text-lg font-semibold mb-4">Camp Payment Details</h3>
     <table className="min-w-full">
       <thead>
@@ -88,7 +89,7 @@ const ParticipantOverview = () => {
     (sum, camp) => sum + camp.amountPaid,
     0
   );
-  const totalOutstanding = processedData.reduce(
+  const totalDueAmount = processedData.reduce(
     (sum, camp) => sum + (camp.paymentStatus === "unpaid" ? camp.campFees : 0),
     0
   );
@@ -113,13 +114,13 @@ const ParticipantOverview = () => {
       </Helmet>
 
       <header className="mb-6">
-        <h1 className="text-2xl font-bold text-center">Participant Overview</h1>
+        <SectionTitle title={"Overview"}></SectionTitle>
       </header>
 
       <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <StatsCard title="Total Registered Camps" value={totalRegistered} />
         <StatsCard title="Total Amount Paid" value={`$${totalPaid}`} />
-        <StatsCard title="Outstanding Fees" value={`$${totalOutstanding}`} />
+        <StatsCard title="Due Amount" value={`$${totalDueAmount}`} />
       </section>
 
       <section className="grid grid-cols-1 lg:grid-cols-2 gap-6">

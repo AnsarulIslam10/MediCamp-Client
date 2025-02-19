@@ -16,6 +16,8 @@ import {
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Loading from "../../../components/Shared/Loading";
 import useAuth from "../../../hooks/useAuth";
+import { MdCampaign } from "react-icons/md";
+import { FaDollarSign, FaUsers } from "react-icons/fa";
 
 const OrganizerOverview = () => {
   const axiosSecure = useAxiosSecure();
@@ -130,23 +132,23 @@ const OrganizerOverview = () => {
         <h1 className="text-2xl font-bold text-center">Organizer Overview</h1>
       </header>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <div className="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-md">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 text-center">
+        <div className="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-card-shadow dark:shadow-none">
           <h3 className="text-lg font-semibold">Total Camps</h3>
-          <p className="text-2xl font-bold">{totalCamps}</p>
+          <p className="text-2xl font-bold flex items-center justify-center gap-2"><MdCampaign className="text-4xl"/> {totalCamps}</p>
         </div>
-        <div className="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-md">
+        <div className="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-card-shadow dark:shadow-none">
           <h3 className="text-lg font-semibold">Total Participants</h3>
-          <p className="text-2xl font-bold">{totalParticipants}</p>
+          <p className="text-2xl font-bold flex items-center justify-center gap-2"><FaUsers className="text-3xl"/>{totalParticipants}</p>
         </div>
-        <div className="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-md">
+        <div className="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-card-shadow dark:shadow-none">
           <h3 className="text-lg font-semibold">Total Revenue</h3>
-          <p className="text-2xl font-bold">${totalRevenue}</p>
+          <p className="text-2xl font-bold flex items-center justify-center gap-2"><FaDollarSign className="text-3xl"/>{totalRevenue}</p>
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-        <div className="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-md">
+        <div className="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-card-shadow dark:shadow-none">
           <h3 className="text-lg font-semibold mb-4">Most Popular Camps</h3>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={popularCamps}>
@@ -159,7 +161,7 @@ const OrganizerOverview = () => {
           </ResponsiveContainer>
         </div>
 
-        <div className="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-md">
+        <div className="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-card-shadow dark:shadow-none">
           <h3 className="text-lg font-semibold mb-4">Payment Status</h3>
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>
@@ -183,7 +185,7 @@ const OrganizerOverview = () => {
         </div>
       </div>
 
-      <div className="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-md mb-8">
+      <div className="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-card-shadow dark:shadow-none mb-8">
         <h3 className="text-lg font-semibold mb-4">Recent Registrations</h3>
         <table className="w-full">
           <thead>
@@ -205,7 +207,7 @@ const OrganizerOverview = () => {
         </table>
       </div>
 
-      <div className="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-md mb-8">
+      <div className="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-card-shadow dark:shadow-none mb-8">
         <h3 className="text-lg font-semibold mb-4">Your Camps</h3>
         <table className="w-full">
           <thead>
@@ -229,7 +231,7 @@ const OrganizerOverview = () => {
         </table>
       </div>
 
-      <div className="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-md">
+      <div className="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-card-shadow dark:shadow-none">
         <h3 className="text-lg font-semibold mb-4">Recent Feedback</h3>
         <table className="w-full">
           <thead>

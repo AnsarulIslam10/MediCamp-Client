@@ -15,7 +15,7 @@ const HealthTipsAwareness = () => {
       ></SectionTitle>
       <div className="mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
         <div className="flex flex-col justify-center">
-          <div className="flex items-start gap-4 bg-white dark:bg-slate-900 p-6 rounded-lg shadow-lg">
+          <div className="flex items-start gap-4 bg-white dark:bg-slate-900 p-6 rounded-lg shadow-card-shadow dark:shadow-none">
             <div className="flex-shrink-0 bg-primary p-4 rounded-full">
               <MdWaterDrop className="text-3xl text-white" />
             </div>
@@ -32,7 +32,7 @@ const HealthTipsAwareness = () => {
             </div>
           </div>
 
-          <div className="flex items-start gap-4 bg-white dark:bg-slate-900 p-6 rounded-lg shadow-lg mt-6">
+          <div className="flex items-start gap-4 bg-white dark:bg-slate-900 p-6 rounded-lg shadow-card-shadow dark:shadow-none mt-6">
             <div className="flex-shrink-0 bg-primary p-4 rounded-full">
               <FaRegSmile className="text-3xl text-white" />
             </div>

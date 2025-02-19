@@ -157,7 +157,7 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
       <div className="navbar-end">
-        <div>
+        <div className="mr-4">
           <label className="swap swap-rotate">
             {/* this hidden checkbox controls the state */}
             <input
@@ -207,7 +207,7 @@ const Navbar = () => {
               </button>
               {user && isAdmin && (
                 <li>
-                  <Link className="text-xl" to={"/dashboard/organizer-profile"}>
+                  <Link className="text-xl" to={"/dashboard/organizer-overview"}>
                     Dashboard
                   </Link>
                 </li>
@@ -216,7 +216,7 @@ const Navbar = () => {
                 <li>
                   <Link
                     className="text-xl"
-                    to={"/dashboard/participant-profile"}
+                    to={"/dashboard/participant-overview"}
                   >
                     Dashboard
                   </Link>

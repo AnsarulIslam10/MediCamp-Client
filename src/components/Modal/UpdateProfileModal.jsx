@@ -75,7 +75,7 @@ export default function UpdateProfileModal({ userData, refetch }) {
       <Button
         disabled={!user}
         onClick={open}
-        className="rounded-md btn disabled:bg-gray-300 bg-primary hover:bg-primary-hover py-2 px-4 text-sm font-medium text-white focus:outline-none  data-[focus]:outline-1 data-[focus]:outline-white"
+        className="rounded-md btn disabled:bg-gray-300 bg-primary hover:bg-primary-hover py-2 px-4 text-sm font-medium text-secondary focus:outline-none  data-[focus]:outline-1 data-[focus]:outline-white"
       >
         <FaEdit /> Update Profile
       </Button>
@@ -91,7 +91,7 @@ export default function UpdateProfileModal({ userData, refetch }) {
           <div className="flex min-h-full items-center justify-center p-4">
             <DialogPanel
               transition
-              className="w-full max-w-2xl rounded-xl bg-white drop-shadow-2xl text-black p-6 backdrop-blur-2xl duration-300 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0"
+              className="w-full max-w-2xl rounded-xl bg-white dark:bg-slate-900 dark:text-white drop-shadow-2xl text-black p-6 backdrop-blur-2xl duration-300 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0"
             >
               <div className="flex justify-end text-gray-600">
                 <Button className="text-2xl" onClick={close}>
@@ -110,7 +110,7 @@ export default function UpdateProfileModal({ userData, refetch }) {
                       defaultValue={user.displayName}
                       {...register("name")}
                       placeholder="Enter New Name"
-                      className="input input-bordered"
+                      className="input input-bordered dark:bg-slate-800 dark:text-white"
                     />
                   </div>
                   <div className="form-control">
@@ -121,7 +121,7 @@ export default function UpdateProfileModal({ userData, refetch }) {
                       type="file"
                       {...register("image")}
                       placeholder="Enter Your Photo URL"
-                      className="file-input p-1 w-full max-w-xs"
+                      className="file-input p-1 w-full max-w-xs dark:bg-slate-800 dark:text-white"
                     />
                   </div>
                 </div>
@@ -137,7 +137,7 @@ export default function UpdateProfileModal({ userData, refetch }) {
                       defaultValue={phoneNumber}
                       {...register("phoneNumber")}
                       placeholder="Enter Your Phone Number"
-                      className="input input-bordered"
+                      className="input input-bordered dark:bg-slate-800 dark:text-white"
                     />
                   </div>
                   <div className="form-control">
@@ -149,7 +149,7 @@ export default function UpdateProfileModal({ userData, refetch }) {
                       defaultValue={address}
                       {...register("address")}
                       placeholder="Enter Your Address"
-                      className="input input-bordered"
+                      className="input input-bordered dark:bg-slate-800 dark:text-white"
                     />
                   </div>
                 </div>

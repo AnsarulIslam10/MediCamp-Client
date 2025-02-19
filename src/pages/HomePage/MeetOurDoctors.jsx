@@ -31,7 +31,7 @@ const MeetOurDoctors = () => {
   return (
     <section id="doctors" className="my-8 lg:my-16">
       <div className="mx-auto">
-        <SectionTitle title={"Meet Our Doctors"} sub={"Our Doctors"} />
+        <SectionTitle title={"Meet Our Doctors"} sub={"Get to know the experts dedicated to your health and well-being"} />
         <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {doctorsData.map((doctor, index) => (
             <div

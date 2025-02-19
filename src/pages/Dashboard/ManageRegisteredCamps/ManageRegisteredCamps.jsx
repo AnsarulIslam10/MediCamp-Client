@@ -125,7 +125,7 @@ const ManageRegisteredCamps = () => {
                 <td>{camp.paymentStatus}</td>
                 <td>
                   <button
-                    disabled={camp.confirmationStatus === "confirmed"}
+                    disabled={camp.confirmationStatus === "confirmed" || camp.paymentStatus === "unpaid"}
                     onClick={() =>
                       handleConfirmationStatus(
                         camp.participantEmail,

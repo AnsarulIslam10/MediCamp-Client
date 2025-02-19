@@ -55,10 +55,10 @@ const OrganizerProfile = () => {
           </div>
         </div>
         <div className="px-6 pt-2">
-          <h2 className="text-2xl font-semibold text-secondary">
+          <h2 className="text-2xl font-semibold text-secondary dark:text-primary">
             {userData.name}
           </h2>
-          <p className="text-gray-600">{userData.email}</p>
+          <p className="text-description dark:text-gray-200">{userData.email}</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8 px-6">

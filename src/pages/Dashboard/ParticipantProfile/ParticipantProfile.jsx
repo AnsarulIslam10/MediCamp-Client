@@ -34,7 +34,9 @@ const ParticipantProfile = () => {
       <div className="mt-16 shadow-card-shadow dark:shadow-none dark:bg-slate-900 p-10">
         <div className="h-40 bg-gray-200 rounded-t-lg overflow-hidden">
           <img
-            src={userData.coverPhoto || "https://i.postimg.cc/nLyKfVjd/banner.jpg"}
+            src={
+              userData.coverPhoto || "https://i.postimg.cc/nLyKfVjd/banner.jpg"
+            }
             alt="Cover"
             className="w-full h-full object-cover"
           />
@@ -54,16 +56,24 @@ const ParticipantProfile = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8 px-6">
           <div className="space-y-2">
-            {userData?.phoneNumber && (
+            {userData?.phoneNumber ? (
               <p>
                 <span className="font-semibold">Phone:</span>{" "}
                 {userData.phoneNumber}
               </p>
+            ) : (
+              <p>
+                <span className="font-semibold">Phone:</span> N/A
+              </p>
             )}
-            {userData?.address && (
+            {userData?.address ? (
               <p>
                 <span className="font-semibold">Address:</span>{" "}
                 {userData.address}
+              </p>
+            ) : (
+              <p>
+                <span className="font-semibold">Address:</span> N/A
               </p>
             )}
           </div>

@@ -11,7 +11,7 @@ const EmergencyHelpline = () => {
           title={"Emergency Contact & Helpline"}
           sub={"We're available 24/7 to assist you in any medical emergency."}
         />
-        <div className="flex flex-col md:flex-row justify-center items-center gap-8 mt-10">
+        <div className="flex flex-col md:flex-row justify-center items-center gap-8 mt-10 px-10">
           <div className="flex flex-col items-center bg-white dark:bg-slate-900 p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300 w-full md:w-1/3">
             <div className="bg-primary p-4 rounded-full mb-4">
               <FaAmbulance className="text-4xl text-white" />
@@ -19,7 +19,7 @@ const EmergencyHelpline = () => {
             <h3 className="text-xl font-semibold text-secondary dark:text-primary mb-2">
               Ambulance Service
             </h3>
-            <p className="text-description dark:text-gray-200 mb-4">Immediate medical assistance</p>
+            <p className="text-description dark:text-gray-200 mb-4">Emergency medical help</p>
             <a
               href="tel:+88017391212121"
               className="flex items-center justify-center bg-primary text-secondary px-6 py-2 rounded-lg hover:bg-primary-dark transition-colors duration-300"
