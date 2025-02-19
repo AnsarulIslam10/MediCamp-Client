@@ -36,7 +36,7 @@ const FeedbackAndRatings = () => {
         backgroundAttachment: "fixed",
       }}
     >
-      <div className="bg-black/30 py-8 lg:py-16">
+      <div className="bg-black/30 py-8 lg:py-16 mb-0">
         <SectionTitle
           title={"Feedback & Ratings"}
           sub={"What Our Participants Are Saying"}

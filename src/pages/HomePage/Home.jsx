@@ -7,6 +7,7 @@ import FAQs from "./FAQs";
 import { Helmet } from "react-helmet-async";
 import OurServices from "./OurServices";
 import MeetOurDoctors from "./MeetOurDoctors";
+import EmergencyHelpline from "./EmergencyHelpline";
 
 const Home = () => {
   return (
@@ -19,6 +20,7 @@ const Home = () => {
       <OurServices/>
       <MeetOurDoctors/>
       <FeedbackAndRatings></FeedbackAndRatings>
+      <EmergencyHelpline></EmergencyHelpline>
       <FAQs></FAQs>
     </Container>
   );
