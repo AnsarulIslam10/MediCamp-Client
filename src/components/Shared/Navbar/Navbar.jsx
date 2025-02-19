@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import logo from "../../../assets/Logo/MediCamp.svg";
 import useAdmin from "../../../hooks/useAdmin";
@@ -9,6 +9,8 @@ const Navbar = () => {
   const { user, signOutUser } = useAuth();
   const [isAdmin] = useAdmin();
   const [theme, setTheme] = useState("light");
+  const navigate = useNavigate();
+  const location = useLocation();
   useEffect(() => {
     const storedTheme = localStorage.getItem("theme") || "light";
     setTheme(storedTheme);
@@ -20,6 +22,18 @@ const Navbar = () => {
     setTheme(updatedTheme);
     localStorage.setItem("theme", updatedTheme);
     document.body.className = updatedTheme;
+  };
+
+  const handleScroll = (sectionId) => {
+    if (location.pathname !== "/") {
+      navigate("/");
+    }
+    setTimeout(() => {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 100);
   };
 
   const links = (
@@ -47,6 +61,73 @@ const Navbar = () => {
         >
           Available Camps
         </NavLink>
+      </li>
+      {user ? (
+        isAdmin ? (
+          <>
+            <li>
+              <NavLink
+                className={({ isActive }) =>
+                  `btn btn-sm btn-ghost text-xl rounded-none hover:bg-primary-hover ${
+                    isActive ? "bg-primary" : ""
+                  }`
+                }
+                to={"/dashboard/organizer-profile"}
+              >
+                Profile
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                className={({ isActive }) =>
+                  `btn btn-sm btn-ghost text-xl rounded-none hover:bg-primary-hover ${
+                    isActive ? "bg-primary" : ""
+                  }`
+                }
+                to={"/dashboard/organizer-overview"}
+              >
+                Overview
+              </NavLink>
+            </li>
+          </>
+        ) : (
+          <>
+            <li>
+              <NavLink
+                className={({ isActive }) =>
+                  `btn btn-sm btn-ghost text-xl rounded-none hover:bg-primary-hover ${
+                    isActive ? "bg-primary" : ""
+                  }`
+                }
+                to={"/dashboard/participant-profile"}
+              >
+                Profile
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                className={({ isActive }) =>
+                  `btn btn-sm btn-ghost text-xl rounded-none hover:bg-primary-hover ${
+                    isActive ? "bg-primary" : ""
+                  }`
+                }
+                to={"/dashboard/participant-overview"}
+              >
+                Overview
+              </NavLink>
+            </li>
+          </>
+        )
+      ) : (
+        ""
+      )}
+      <li>
+        <button
+          className="btn btn-sm btn-ghost text-xl rounded-none hover:bg-primary-hover"
+          onClick={() => handleScroll("doctors")}
+        >
+          Doctors
+        </button>
       </li>
     </>
   );

@@ -4,7 +4,7 @@ import SectionTitle from "../../components/Shared/SectionTitle/SectionTitle";
 import { Slide } from "react-awesome-reveal";
 const FAQs = () => {
   return (
-    <section className=" my-16">
+    <section id="FAQs" className=" my-16">
       <SectionTitle
         title={"Frequently Asked Questions"}
         sub={"Got Questions? We’ve Got Answers"}

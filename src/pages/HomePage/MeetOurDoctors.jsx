@@ -29,7 +29,7 @@ const MeetOurDoctors = () => {
   ];
 
   return (
-    <section className="my-8 lg:my-16">
+    <section id="doctors" className="my-8 lg:my-16">
       <div className="mx-auto">
         <SectionTitle title={"Meet Our Doctors"} sub={"Our Doctors"} />
         <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">

@@ -61,7 +61,7 @@ const Dashboard = () => {
                   to={"/dashboard/organizer-profile"}
                   className={navLinkStyles}
                 >
-                  <FaUser className="text-3xl" /> Organizer Profile
+                  <FaUser className="text-3xl" />Profile
                 </NavLink>
               </li>
               <li>
@@ -105,7 +105,7 @@ const Dashboard = () => {
                   to={"/dashboard/participant-profile"}
                   className={navLinkStyles}
                 >
-                  <FaUser className="text-3xl" /> Participant Profile
+                  <FaUser className="text-3xl" /> Profile
                 </NavLink>
               </li>
               <li>
