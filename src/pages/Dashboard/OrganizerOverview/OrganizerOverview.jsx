@@ -1,6 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import {
   BarChart,
   Bar,
@@ -9,8 +9,6 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
-  PieChart,
-  Pie,
   Cell,
 } from "recharts";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
@@ -39,11 +37,7 @@ const OrganizerOverview = () => {
     },
   });
 
-  const {
-    data: totalRevenue = 0,
-    isLoading: isRevenueLoading,
-    isError: isRevenueError,
-  } = useQuery({
+  const { data: totalRevenue = 0, isLoading: isRevenueLoading, isError: isRevenueError } = useQuery({
     queryKey: ["totalRevenue"],
     queryFn: async () => {
       const res = await axiosSecure.get("/payments");
@@ -64,17 +58,23 @@ const OrganizerOverview = () => {
     },
   });
 
-  const { data: paymentStatusData = [] } = useQuery({
-    queryKey: ["paymentStatusData"],
+  const { data: revenueByCamp = [] } = useQuery({
+    queryKey: ["revenueByCamp"],
     queryFn: async () => {
       const res = await axiosSecure.get("/payments");
       const payments = res.data.result;
-      const unpaid = payments.filter((payment) => payment.paymentStatus === "paid").length;
-      const paid = payments.length + unpaid;
-      return [
-        { name: "paid", value: paid },
-        { name: "Unpaid", value: unpaid },
-      ];
+      const revenueMap = {};
+      payments.forEach((payment) => {
+        if (revenueMap[payment.campName]) {
+          revenueMap[payment.campName] += payment.campFee;
+        } else {
+          revenueMap[payment.campName] = payment.campFee;
+        }
+      });
+      return Object.keys(revenueMap).map((campName) => ({
+        name: campName,
+        revenue: revenueMap[campName],
+      }));
     },
   });
 
@@ -82,7 +82,7 @@ const OrganizerOverview = () => {
     queryKey: ["recentActivities"],
     queryFn: async () => {
       const res = await axiosSecure.get("/registered-camps");
-      return res.data.result.slice(0, 5);
+      return res.data.result.slice(-5).reverse();
     },
   });
 
@@ -102,53 +102,41 @@ const OrganizerOverview = () => {
     },
   });
 
-  const updatePaymentStatus = async () => {
-    const res = await axiosSecure.get("/payments");
-    const payments = res.data.result;
-
-    const unpaidPayments = payments.filter((payment) => payment.paymentStatus === "unpaid");
-
-    await Promise.all(
-      unpaidPayments.map((payment) =>
-        axiosSecure.put(`/payments/${payment._id}`, {
-          paymentStatus: "paid",
-        })
-      )
-    );
-  };
-
   if (isRevenueLoading) return <Loading />;
   if (isRevenueError) return <div>Error fetching payments.</div>;
 
   const COLORS = ["#01dfdf", "#003366"];
 
   return (
-    <div className="p-6 space-y-8">
+    <div className="p-4 md:p-6 space-y-8">
       <Helmet>
         <title>MediCamp | Organizer Overview</title>
       </Helmet>
-
       <header className="mb-6">
-        <h1 className="text-2xl font-bold text-center">Organizer Overview</h1>
+        <h1 className="text-2xl md:text-3xl font-bold text-center">Organizer Overview</h1>
       </header>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 text-center">
-        <div className="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-card-shadow dark:shadow-none">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8 text-center">
+        <div className="bg-white dark:bg-slate-900 p-4 md:p-6 rounded-lg shadow-card-shadow dark:shadow-none">
           <h3 className="text-lg font-semibold">Total Camps</h3>
-          <p className="text-2xl font-bold flex items-center justify-center gap-2"><MdCampaign className="text-4xl"/> {totalCamps}</p>
+          <p className="text-xl md:text-2xl font-bold flex items-center justify-center gap-2">
+            <MdCampaign className="text-3xl md:text-4xl" /> {totalCamps}
+          </p>
         </div>
-        <div className="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-card-shadow dark:shadow-none">
+        <div className="bg-white dark:bg-slate-900 p-4 md:p-6 rounded-lg shadow-card-shadow dark:shadow-none">
           <h3 className="text-lg font-semibold">Total Participants</h3>
-          <p className="text-2xl font-bold flex items-center justify-center gap-2"><FaUsers className="text-3xl"/>{totalParticipants}</p>
+          <p className="text-xl md:text-2xl font-bold flex items-center justify-center gap-2">
+            <FaUsers className="text-2xl md:text-3xl" /> {totalParticipants}
+          </p>
         </div>
-        <div className="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-card-shadow dark:shadow-none">
+        <div className="bg-white dark:bg-slate-900 p-4 md:p-6 rounded-lg shadow-card-shadow dark:shadow-none">
           <h3 className="text-lg font-semibold">Total Revenue</h3>
-          <p className="text-2xl font-bold flex items-center justify-center gap-2"><FaDollarSign className="text-3xl"/>{totalRevenue}</p>
+          <p className="text-xl md:text-2xl font-bold flex items-center justify-center gap-2">
+            <FaDollarSign className="text-2xl md:text-3xl" /> {totalRevenue}
+          </p>
         </div>
       </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-        <div className="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-card-shadow dark:shadow-none">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+        <div className="bg-white dark:bg-slate-900 p-4 md:p-6 rounded-lg shadow-card-shadow dark:shadow-none">
           <h3 className="text-lg font-semibold mb-4">Most Popular Camps</h3>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={popularCamps}>
@@ -160,34 +148,22 @@ const OrganizerOverview = () => {
             </BarChart>
           </ResponsiveContainer>
         </div>
-
-        <div className="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-card-shadow dark:shadow-none">
-          <h3 className="text-lg font-semibold mb-4">Payment Status</h3>
+        <div className="bg-white dark:bg-slate-900 p-4 md:p-6 rounded-lg shadow-card-shadow dark:shadow-none">
+          <h3 className="text-lg font-semibold mb-4">Revenue by Camp</h3>
           <ResponsiveContainer width="100%" height={300}>
-            <PieChart>
-              <Pie
-                data={paymentStatusData}
-                cx="50%"
-                cy="50%"
-                outerRadius={80}
-                fill="#003366"
-                dataKey="value"
-                label
-              >
-                {paymentStatusData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                ))}
-              </Pie>
+            <BarChart data={revenueByCamp}>
+              <XAxis dataKey="name" />
+              <YAxis />
               <Tooltip />
               <Legend />
-            </PieChart>
+              <Bar dataKey="revenue" fill="#01dfdf" />
+            </BarChart>
           </ResponsiveContainer>
         </div>
       </div>
-
-      <div className="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-card-shadow dark:shadow-none mb-8">
+      <div className="bg-white dark:bg-slate-900 p-4 md:p-6 rounded-lg shadow-card-shadow dark:shadow-none mb-8 overflow-x-auto">
         <h3 className="text-lg font-semibold mb-4">Recent Registrations</h3>
-        <table className="w-full">
+        <table className="w-full text-sm md:text-base">
           <thead>
             <tr className="bg-primary text-secondary">
               <th className="p-2">Camp Name</th>
@@ -206,10 +182,9 @@ const OrganizerOverview = () => {
           </tbody>
         </table>
       </div>
-
-      <div className="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-card-shadow dark:shadow-none mb-8">
+      <div className="bg-white dark:bg-slate-900 p-4 md:p-6 rounded-lg shadow-card-shadow dark:shadow-none mb-8 overflow-x-auto">
         <h3 className="text-lg font-semibold mb-4">Your Camps</h3>
-        <table className="w-full">
+        <table className="w-full text-sm md:text-base">
           <thead>
             <tr className="bg-primary text-secondary">
               <th className="p-2 text-left">Camp Name</th>
@@ -230,10 +205,9 @@ const OrganizerOverview = () => {
           </tbody>
         </table>
       </div>
-
-      <div className="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-card-shadow dark:shadow-none">
+      <div className="bg-white dark:bg-slate-900 p-4 md:p-6 rounded-lg shadow-card-shadow dark:shadow-none overflow-x-auto">
         <h3 className="text-lg font-semibold mb-4">Recent Feedback</h3>
-        <table className="w-full">
+        <table className="w-full text-sm md:text-base">
           <thead>
             <tr className="bg-primary text-secondary">
               <th className="p-2 text-left">Camp Name</th>
@@ -245,7 +219,7 @@ const OrganizerOverview = () => {
             {feedbackData.map((feedback, idx) => (
               <tr key={idx} className="border-b hover:bg-gray-50 dark:border-gray-600">
                 <td className="p-2">{feedback.campName}</td>
-                <td className="p-2">{feedback.message}</td>
+                <td className="p-2">{feedback.feedback.slice(0, 80)}...</td>
                 <td className="p-2">{feedback.rating}</td>
               </tr>
             ))}

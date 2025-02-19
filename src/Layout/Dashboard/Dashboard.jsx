@@ -31,8 +31,11 @@ const Dashboard = () => {
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col lg:px-10 dark:bg-[#121212] dark:text-white">
         <Outlet></Outlet>
-        <label htmlFor="my-drawer-2" className="lg:hidden">
-          <FaBars className="absolute text-3xl top-1 left-1" />
+        <label
+          htmlFor="my-drawer-2"
+          className="lg:hidden fixed top-1 left-1 z-50"
+        >
+          <FaBars className="text-3xl" />
         </label>
       </div>
       <div className="drawer-side">
@@ -131,13 +134,13 @@ const Dashboard = () => {
             <li className="absolute bottom-20">
               <NavLink
                 to={"/"}
-                className="btn btn-outline hover:border-primary-hover hover:text-primary-hover text-primary text-2xl uppercase font-bold"
+                className="btn btn-ghost text-primary text-2xl uppercase font-bold"
               >
                 <FaHome className="text-3xl" /> Home
               </NavLink>
             </li>
             <li className="absolute bottom-6" onClick={handleLogOut}>
-              <NavLink className="btn btn-outline hover:border-primary-hover hover:text-primary-hover text-primary text-2xl uppercase font-bold">
+              <NavLink className="btn bg-secondary  border-none text-primary hover:bg-secondary text-2xl uppercase font-bold">
                 <MdExitToApp className="text-3xl" /> Logout
               </NavLink>
             </li>

@@ -74,7 +74,7 @@ const CampCard = ({ item }) => {
           to={`/camp-details/${_id}`}
           className="btn bg-primary hover:bg-primary-hover"
         >
-          Details
+          See More
         </Link>
       </div>
     </div>
