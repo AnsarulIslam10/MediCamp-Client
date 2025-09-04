@@ -21,27 +21,31 @@ const CampCard = ({ item }) => {
     location,
     healthcareProfessionalName,
     participantCount,
-    description
+    description,
   } = item || {};
-  const formatedDate = moment(dateTime).format("L");
+
+  const formatedDate = moment(dateTime).format("LL");
   const formatedTime = moment(dateTime).format("LT");
+
   return (
-    <div className="card h-[100%] rounded-none flex bg-white dark:bg-slate-900 shadow-card-shadow dark:shadow-none hover:scale-105 transition-all duration-300">
+    <div className="group bg-white dark:bg-slate-900 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 dark:border-gray-800">
+      {/* Image Section */}
       <div className="relative">
-        <figure>
-          <img
-            className="aspect-video object-cover w-full mb-2"
-            src={image}
-            alt="camp"
-          />
-        </figure>
-        <p className="absolute top-4 right-4 bg-primary text-2xl px-3 drop-shadow-md rounded-full font-medium flex items-center">
-          <FaDollarSign className="text-xl mt-[2px]" />
-          {campFees}
-        </p>
+        <img
+          className="aspect-video w-full object-cover group-hover:scale-105 transition-transform duration-500"
+          src={image}
+          alt={campName}
+        />
+        {/* Price Badge */}
+        <span className="absolute top-4 right-4 bg-primary text-white text-sm sm:text-base px-3 py-1 rounded-full shadow-lg flex items-center gap-1 font-medium">
+          <FaDollarSign /> {campFees}
+        </span>
       </div>
-      <div className="p-6 flex-1 space-y-1 pt-0">
-        <div className="flex justify-between text-description dark:text-gray-200">
+
+      {/* Content */}
+      <div className="p-5 sm:p-6 flex flex-col gap-3">
+        {/* Date & Time */}
+        <div className="flex flex-wrap justify-between text-gray-500 dark:text-gray-400 text-sm">
           <p className="flex items-center gap-1">
             <FaCalendarAlt /> {formatedDate}
           </p>
@@ -50,31 +54,41 @@ const CampCard = ({ item }) => {
           </p>
         </div>
 
-        <h2 className="card-title text-secondary dark:text-primary sm:text-xl lg:text-2xl flex items-center gap-1">
-          <MdCampaign className="text-description dark:text-gray-200 text-lg" />
-          {campName}
+        {/* Title */}
+        <h2 className="text-lg sm:text-xl font-bold text-gray-800 dark:text-white flex items-center gap-2">
+          <MdCampaign className="text-primary" /> {campName}
         </h2>
-        <p className="flex items-center gap-1 text-xl">
-          <FaUserDoctor className="text-description dark:text-gray-200" />
-          {healthcareProfessionalName}
+
+        {/* Doctor & Participants */}
+        <div className="flex flex-wrap gap-4 text-gray-700 dark:text-gray-300 text-sm sm:text-base">
+          <p className="flex items-center gap-1">
+            <FaUserDoctor className="text-primary/70" />
+            {healthcareProfessionalName}
+          </p>
+          <p className="flex items-center gap-1">
+            <FaUsers className="text-primary/70" />
+            {participantCount} joined
+          </p>
+        </div>
+
+        {/* Location */}
+        <p className="flex items-center gap-1 text-gray-600 dark:text-gray-400 text-sm">
+          <FaLocationDot className="text-primary" /> {location}
         </p>
-        <p className="flex items-center gap-1 text-xl">
-          <FaUsers className="text-description dark:text-gray-200" />
-          {participantCount}
-        </p>
-        <p className="text-description dark:text-gray-200 flex items-center gap-1">
-          <FaLocationDot className="text-xl" /> {location}
-        </p>
-        <p className="text-description dark:text-gray-200">
-          {description.slice(0, 50)}...
+
+        {/* Description */}
+        <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+          {description.slice(0, 80)}...
         </p>
       </div>
-      <div className="flex justify-end px-6 pb-6">
+
+      {/* Footer Button */}
+      <div className="px-5 sm:px-6 pb-5 sm:pb-6">
         <Link
           to={`/camp-details/${_id}`}
-          className="btn bg-primary hover:bg-primary-hover"
+          className="w-full btn bg-primary hover:bg-primary-hover text-white rounded-lg shadow-md"
         >
-          See More
+          See Details
         </Link>
       </div>
     </div>

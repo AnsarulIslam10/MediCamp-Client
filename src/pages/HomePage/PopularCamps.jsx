@@ -27,7 +27,7 @@ const PopularCamps = () => {
         title={"Popular Medical Camps"}
         sub={"Top Medical Camps with the Highest Participation"}
       ></SectionTitle>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
         {popularCamps.map((item) => (
           <Fade key={item._id}>
             <CampCard item={item}></CampCard>
