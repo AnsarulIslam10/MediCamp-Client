@@ -1,19 +1,17 @@
-import React from "react";
 import { FaBars, FaHome } from "react-icons/fa";
-import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
-import useAdmin from "../../hooks/useAdmin";
-import { MdExitToApp } from "react-icons/md";
-import useAuth from "../../hooks/useAuth";
-import logo from "../../assets/Logo/MediCamp.svg";
 import {
-  FaChartBar,
   FaCreditCard,
   FaList,
   FaListCheck,
   FaPlus,
-  FaUser,
+  FaUser
 } from "react-icons/fa6";
 import { ImStatsBars } from "react-icons/im";
+import { MdExitToApp } from "react-icons/md";
+import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
+import logo from "../../assets/Logo/MediCamp.svg";
+import useAdmin from "../../hooks/useAdmin";
+import useAuth from "../../hooks/useAuth";
 const Dashboard = () => {
   const [isAdmin] = useAdmin();
   const { signOutUser } = useAuth();
