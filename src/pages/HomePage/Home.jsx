@@ -1,16 +1,16 @@
-import React from "react";
-import Container from "../../components/Shared/Container";
-import Carousel from "./Carousel";
-import PopularCamps from "./PopularCamps";
-import FeedbackAndRatings from "./FeedbackAndRatings";
-import FAQs from "./FAQs";
 import { Helmet } from "react-helmet-async";
-import OurServices from "./OurServices";
-import MeetOurDoctors from "./MeetOurDoctors";
-import EmergencyHelpline from "./EmergencyHelpline";
-import HealthTipsAwareness from "./HealthTipsAwareness";
+import Container from "../../components/Shared/Container";
 import Blog from "./Blog";
+import Carousel from "./Carousel";
+import EmergencyHelpline from "./EmergencyHelpline";
+import FAQs from "./FAQs";
+import FeedbackAndRatings from "./FeedbackAndRatings";
 import Gallery from "./Gallery";
+import HealthTipsAwareness from "./HealthTipsAwareness";
+import MeetOurDoctors from "./MeetOurDoctors";
+import OurServices from "./OurServices";
+import PopularCamps from "./PopularCamps";
+import Membership from "./Membership";
 
 const Home = () => {
   return (
@@ -20,13 +20,14 @@ const Home = () => {
       </Helmet>
       <Carousel></Carousel>
       <PopularCamps></PopularCamps>
-      <OurServices/>
-      <MeetOurDoctors/>
-      <HealthTipsAwareness/>
+      <OurServices />
+      <MeetOurDoctors />
+      <HealthTipsAwareness />
       <FeedbackAndRatings></FeedbackAndRatings>
       <EmergencyHelpline></EmergencyHelpline>
       <Blog />
       <Gallery />
+      <Membership />
       <FAQs></FAQs>
     </Container>
   );

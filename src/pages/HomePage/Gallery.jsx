@@ -18,7 +18,7 @@ const Gallery = () => {
   ];
 
   return (
-    <section className="py-16">
+    <section id="gallery" className="py-16">
       <SectionTitle
         title="Highlights & Memories"
         sub="Take a glimpse into our medical camps and community services."

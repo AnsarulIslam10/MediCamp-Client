@@ -137,6 +137,14 @@ const Navbar = () => {
           Blog
         </button>
       </li>
+      <li>
+        <button
+          className="btn btn-sm btn-ghost text-xl rounded-none hover:bg-primary-hover"
+          onClick={() => handleScroll("gallery")}
+        >
+          Gallery
+        </button>
+      </li>
     </>
   );
   return (
