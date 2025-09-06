@@ -5,7 +5,7 @@ import { useState } from "react";
 const useCamp = (sortBy) => {
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
-  const [limit] = useState(9);
+  const [limit] = useState(12);
   const {
     data: camp = [],
     isLoading: loading,
