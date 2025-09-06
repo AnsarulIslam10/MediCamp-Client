@@ -49,7 +49,7 @@ const Dashboard = () => {
       {/* Drawer Content (main area) */}
       <div className="drawer-content flex flex-col lg:px-10 dark:bg-[#121212] dark:text-white">
         {/* Top Navbar */}
-        <div className="navbar top-0 left-0 right-0 fixed bg-white dark:bg-[#1a1a1a] shadow px-6">
+        <div className="navbar top-0 left-0 right-0 fixed bg-white dark:bg-[#1a1a1a] shadow px-6 z-50">
           <div className="flex-1">
             <label
               htmlFor="my-drawer-2"
@@ -128,13 +128,13 @@ const Dashboard = () => {
         </div>
 
         {/* Page Content */}
-        <div className="p-4">
+        <div className="p-4 mt-8">
           <Outlet />
         </div>
       </div>
 
       {/* Sidebar */}
-      <div className="drawer-side">
+      <div className="drawer-side z-50">
         <label
           htmlFor="my-drawer-2"
           aria-label="close sidebar"
@@ -186,7 +186,7 @@ const Dashboard = () => {
                   className={navLinkStyles}
                 >
                   <FaListCheck className="text-2xl" />
-                  Manage Registered Camps
+                  Registered Camps
                 </NavLink>
               </li>
             </>

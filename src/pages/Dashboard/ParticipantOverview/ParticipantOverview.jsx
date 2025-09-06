@@ -18,43 +18,71 @@ import Loading from "../../../components/Shared/Loading";
 import useAuth from "../../../hooks/useAuth";
 import SectionTitle from "../../../components/Shared/SectionTitle/SectionTitle";
 
+// Stats card
 const StatsCard = ({ title, value }) => (
-  <div className="bg-white dark:bg-slate-900 p-4 md:p-6 rounded-lg shadow-card-shadow dark:shadow-none flex flex-col items-center">
-    <h3 className="text-base md:text-lg font-semibold mb-2">{title}</h3>
-    <p className="text-2xl md:text-3xl font-bold">{value}</p>
+  <div className="bg-white dark:bg-slate-900 p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300 flex flex-col items-center">
+    <h3 className="text-sm md:text-base font-medium text-gray-600 dark:text-gray-300 mb-2 uppercase tracking-wide">
+      {title}
+    </h3>
+    <p className="text-3xl md:text-4xl font-bold text-primary">{value}</p>
   </div>
 );
 
+// Chart wrapper
 const ChartCard = ({ title, children }) => (
-  <div className="bg-white dark:bg-slate-900 p-4 md:p-6 rounded-lg shadow-card-shadow dark:shadow-none">
-    <h3 className="text-base md:text-lg font-semibold mb-4 text-center">{title}</h3>
+  <div className="bg-white dark:bg-slate-900 p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300">
+    <h3 className="text-lg font-semibold mb-4 text-center text-gray-800 dark:text-gray-200">
+      {title}
+    </h3>
     {children}
   </div>
 );
 
+// Table
 const ActivityTable = ({ activities }) => (
-  <div className="bg-white dark:bg-slate-900 p-4 md:p-6 rounded-lg shadow-card-shadow dark:shadow-none overflow-x-auto">
-    <h3 className="text-base md:text-lg font-semibold mb-4">Camp Payment Details</h3>
-    <table className="min-w-full text-xs md:text-sm">
-      <thead>
-        <tr className="bg-primary text-secondary">
-          <th className="p-2 text-left">Camp Name</th>
-          <th className="p-2 text-left">Camp Fee</th>
-          <th className="p-2 text-left">Amount Paid</th>
-          <th className="p-2 text-left">Payment Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        {activities.map((camp, idx) => (
-          <tr key={idx} className="border-b dark:border-gray-600">
-            <td className="p-2">{camp.campName}</td>
-            <td className="p-2">${camp.campFees}</td>
-            <td className="p-2">${camp.amountPaid}</td>
-            <td className="p-2 capitalize">{camp.paymentStatus}</td>
+  <div className="bg-white dark:bg-slate-900 p-6 rounded-xl shadow-md">
+    <h3 className="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200">
+      Camp Payment Details
+    </h3>
+    <div className="overflow-x-auto rounded-lg">
+      <table className="min-w-full text-sm border border-gray-200 dark:border-gray-700 rounded-lg">
+        <thead>
+          <tr className="bg-primary text-white text-left">
+            <th className="p-3">Camp Name</th>
+            <th className="p-3">Camp Fee</th>
+            <th className="p-3">Amount Paid</th>
+            <th className="p-3">Payment Status</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {activities.map((camp, idx) => (
+            <tr
+              key={idx}
+              className={`${
+                idx % 2 === 0
+                  ? "bg-gray-50 dark:bg-slate-800"
+                  : "bg-white dark:bg-slate-900"
+              } hover:bg-gray-100 dark:hover:bg-slate-700 transition`}
+            >
+              <td className="p-3">{camp.campName}</td>
+              <td className="p-3 font-medium">${camp.campFees}</td>
+              <td className="p-3 font-medium text-primary">
+                ${camp.amountPaid}
+              </td>
+              <td
+                className={`p-3 capitalize font-semibold ${
+                  camp.paymentStatus === "paid"
+                    ? "text-green-500"
+                    : "text-red-500"
+                }`}
+              >
+                {camp.paymentStatus}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   </div>
 );
 
@@ -87,6 +115,7 @@ const ParticipantOverview = () => {
 
   const paidCount = processedData.filter((camp) => camp.paymentStatus === "paid").length;
   const unpaidCount = processedData.filter((camp) => camp.paymentStatus === "unpaid").length;
+
   const pieData = [
     { name: "Paid", value: paidCount },
     { name: "Unpaid", value: unpaidCount },
@@ -95,39 +124,49 @@ const ParticipantOverview = () => {
   const COLORS = ["#01dfdf", "#003366"];
 
   return (
-    <div className="container mx-auto p-4 md:p-6 space-y-8">
+    <div className="container mx-auto p-4 md:p-8 space-y-10">
       <Helmet>
         <title>MediCamp | Participant Overview</title>
       </Helmet>
 
-      <header className="mb-6">
-        <SectionTitle title="Overview" />
+      {/* Section Title */}
+      <header>
+        <SectionTitle title="Participant Overview" />
       </header>
 
-      <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      {/* Stats */}
+      <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         <StatsCard title="Total Registered Camps" value={totalRegistered} />
         <StatsCard title="Total Amount Paid" value={`$${totalPaid}`} />
         <StatsCard title="Due Amount" value={`$${totalDueAmount}`} />
       </section>
 
-      <section className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      {/* Charts */}
+      <section className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <ChartCard title="Camp Payment Comparison">
-          <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width="100%" height={320}>
             <BarChart data={processedData}>
-              <XAxis dataKey="campName" tick={{ fontSize: 10 }} />
+              <XAxis dataKey="campName" tick={{ fontSize: 11 }} />
               <YAxis />
               <Tooltip />
               <Legend />
-              <Bar dataKey="campFees" fill="#003366" name="Camp Fee" />
-              <Bar dataKey="amountPaid" fill="#01dfdf" name="Amount Paid" />
+              <Bar dataKey="campFees" fill="#003366" name="Camp Fee" radius={[6, 6, 0, 0]} />
+              <Bar dataKey="amountPaid" fill="#01dfdf" name="Amount Paid" radius={[6, 6, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </ChartCard>
 
         <ChartCard title="Payment Status Distribution">
-          <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width="100%" height={320}>
             <PieChart>
-              <Pie data={pieData} cx="50%" cy="50%" outerRadius={80} dataKey="value" label>
+              <Pie
+                data={pieData}
+                cx="50%"
+                cy="50%"
+                outerRadius={90}
+                dataKey="value"
+                label
+              >
                 {pieData.map((entry, index) => (
                   <Cell key={index} fill={COLORS[index % COLORS.length]} />
                 ))}
@@ -139,6 +178,7 @@ const ParticipantOverview = () => {
         </ChartCard>
       </section>
 
+      {/* Table */}
       <section>
         <ActivityTable activities={processedData} />
       </section>

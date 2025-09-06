@@ -1,59 +1,102 @@
-import React from "react";
-import { Helmet } from "react-helmet-async";
 import { useQuery } from "@tanstack/react-query";
+import { Helmet } from "react-helmet-async";
+import { FaDollarSign, FaUsers } from "react-icons/fa";
+import { MdCampaign } from "react-icons/md";
 import {
-  BarChart,
   Bar,
-  XAxis,
-  YAxis,
-  Tooltip,
+  BarChart,
   Legend,
   ResponsiveContainer,
-  Cell,
+  Tooltip,
+  XAxis,
+  YAxis
 } from "recharts";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Loading from "../../../components/Shared/Loading";
+import SectionTitle from "../../../components/Shared/SectionTitle/SectionTitle";
 import useAuth from "../../../hooks/useAuth";
-import { MdCampaign } from "react-icons/md";
-import { FaDollarSign, FaUsers } from "react-icons/fa";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+
+// Stats card
+const StatsCard = ({ title, value, icon }) => (
+  <div className="bg-white dark:bg-slate-900 p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300 flex flex-col items-center">
+    <h3 className="text-sm md:text-base font-medium text-gray-600 dark:text-gray-300 mb-2 uppercase tracking-wide">
+      {title}
+    </h3>
+    <p className="text-3xl md:text-4xl font-bold text-primary flex items-center gap-2">
+      {icon} {value}
+    </p>
+  </div>
+);
+
+// Chart wrapper
+const ChartCard = ({ title, children }) => (
+  <div className="bg-white dark:bg-slate-900 p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300">
+    <h3 className="text-lg font-semibold mb-4 text-center text-gray-800 dark:text-gray-200">
+      {title}
+    </h3>
+    {children}
+  </div>
+);
+
+// Table
+const DataTable = ({ title, columns, data }) => (
+  <div className="bg-white dark:bg-slate-900 p-6 rounded-xl shadow-md overflow-x-auto">
+    <h3 className="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200">{title}</h3>
+    <table className="min-w-full text-sm border border-gray-200 dark:border-gray-700 rounded-lg">
+      <thead>
+        <tr className="bg-primary text-white text-left">
+          {columns.map((col, idx) => (
+            <th key={idx} className="p-3">{col}</th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {data.map((row, idx) => (
+          <tr
+            key={idx}
+            className={`${
+              idx % 2 === 0 ? "bg-gray-50 dark:bg-slate-800" : "bg-white dark:bg-slate-900"
+            } hover:bg-gray-100 dark:hover:bg-slate-700 transition`}
+          >
+            {Object.values(row).map((val, i) => (
+              <td key={i} className="p-3">{val}</td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+);
 
 const OrganizerOverview = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
 
+  // Fetch data
   const { data: totalCamps = 0 } = useQuery({
     queryKey: ["totalCamps"],
-    queryFn: async () => {
-      const res = await axiosSecure.get("/all-camps");
-      return res.data.totalCount;
-    },
+    queryFn: async () => (await axiosSecure.get("/all-camps")).data.totalCount,
   });
 
   const { data: totalParticipants = 0 } = useQuery({
     queryKey: ["totalParticipants"],
-    queryFn: async () => {
-      const res = await axiosSecure.get("/registered-camps");
-      return res.data.totalCount;
-    },
+    queryFn: async () => (await axiosSecure.get("/registered-camps")).data.totalCount,
   });
 
   const { data: totalRevenue = 0, isLoading: isRevenueLoading, isError: isRevenueError } = useQuery({
     queryKey: ["totalRevenue"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/payments");
-      const payments = res.data.result;
-      const revenue = payments.reduce((sum, payment) => sum + payment.campFee, 0);
-      return revenue;
+      const payments = (await axiosSecure.get("/payments")).data.result;
+      return payments.reduce((sum, p) => sum + p.campFee, 0);
     },
   });
 
   const { data: popularCamps = [] } = useQuery({
     queryKey: ["popularCamps"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/popular-camps");
-      return res.data.map((camp) => ({
-        name: camp.campName,
-        participants: camp.participantCount,
+      return (await axiosSecure.get("/popular-camps")).data.map((c) => ({
+        name: c.campName,
+        participants: c.participantCount,
       }));
     },
   });
@@ -61,171 +104,110 @@ const OrganizerOverview = () => {
   const { data: revenueByCamp = [] } = useQuery({
     queryKey: ["revenueByCamp"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/payments");
-      const payments = res.data.result;
+      const payments = (await axiosSecure.get("/payments")).data.result;
       const revenueMap = {};
-      payments.forEach((payment) => {
-        if (revenueMap[payment.campName]) {
-          revenueMap[payment.campName] += payment.campFee;
-        } else {
-          revenueMap[payment.campName] = payment.campFee;
-        }
-      });
-      return Object.keys(revenueMap).map((campName) => ({
-        name: campName,
-        revenue: revenueMap[campName],
-      }));
+      payments.forEach((p) => (revenueMap[p.campName] = (revenueMap[p.campName] || 0) + p.campFee));
+      return Object.keys(revenueMap).map((name) => ({ name, revenue: revenueMap[name] }));
     },
   });
 
   const { data: recentActivities = [] } = useQuery({
     queryKey: ["recentActivities"],
-    queryFn: async () => {
-      const res = await axiosSecure.get("/registered-camps");
-      return res.data.result.slice(-5).reverse();
-    },
+    queryFn: async () => (await axiosSecure.get("/registered-camps")).data.result.slice(-5).reverse(),
   });
 
   const { data: organizerCamps = { result: [] } } = useQuery({
     queryKey: ["organizerCamps", user.email],
-    queryFn: async () => {
-      const res = await axiosSecure.get(`/camps/organizer/${user.email}`);
-      return res.data;
-    },
+    queryFn: async () => (await axiosSecure.get(`/camps/organizer/${user.email}`)).data,
   });
 
   const { data: feedbackData = [] } = useQuery({
     queryKey: ["feedbackData"],
-    queryFn: async () => {
-      const res = await axiosSecure.get("/feedback");
-      return res.data.slice(0, 5);
-    },
+    queryFn: async () => (await axiosSecure.get("/feedback")).data.slice(0, 5),
   });
 
   if (isRevenueLoading) return <Loading />;
   if (isRevenueError) return <div>Error fetching payments.</div>;
 
-  const COLORS = ["#01dfdf", "#003366"];
+  const barColors = ["#003366", "#01dfdf"];
 
   return (
-    <div className="p-4 md:p-6 space-y-8">
+    <div className="container mx-auto p-4 md:p-8 space-y-10">
       <Helmet>
         <title>MediCamp | Organizer Overview</title>
       </Helmet>
-      <header className="mb-6">
-        <h1 className="text-2xl md:text-3xl font-bold text-center">Organizer Overview</h1>
+
+      <header>
+        <SectionTitle title="Organizer Overview" />
       </header>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8 text-center">
-        <div className="bg-white dark:bg-slate-900 p-4 md:p-6 rounded-lg shadow-card-shadow dark:shadow-none">
-          <h3 className="text-lg font-semibold">Total Camps</h3>
-          <p className="text-xl md:text-2xl font-bold flex items-center justify-center gap-2">
-            <MdCampaign className="text-3xl md:text-4xl" /> {totalCamps}
-          </p>
-        </div>
-        <div className="bg-white dark:bg-slate-900 p-4 md:p-6 rounded-lg shadow-card-shadow dark:shadow-none">
-          <h3 className="text-lg font-semibold">Total Participants</h3>
-          <p className="text-xl md:text-2xl font-bold flex items-center justify-center gap-2">
-            <FaUsers className="text-2xl md:text-3xl" /> {totalParticipants}
-          </p>
-        </div>
-        <div className="bg-white dark:bg-slate-900 p-4 md:p-6 rounded-lg shadow-card-shadow dark:shadow-none">
-          <h3 className="text-lg font-semibold">Total Revenue</h3>
-          <p className="text-xl md:text-2xl font-bold flex items-center justify-center gap-2">
-            <FaDollarSign className="text-2xl md:text-3xl" /> {totalRevenue}
-          </p>
-        </div>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-        <div className="bg-white dark:bg-slate-900 p-4 md:p-6 rounded-lg shadow-card-shadow dark:shadow-none">
-          <h3 className="text-lg font-semibold mb-4">Most Popular Camps</h3>
-          <ResponsiveContainer width="100%" height={300}>
+
+      {/* Stats */}
+      <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <StatsCard title="Total Camps" value={totalCamps} icon={<MdCampaign />} />
+        <StatsCard title="Total Participants" value={totalParticipants} icon={<FaUsers />} />
+        <StatsCard title="Total Revenue" value={`$${totalRevenue}`} icon={<FaDollarSign />} />
+      </section>
+
+      {/* Charts */}
+      <section className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <ChartCard title="Most Popular Camps">
+          <ResponsiveContainer width="100%" height={320}>
             <BarChart data={popularCamps}>
-              <XAxis dataKey="name" />
+              <XAxis dataKey="name" tick={{ fontSize: 11 }} />
               <YAxis />
               <Tooltip />
               <Legend />
-              <Bar dataKey="participants" fill="#003366" />
+              <Bar dataKey="participants" fill={barColors[0]} radius={[6, 6, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
-        </div>
-        <div className="bg-white dark:bg-slate-900 p-4 md:p-6 rounded-lg shadow-card-shadow dark:shadow-none">
-          <h3 className="text-lg font-semibold mb-4">Revenue by Camp</h3>
-          <ResponsiveContainer width="100%" height={300}>
+        </ChartCard>
+
+        <ChartCard title="Revenue by Camp">
+          <ResponsiveContainer width="100%" height={320}>
             <BarChart data={revenueByCamp}>
-              <XAxis dataKey="name" />
+              <XAxis dataKey="name" tick={{ fontSize: 11 }} />
               <YAxis />
               <Tooltip />
               <Legend />
-              <Bar dataKey="revenue" fill="#01dfdf" />
+              <Bar dataKey="revenue" fill={barColors[1]} radius={[6, 6, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
-        </div>
-      </div>
-      <div className="bg-white dark:bg-slate-900 p-4 md:p-6 rounded-lg shadow-card-shadow dark:shadow-none mb-8 overflow-x-auto">
-        <h3 className="text-lg font-semibold mb-4">Recent Registrations</h3>
-        <table className="w-full text-sm md:text-base">
-          <thead>
-            <tr className="bg-primary text-secondary">
-              <th className="p-2">Camp Name</th>
-              <th className="p-2">Participant</th>
-              <th className="p-2">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {recentActivities.map((activity) => (
-              <tr key={activity._id} className="border-b dark:border-gray-600">
-                <td className="p-2">{activity.campName}</td>
-                <td className="p-2">{activity.participantName}</td>
-                <td className="p-2">{activity.confirmationStatus}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      <div className="bg-white dark:bg-slate-900 p-4 md:p-6 rounded-lg shadow-card-shadow dark:shadow-none mb-8 overflow-x-auto">
-        <h3 className="text-lg font-semibold mb-4">Your Camps</h3>
-        <table className="w-full text-sm md:text-base">
-          <thead>
-            <tr className="bg-primary text-secondary">
-              <th className="p-2 text-left">Camp Name</th>
-              <th className="p-2 text-left">Date & Time</th>
-              <th className="p-2 text-left">Location</th>
-              <th className="p-2 text-left">Participants</th>
-            </tr>
-          </thead>
-          <tbody>
-            {organizerCamps.result.map((camp) => (
-              <tr key={camp._id} className="border-b hover:bg-gray-50 dark:border-gray-600">
-                <td className="p-2">{camp.campName}</td>
-                <td className="p-2">{camp.dateTime}</td>
-                <td className="p-2">{camp.location}</td>
-                <td className="p-2">{camp.participantCount}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      <div className="bg-white dark:bg-slate-900 p-4 md:p-6 rounded-lg shadow-card-shadow dark:shadow-none overflow-x-auto">
-        <h3 className="text-lg font-semibold mb-4">Recent Feedback</h3>
-        <table className="w-full text-sm md:text-base">
-          <thead>
-            <tr className="bg-primary text-secondary">
-              <th className="p-2 text-left">Camp Name</th>
-              <th className="p-2 text-left">Feedback</th>
-              <th className="p-2 text-left">Rating</th>
-            </tr>
-          </thead>
-          <tbody>
-            {feedbackData.map((feedback, idx) => (
-              <tr key={idx} className="border-b hover:bg-gray-50 dark:border-gray-600">
-                <td className="p-2">{feedback.campName}</td>
-                <td className="p-2">{feedback.feedback.slice(0, 80)}...</td>
-                <td className="p-2">{feedback.rating}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+        </ChartCard>
+      </section>
+
+      {/* Tables */}
+      <section className="grid grid-cols-1 gap-6">
+        <DataTable
+          title="Recent Registrations"
+          columns={["Camp Name", "Participant", "Status"]}
+          data={recentActivities.map((act) => ({
+            campName: act.campName,
+            participantName: act.participantName,
+            confirmationStatus: act.confirmationStatus,
+          }))}
+        />
+
+        <DataTable
+          title="Your Camps"
+          columns={["Camp Name", "Date & Time", "Location", "Participants"]}
+          data={organizerCamps.result.map((c) => ({
+            campName: c.campName,
+            dateTime: c.dateTime,
+            location: c.location,
+            participantCount: c.participantCount,
+          }))}
+        />
+
+        <DataTable
+          title="Recent Feedback"
+          columns={["Camp Name", "Feedback", "Rating"]}
+          data={feedbackData.map((f) => ({
+            campName: f.campName,
+            feedback: f.feedback.slice(0, 80) + "...",
+            rating: f.rating,
+          }))}
+        />
+      </section>
     </div>
   );
 };
