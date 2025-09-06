@@ -57,7 +57,7 @@ Social support is another essential factor. Surrounding yourself with positive r
   ];
 
   return (
-    <section className="py-16">
+    <section id="blog" className="py-16">
       <SectionTitle
         title="Latest Health Articles"
         sub="Stay updated with expert advice, tips, and awareness posts."

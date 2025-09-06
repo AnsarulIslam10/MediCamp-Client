@@ -10,6 +10,7 @@ import MeetOurDoctors from "./MeetOurDoctors";
 import EmergencyHelpline from "./EmergencyHelpline";
 import HealthTipsAwareness from "./HealthTipsAwareness";
 import Blog from "./Blog";
+import Gallery from "./Gallery";
 
 const Home = () => {
   return (
@@ -25,6 +26,7 @@ const Home = () => {
       <FeedbackAndRatings></FeedbackAndRatings>
       <EmergencyHelpline></EmergencyHelpline>
       <Blog />
+      <Gallery />
       <FAQs></FAQs>
     </Container>
   );
