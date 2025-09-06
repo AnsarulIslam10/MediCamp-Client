@@ -28,7 +28,7 @@ const CampCard = ({ item }) => {
   const formatedTime = moment(dateTime).format("LT");
 
   return (
-    <div className="group bg-white dark:bg-slate-900 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 dark:border-gray-800">
+    <div className="group bg-white dark:bg-slate-900 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 dark:border-gray-800 flex flex-col h-full">
       {/* Image Section */}
       <div className="relative">
         <img
@@ -43,7 +43,7 @@ const CampCard = ({ item }) => {
       </div>
 
       {/* Content */}
-      <div className="p-5 sm:p-6 flex flex-col gap-3">
+      <div className="p-5 sm:p-6 flex flex-col gap-3 flex-grow">
         {/* Date & Time */}
         <div className="flex flex-wrap justify-between text-gray-500 dark:text-gray-400 text-sm">
           <p className="flex items-center gap-1">
@@ -77,13 +77,13 @@ const CampCard = ({ item }) => {
         </p>
 
         {/* Description */}
-        <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+        <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed flex-grow">
           {description.slice(0, 80)}...
         </p>
       </div>
 
       {/* Footer Button */}
-      <div className="px-5 sm:px-6 pb-5 sm:pb-6">
+      <div className="px-5 sm:px-6 pb-5 sm:pb-6 mt-auto">
         <Link
           to={`/camp-details/${_id}`}
           className="w-full btn bg-primary hover:bg-primary-hover text-white rounded-lg shadow-md"
