@@ -9,6 +9,7 @@ import OurServices from "./OurServices";
 import MeetOurDoctors from "./MeetOurDoctors";
 import EmergencyHelpline from "./EmergencyHelpline";
 import HealthTipsAwareness from "./HealthTipsAwareness";
+import Blog from "./Blog";
 
 const Home = () => {
   return (
@@ -23,6 +24,7 @@ const Home = () => {
       <HealthTipsAwareness/>
       <FeedbackAndRatings></FeedbackAndRatings>
       <EmergencyHelpline></EmergencyHelpline>
+      <Blog />
       <FAQs></FAQs>
     </Container>
   );
