@@ -223,7 +223,10 @@ const Navbar = () => {
               </button>
               {user && isAdmin && (
                 <li>
-                  <Link className="text-xl" to={"/dashboard/organizer-overview"}>
+                  <Link
+                    className="text-xl"
+                    to={"/dashboard/organizer-overview"}
+                  >
                     Dashboard
                   </Link>
                 </li>

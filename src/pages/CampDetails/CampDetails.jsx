@@ -19,8 +19,8 @@ const CampDetails = () => {
       return res.data;
     },
   });
+
   const {
-    _id,
     campName,
     image,
     campFees,
@@ -30,74 +30,84 @@ const CampDetails = () => {
     participantCount,
     description,
   } = camp;
-  const formatedDate = moment(dateTime).format("L");
+
+  const formatedDate = moment(dateTime).format("LL");
   const formatedTime = moment(dateTime).format("LT");
+
   return (
-    <section className="my-16 max-w-7xl mx-auto px-2">
+    <section className="my-16 max-w-7xl mx-auto px-4">
       <Helmet>
         <title>MediCamp | Camp Details</title>
       </Helmet>
-      <div className="card rounded-none flex bg-white dark:bg-slate-900 shadow-card-shadow p-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <figure>
-              <img className="" src={image} alt="camp" />
-            </figure>
-          </div>
-          <div>
-            <div className="flex-1 text-2xl font-semibold space-y-4 pt-0">
-              <h2 className="card-title text-secondary dark:text-primary text-4xl">{campName}</h2>
-              <p className="flex items-center gap-1">
-                <FaCalendarAlt />
-                Date:{" "}
-                <span className="font-medium text-description dark:text-gray-200">
-                  {formatedDate}
-                </span>
-              </p>
-              <p className="flex items-center gap-1">
-                <FaClock />
-                Time:{" "}
-                <span className="font-medium text-description dark:text-gray-200">
-                  {formatedTime}
-                </span>
-              </p>
-              <p className="flex items-center gap-1">
-                <FaLocationDot />
-                Location:{" "}
-                <span className="font-medium text-description dark:text-gray-200">{location}</span>
-              </p>
-              <p className="font-semibold flex items-center">
-                <FaDollarSign className="text-[28px]" />
-                Camp Fee:
-                <span className="font-medium text-description dark:text-gray-200 ml-1">
-                  ${campFees}/per person
-                </span>
-              </p>
 
-              <p className="flex items-center gap-1">
-                <FaUserDoctor />
-                Medic:{" "}
-                <span className="font-medium text-description dark:text-gray-200">
-                  {healthcareProfessionalName}
-                </span>
-              </p>
-              <p className="flex items-center gap-1">
-                <FaUsers />
-                Participant:{" "}
-                <span className="font-medium text-description dark:text-gray-200">
-                  {participantCount}
-                </span>
-              </p>
+      <div className="bg-white dark:bg-slate-900 rounded-xl shadow-lg overflow-hidden">
+        {/* Top Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-6 md:p-10">
+          {/* Image */}
+          <div>
+            <img
+              src={image}
+              alt={campName}
+              className="w-full h-[400px] object-cover rounded-lg shadow-md"
+            />
+          </div>
+
+          {/* Details */}
+          <div className="flex flex-col justify-between">
+            <div className="space-y-5">
+              <h2 className="text-4xl font-bold text-secondary dark:text-primary leading-snug">
+                {campName}
+              </h2>
+
+              <div className="grid grid-cols-1 gap-3 text-lg">
+                <p className="flex items-center gap-2">
+                  <FaCalendarAlt className="text-primary" />
+                  <span className="font-medium">{formatedDate}</span>
+                </p>
+                <p className="flex items-center gap-2">
+                  <FaClock className="text-primary" />
+                  <span className="font-medium">{formatedTime}</span>
+                </p>
+                <p className="flex items-center gap-2">
+                  <FaLocationDot className="text-primary" />
+                  <span className="font-medium">{location}</span>
+                </p>
+                <p className="flex items-center gap-2">
+                  <FaDollarSign className="text-green-600 text-xl" />
+                  <span className="font-semibold">
+                    ${campFees}
+                    <span className="text-description dark:text-gray-300 font-normal">
+                      /per person
+                    </span>
+                  </span>
+                </p>
+                <p className="flex items-center gap-2">
+                  <FaUserDoctor className="text-primary" />
+                  <span className="font-medium">{healthcareProfessionalName}</span>
+                </p>
+                <p className="flex items-center gap-2">
+                  <FaUsers className="text-primary" />
+                  <span className="font-medium">{participantCount} Participants</span>
+                </p>
+              </div>
             </div>
-            <div className="flex justify-end px-6">
+
+            {/* Join Button */}
+            <div className="mt-6 flex justify-end">
               <JoinCampModal camp={camp} refetch={refetch}></JoinCampModal>
             </div>
           </div>
         </div>
-        <div className="divider px-5"></div>
-        <div>
-          <p className="text-3xl font-semibold">Description:</p>
-          <p className="text-description dark:text-gray-200 text-xl mt-2">{description}</p>
+
+        {/* Divider */}
+        <div className="border-t dark:border-gray-700"></div>
+
+        {/* Description */}
+        <div className="p-6 md:p-10">
+          <h3 className="text-2xl font-semibold mb-4">About This Camp</h3>
+          <p className="text-lg text-description dark:text-gray-300 leading-relaxed">
+            {description}
+          </p>
         </div>
       </div>
     </section>
