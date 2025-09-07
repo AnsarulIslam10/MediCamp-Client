@@ -86,7 +86,7 @@ const UpdateCamp = () => {
     }
   };
   return (
-    <div className="flex w-full max-w-5xl justify-center items-center min-h-screen text-[#444444] px-1 my-16">
+    <div className="flex w-full mx-auto max-w-5xl justify-center items-center text-[#444444] px-1 my-16">
       <Helmet>
         <title>MediCamp | Update Camp</title>
       </Helmet>
