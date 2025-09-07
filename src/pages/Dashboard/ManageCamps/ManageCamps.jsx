@@ -1,9 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
-
 import moment from "moment";
 import { FaEdit, FaTrash } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
@@ -13,18 +12,13 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 
 const ManageCamps = () => {
   const { user } = useAuth();
-  const navigate = useNavigate();
   const axiosSecure = useAxiosSecure();
 
   const [page, setPage] = useState(1);
   const [limit] = useState(10);
   const [search, setSearch] = useState("");
 
-  const {
-    data: manageCamps = [],
-    isLoading,
-    refetch,
-  } = useQuery({
+  const { data: manageCamps = [], isLoading, refetch } = useQuery({
     queryKey: ["manage-camps", `${user?.email}`, page, limit, search],
     queryFn: async () => {
       const res = await axiosSecure.get(
@@ -59,6 +53,9 @@ const ManageCamps = () => {
     });
   };
 
+  // Create an array of 10 skeleton rows
+  const skeletonRows = Array.from({ length: 10 });
+
   return (
     <div className="p-1 mb-8 mt-16">
       <Helmet>
@@ -67,7 +64,8 @@ const ManageCamps = () => {
       <SectionTitle
         title={"Manage Camps"}
         sub={"Overview and Control of Your Camps"}
-      ></SectionTitle>
+      />
+
       <div className="flex justify-end mb-2">
         <label className="input input-bordered flex items-center gap-2 dark:bg-slate-900 dark:text-white">
           <input
@@ -81,7 +79,7 @@ const ManageCamps = () => {
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 16 16"
             fill="currentColor"
-            className="h-4 w-4 opacity-70 "
+            className="h-4 w-4 opacity-70"
           >
             <path
               fillRule="evenodd"
@@ -92,9 +90,8 @@ const ManageCamps = () => {
         </label>
       </div>
 
-      <div className="overflow-x-auto shadow-card-shadow dark:shadow-none dark:bg-slate-900">
-        <table className="table">
-          {/* head */}
+      <div className="overflow-x-auto shadow-card-shadow dark:shadow-none dark:bg-slate-900 rounded-lg">
+        <table className="table w-full">
           <thead>
             <tr className="bg-primary text-secondary">
               <th></th>
@@ -106,25 +103,47 @@ const ManageCamps = () => {
             </tr>
           </thead>
           <tbody>
-            {/* row 1 */}
-            {manageCamps.result?.map((camp, idx) => (
-              <tr key={camp._id} className="dark:border-gray-600">
-                <th>{idx + 1}</th>
-                <td>{camp.campName}</td>
-                <td>{moment(camp.dateTime).format("L, LT")}</td>
-                <td>{camp.healthcareProfessionalName}</td>
-                <td>
-                  <Link to={`/dashboard/update-camp/${camp._id}`}>
-                    <FaEdit />
-                  </Link>
-                </td>
-                <td>
-                  <button onClick={() => handleDelete(camp._id)}>
-                    <FaTrash />
-                  </button>
-                </td>
-              </tr>
-            ))}
+            {isLoading
+              ? skeletonRows.map((_, idx) => (
+                  <tr key={idx} className="animate-pulse">
+                    <th>
+                      <div className="h-6 w-6 bg-gray-300 rounded-md dark:bg-gray-700" />
+                    </th>
+                    <td>
+                      <div className="h-6 w-32 bg-gray-300 rounded-md dark:bg-gray-700" />
+                    </td>
+                    <td>
+                      <div className="h-6 w-24 bg-gray-300 rounded-md dark:bg-gray-700" />
+                    </td>
+                    <td>
+                      <div className="h-6 w-32 bg-gray-300 rounded-md dark:bg-gray-700" />
+                    </td>
+                    <td>
+                      <div className="h-6 w-6 bg-gray-300 rounded-full dark:bg-gray-700" />
+                    </td>
+                    <td>
+                      <div className="h-6 w-6 bg-gray-300 rounded-full dark:bg-gray-700" />
+                    </td>
+                  </tr>
+                ))
+              : manageCamps.result?.map((camp, idx) => (
+                  <tr key={camp._id} className="dark:border-gray-600">
+                    <th>{idx + 1}</th>
+                    <td>{camp.campName}</td>
+                    <td>{moment(camp.dateTime).format("L, LT")}</td>
+                    <td>{camp.healthcareProfessionalName}</td>
+                    <td>
+                      <Link to={`/dashboard/update-camp/${camp._id}`}>
+                        <FaEdit />
+                      </Link>
+                    </td>
+                    <td>
+                      <button onClick={() => handleDelete(camp._id)}>
+                        <FaTrash />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
           </tbody>
         </table>
       </div>
@@ -135,7 +154,7 @@ const ManageCamps = () => {
           onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
           disabled={page === 1}
         >
-          <span className="text-lg font-semibold"><FaChevronLeft /></span>
+          <FaChevronLeft />
         </button>
         <span className="text-lg btn rounded-none font-bold text-gray-700">
           {page}
@@ -151,7 +170,7 @@ const ManageCamps = () => {
           }
           disabled={page === manageCamps.totalPages}
         >
-          <span className="text-lg font-semibold"><FaChevronRight /></span>
+          <FaChevronRight />
         </button>
       </div>
     </div>
