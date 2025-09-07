@@ -30,6 +30,7 @@ const RegisteredCamps = () => {
       );
       return res.data;
     },
+    enabled: !!user?.email,
   });
 
   const handleDelete = (id) => {
@@ -58,6 +59,9 @@ const RegisteredCamps = () => {
     });
   };
 
+  // Skeleton rows for loading
+  const skeletonRows = Array.from({ length: 10 });
+
   return (
     <div className="p-1 mb-8 mt-16">
       <Helmet>
@@ -66,50 +70,77 @@ const RegisteredCamps = () => {
       <SectionTitle
         title={"Registered Camps"}
         sub={"All Your Camp Registrations in One Place"}
-      ></SectionTitle>
-      {registeredCamps?.result?.length > 0 ? (
-        <>
-          <div className="flex justify-end mb-2">
-            <label className="input input-bordered flex items-center gap-2 dark:bg-slate-900 dark:text-white">
-              <input
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                type="text"
-                className="grow"
-                placeholder="Search"
-              />
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 16 16"
-                fill="currentColor"
-                className="h-4 w-4 opacity-70 "
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </label>
-          </div>
-          <div className="overflow-x-auto shadow-card-shadow dark:shadow-none dark:bg-slate-900">
-            <table className="table">
-              {/* head */}
-              <thead>
-                <tr className="bg-primary text-secondary">
-                  <th></th>
-                  <th>Camp Name</th>
-                  <th>Camp Fees</th>
-                  <th>Participant Name</th>
-                  <th>Payment Status</th>
-                  <th>Confirmation Status</th>
-                  <th>Cancel</th>
-                  <th>Feedback</th>
-                </tr>
-              </thead>
-              <tbody>
-                {/* row 1 */}
-                {registeredCamps.result?.map((camp, idx) => (
+      />
+
+      <div className="flex justify-end mb-2">
+        <label className="input input-bordered flex items-center gap-2 dark:bg-slate-900 dark:text-white">
+          <input
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            type="text"
+            className="grow"
+            placeholder="Search"
+          />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 16 16"
+            fill="currentColor"
+            className="h-4 w-4 opacity-70"
+          >
+            <path
+              fillRule="evenodd"
+              d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </label>
+      </div>
+
+      <div className="overflow-x-auto shadow-card-shadow dark:shadow-none dark:bg-slate-900 rounded-lg">
+        <table className="table w-full">
+          <thead>
+            <tr className="bg-primary text-secondary">
+              <th></th>
+              <th>Camp Name</th>
+              <th>Camp Fees</th>
+              <th>Participant Name</th>
+              <th>Payment Status</th>
+              <th>Confirmation Status</th>
+              <th>Cancel</th>
+              <th>Feedback</th>
+            </tr>
+          </thead>
+          <tbody>
+            {isLoading
+              ? skeletonRows.map((_, idx) => (
+                  <tr key={idx} className="animate-pulse">
+                    <th>
+                      <div className="h-6 w-6 bg-gray-300 rounded-md dark:bg-gray-700" />
+                    </th>
+                    <td>
+                      <div className="h-6 w-32 bg-gray-300 rounded-md dark:bg-gray-700" />
+                    </td>
+                    <td>
+                      <div className="h-6 w-20 bg-gray-300 rounded-md dark:bg-gray-700" />
+                    </td>
+                    <td>
+                      <div className="h-6 w-32 bg-gray-300 rounded-md dark:bg-gray-700" />
+                    </td>
+                    <td>
+                      <div className="h-6 w-20 bg-gray-300 rounded-md dark:bg-gray-700" />
+                    </td>
+                    <td>
+                      <div className="h-6 w-20 bg-gray-300 rounded-md dark:bg-gray-700" />
+                    </td>
+                    <td>
+                      <div className="h-6 w-6 bg-gray-300 rounded-full dark:bg-gray-700" />
+                    </td>
+                    <td>
+                      <div className="h-6 w-6 bg-gray-300 rounded-full dark:bg-gray-700" />
+                    </td>
+                  </tr>
+                ))
+              : registeredCamps.result?.map((camp, idx) => (
                   <tr key={camp._id} className="dark:border-gray-600">
                     <th>{idx + 1}</th>
                     <td>{camp.campName}</td>
@@ -142,44 +173,39 @@ const RegisteredCamps = () => {
                       </button>
                     </td>
                     <td>
-                      <FeedbackModal camp={camp}></FeedbackModal>
+                      <FeedbackModal camp={camp} />
                     </td>
                   </tr>
                 ))}
-              </tbody>
-            </table>
-          </div>
-          <div className="flex justify-center items-center mt-6 space-x-4">
-            <button
-              className="btn bg-primary border-none px-6 py-2 btn-circle shadow-md hover:bg-primary-hover disabled:opacity-50"
-              onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
-              disabled={page === 1}
-            >
-              <span className="text-lg font-semibold"><FaChevronLeft /></span>
-            </button>
-            <span className="text-lg btn rounded-none font-bold text-gray-700">
-              {page}
-            </span>
-            <button
-              className="btn bg-primary border-none px-6 py-2 btn-circle shadow-md hover:bg-primary-hover disabled:opacity-50"
-              onClick={() =>
-                setPage((prev) =>
-                  registeredCamps.totalPages
-                    ? Math.min(prev + 1, registeredCamps.totalPages)
-                    : prev
-                )
-              }
-              disabled={page === registeredCamps.totalPages}
-            >
-              <span className="text-lg font-semibold"><FaChevronRight /></span>
-            </button>
-          </div>
-        </>
-      ) : (
-        <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-red-500 text-center mt-16">
-          No data found
-        </div>
-      )}
+          </tbody>
+        </table>
+      </div>
+
+      <div className="flex justify-center items-center mt-6 space-x-4">
+        <button
+          className="btn bg-primary border-none px-6 py-2 btn-circle shadow-md hover:bg-primary-hover disabled:opacity-50"
+          onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+          disabled={page === 1}
+        >
+          <FaChevronLeft />
+        </button>
+        <span className="text-lg btn rounded-none font-bold text-gray-700">
+          {page}
+        </span>
+        <button
+          className="btn bg-primary border-none px-6 py-2 btn-circle shadow-md hover:bg-primary-hover disabled:opacity-50"
+          onClick={() =>
+            setPage((prev) =>
+              registeredCamps.totalPages
+                ? Math.min(prev + 1, registeredCamps.totalPages)
+                : prev
+            )
+          }
+          disabled={page === registeredCamps.totalPages}
+        >
+          <FaChevronRight />
+        </button>
+      </div>
     </div>
   );
 };

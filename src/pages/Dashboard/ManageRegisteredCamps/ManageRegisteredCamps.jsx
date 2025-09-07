@@ -18,11 +18,7 @@ const ManageRegisteredCamps = () => {
   const [limit] = useState(10);
   const [search, setSearch] = useState("");
 
-  const {
-    data: manageRegisteredCamps = [],
-    isLoading,
-    refetch,
-  } = useQuery({
+  const { data, isLoading, refetch } = useQuery({
     queryKey: ["manage-registered-camps", page, limit, search],
     queryFn: async () => {
       const res = await axiosSecure.get(
@@ -31,6 +27,9 @@ const ManageRegisteredCamps = () => {
       return res.data;
     },
   });
+
+  const manageRegisteredCamps = data || { result: [], totalPages: 0 };
+  const skeletonRows = Array.from({ length: 10 });
 
   const handleConfirmationStatus = async (email, campId) => {
     const res = await axiosSecure.patch(`/registered-camps/${email}`, {
@@ -41,7 +40,7 @@ const ManageRegisteredCamps = () => {
       toast.success("Confirmation status updated");
       refetch();
     } else {
-      toast.success("Faild to update");
+      toast.error("Failed to update");
     }
   };
 
@@ -68,6 +67,7 @@ const ManageRegisteredCamps = () => {
       }
     });
   };
+
   return (
     <div className="p-1 mb-8 mt-16">
       <Helmet>
@@ -76,7 +76,7 @@ const ManageRegisteredCamps = () => {
       <SectionTitle
         title={"Manage Registered Camps"}
         sub={"Track and Manage All The Registered Camps"}
-      ></SectionTitle>
+      />
       <div className="flex justify-end mb-2">
         <label className="input input-bordered flex items-center gap-2 dark:bg-slate-900 dark:text-white">
           <input
@@ -100,9 +100,8 @@ const ManageRegisteredCamps = () => {
           </svg>
         </label>
       </div>
-      <div className="overflow-x-auto shadow-card-shadow dark:shadow-none dark:bg-slate-900">
-        <table className="table">
-          {/* head */}
+      <div className="overflow-x-auto shadow-card-shadow dark:shadow-none dark:bg-slate-900 rounded-lg">
+        <table className="table w-full">
           <thead>
             <tr className="bg-primary text-secondary">
               <th></th>
@@ -115,42 +114,78 @@ const ManageRegisteredCamps = () => {
             </tr>
           </thead>
           <tbody>
-            {/* row 1 */}
-            {manageRegisteredCamps.result?.map((camp, idx) => (
-              <tr key={camp._id} className="dark:border-gray-600">
-                <th>{idx + 1}</th>
-                <td>{camp.participantName}</td>
-                <td>{camp.campName}</td>
-                <td>${camp.campFees}</td>
-                <td>{camp.paymentStatus}</td>
-                <td>
-                  <button
-                    disabled={camp.confirmationStatus === "confirmed" || camp.paymentStatus === "unpaid"}
-                    onClick={() =>
-                      handleConfirmationStatus(
-                        camp.participantEmail,
-                        camp.campId
-                      )
-                    }
-                    className="btn btn-xs disabled:bg-primary disabled:text-gray-400 bg-primary hover:bg-primary-hover"
-                  >
-                    {camp.confirmationStatus}
-                  </button>
-                </td>
-                <td>
-                  <button
-                    disabled={
-                      camp.paymentStatus === "paid" &&
-                      camp.confirmationStatus === "confirmed"
-                    }
-                    onClick={() => handleDelete(camp._id)}
-                    className="disabled:text-gray-300 text-2xl"
-                  >
-                    <BiX />
-                  </button>
-                </td>
-              </tr>
-            ))}
+            {isLoading
+              ? skeletonRows.map((_, idx) => (
+                  <tr key={idx} className="animate-pulse">
+                    <th>
+                      <div className="h-6 w-6 bg-gray-300 rounded-md dark:bg-gray-700" />
+                    </th>
+                    <td>
+                      <div className="h-6 w-32 bg-gray-300 rounded-md dark:bg-gray-700" />
+                    </td>
+                    <td>
+                      <div className="h-6 w-32 bg-gray-300 rounded-md dark:bg-gray-700" />
+                    </td>
+                    <td>
+                      <div className="h-6 w-20 bg-gray-300 rounded-md dark:bg-gray-700" />
+                    </td>
+                    <td>
+                      <div className="h-6 w-24 bg-gray-300 rounded-md dark:bg-gray-700" />
+                    </td>
+                    <td>
+                      <div className="h-6 w-24 bg-gray-300 rounded-md dark:bg-gray-700" />
+                    </td>
+                    <td>
+                      <div className="h-6 w-6 bg-gray-300 rounded-full dark:bg-gray-700" />
+                    </td>
+                  </tr>
+                ))
+              : manageRegisteredCamps.result?.length > 0
+              ? manageRegisteredCamps.result.map((camp, idx) => (
+                  <tr key={camp._id} className="dark:border-gray-600">
+                    <th>{idx + 1}</th>
+                    <td>{camp.participantName}</td>
+                    <td>{camp.campName}</td>
+                    <td>${camp.campFees}</td>
+                    <td>{camp.paymentStatus}</td>
+                    <td>
+                      <button
+                        disabled={
+                          camp.confirmationStatus === "confirmed" ||
+                          camp.paymentStatus === "unpaid"
+                        }
+                        onClick={() =>
+                          handleConfirmationStatus(
+                            camp.participantEmail,
+                            camp.campId
+                          )
+                        }
+                        className="btn btn-xs disabled:bg-primary disabled:text-gray-400 bg-primary hover:bg-primary-hover"
+                      >
+                        {camp.confirmationStatus}
+                      </button>
+                    </td>
+                    <td>
+                      <button
+                        disabled={
+                          camp.paymentStatus === "paid" &&
+                          camp.confirmationStatus === "confirmed"
+                        }
+                        onClick={() => handleDelete(camp._id)}
+                        className="disabled:text-gray-300 text-2xl"
+                      >
+                        <BiX />
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              : (
+                <tr>
+                  <td colSpan={7} className="text-center py-8 text-red-500 font-bold text-xl">
+                    No data found
+                  </td>
+                </tr>
+              )}
           </tbody>
         </table>
       </div>
