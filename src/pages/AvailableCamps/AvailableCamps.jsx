@@ -4,36 +4,33 @@ import CampCard from "../../components/Shared/CampCard/CampCard";
 import Container from "../../components/Shared/Container";
 import { TfiLayoutGrid2Alt, TfiLayoutGrid3Alt } from "react-icons/tfi";
 import { Helmet } from "react-helmet-async";
-import { Fade, Zoom } from "react-awesome-reveal";
+import { Fade } from "react-awesome-reveal";
 
 const AvailableCamps = () => {
   const [viewLayout, setViewLayout] = useState("three");
   const [sortBy, setSortBy] = useState("");
-  const [camp, , , search, setSearch, page, setPage, limit] = useCamp(sortBy);
+  const [camp, loading, , search, setSearch, page, setPage, limit] =
+    useCamp(sortBy);
 
-  const handleSearch = (e) => {
-    setSearch(e.target.value);
-  };
-
-  const handleSort = (e) => {
-    setSortBy(e.target.value);
-  };
-  const toggleView = () => {
+  const handleSearch = (e) => setSearch(e.target.value);
+  const handleSort = (e) => setSortBy(e.target.value);
+  const toggleView = () =>
     setViewLayout((prev) => (prev === "three" ? "two" : "three"));
-  };
 
   return (
     <Container>
       <Helmet>
         <title>MediCamp | Available Camps</title>
       </Helmet>
+
       <div className="my-8 lg:my-16">
-        <label className="input input-bordered flex items-center gap-2 max-w-lg mx-auto mb-2 dark:bg-slate-800">
+        {/* Search Bar */}
+        <label className="input input-bordered flex items-center gap-2 max-w-lg mx-auto mb-4 dark:bg-slate-800">
           <input
             value={search}
             onChange={handleSearch}
             type="text"
-            className="grow  dark:text-white"
+            className="grow dark:text-white"
             placeholder="Search"
           />
           <button>
@@ -51,6 +48,8 @@ const AvailableCamps = () => {
             </svg>
           </button>
         </label>
+
+        {/* View Toggle + Sort */}
         <div className="flex items-center gap-2 justify-end mb-4">
           <button onClick={toggleView}>
             <TfiLayoutGrid2Alt
@@ -66,6 +65,8 @@ const AvailableCamps = () => {
               }`}
             />
           </button>
+
+          {/* Sort Dropdown */}
           <select
             onChange={handleSort}
             value={sortBy}
@@ -74,16 +75,31 @@ const AvailableCamps = () => {
             <option value="" disabled>
               Sort By
             </option>
-            <option value={"most-registered"}>Most Registered</option>
-            <option value={"camp-fees"}>Camp Fees</option>
-            <option value={"alphabetical"}>A-Z</option>
+            <option value="most-registered">Most Registered</option>
+            <option value="camp-fees">Camp Fees</option>
+            <option value="alphabetical">A-Z</option>
           </select>
         </div>
-        {viewLayout === "three" ? (
+
+        {/* Camp Cards Grid */}
+        {loading ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+            {[...Array(8)].map((_, index) => (
+              <div
+                key={index}
+                className="border rounded-lg shadow-md p-4 animate-pulse dark:bg-slate-700"
+              >
+                <div className="h-40 bg-gray-300 dark:bg-slate-600 mb-4 rounded"></div>
+                <div className="h-4 bg-gray-300 dark:bg-slate-600 mb-2 rounded w-3/4"></div>
+                <div className="h-4 bg-gray-300 dark:bg-slate-600 rounded w-1/2"></div>
+              </div>
+            ))}
+          </div>
+        ) : viewLayout === "three" ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
             {camp.result?.map((item) => (
               <Fade key={item._id}>
-                <CampCard item={item}></CampCard>
+                <CampCard item={item} />
               </Fade>
             ))}
           </div>
@@ -91,34 +107,36 @@ const AvailableCamps = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {camp.result?.map((item) => (
               <Fade key={item._id}>
-                <CampCard item={item}></CampCard>
+                <CampCard item={item} />
               </Fade>
             ))}
           </div>
         )}
-      </div>
-      <div className="flex justify-center items-center my-6 space-x-4">
-        <button
-          className="btn bg-primary border-none px-6 py-2 rounded-lg shadow-md hover:bg-primary-hover disabled:opacity-50"
-          onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
-          disabled={page === 1}
-        >
-          <span className="text-lg font-semibold">Prev</span>
-        </button>
-        <span className="text-lg font-medium text-gray-700">
-          Page {page} of {camp.totalPages}
-        </span>
-        <button
-          className="btn bg-primary border-none px-6 py-2 rounded-lg shadow-md hover:bg-primary-hover disabled:opacity-50"
-          onClick={() =>
-            setPage((prev) =>
-              camp.totalPages ? Math.min(prev + 1, camp.totalPages) : prev
-            )
-          }
-          disabled={page === camp.totalPages}
-        >
-          <span className="text-lg font-semibold">Next</span>
-        </button>
+
+        {/* Pagination */}
+        <div className="flex justify-center items-center my-6 space-x-4">
+          <button
+            className="btn bg-primary border-none px-6 py-2 rounded-lg shadow-md hover:bg-primary-hover disabled:opacity-50"
+            onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+            disabled={page === 1}
+          >
+            <span className="text-lg font-semibold">Prev</span>
+          </button>
+          <span className="text-lg font-medium text-gray-700">
+            Page {page} of {camp.totalPages}
+          </span>
+          <button
+            className="btn bg-primary border-none px-6 py-2 rounded-lg shadow-md hover:bg-primary-hover disabled:opacity-50"
+            onClick={() =>
+              setPage((prev) =>
+                camp.totalPages ? Math.min(prev + 1, camp.totalPages) : prev
+              )
+            }
+            disabled={page === camp.totalPages}
+          >
+            <span className="text-lg font-semibold">Next</span>
+          </button>
+        </div>
       </div>
     </Container>
   );
