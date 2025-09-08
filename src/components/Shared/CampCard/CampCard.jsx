@@ -86,7 +86,7 @@ const CampCard = ({ item }) => {
       <div className="px-5 sm:px-6 pb-5 sm:pb-6 mt-auto">
         <Link
           to={`/camp-details/${_id}`}
-          className="w-full btn bg-primary hover:bg-primary-hover text-white rounded-lg"
+          className="w-full btn bg-primary hover:bg-primary-hover border-none text-white rounded-lg"
         >
           See Details
         </Link>

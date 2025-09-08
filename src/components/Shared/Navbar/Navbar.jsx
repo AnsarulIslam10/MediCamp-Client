@@ -59,7 +59,7 @@ const Navbar = () => {
           }
           to={"/available-camps"}
         >
-          Available Camps
+          All Camps
         </NavLink>
       </li>
       <li>
