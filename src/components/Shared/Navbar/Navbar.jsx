@@ -172,7 +172,7 @@ const Navbar = () => {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-50 mt-3 w-52 p-2 shadow gap-3 items-center"
+            className="menu menu-sm dropdown-content bg-white dark:bg-[#121212] rounded-box z-50 mt-3 w-52 p-2 shadow gap-3 items-center"
           >
             {links}
           </ul>
@@ -185,7 +185,7 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
       <div className="navbar-end">
-        <div className="mr-4">
+        <div className="mr-4 mt-2">
           <label className="swap swap-rotate">
             {/* this hidden checkbox controls the state */}
             <input

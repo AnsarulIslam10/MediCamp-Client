@@ -50,7 +50,7 @@ const Membership = () => {
               <h3 className="text-2xl font-semibold text-secondary dark:text-primary">
                 {tier.name}
               </h3>
-              <p className="text-3xl font-bold mt-4 text-primary dark:text-secondary">
+              <p className="text-3xl font-bold mt-4 text-primary">
                 {tier.price}
               </p>
 

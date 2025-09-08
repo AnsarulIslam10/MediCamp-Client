@@ -53,7 +53,7 @@ const MeetOurDoctors = () => {
                   {doctor.specialty}
                 </p>
                 <div className="divider px-20"></div>
-                <p className="text-gray-600 text-sm">{doctor.description}</p>
+                <p className="text-gray-600 dark:text-gray-300 text-sm">{doctor.description}</p>
               </div>
               <div className="flex justify-center space-x-3 mt-4">
                 <a href="https://www.facebook.com" target="_blank">
