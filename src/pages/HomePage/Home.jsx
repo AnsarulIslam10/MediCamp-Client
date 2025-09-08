@@ -24,10 +24,10 @@ const Home = () => {
       <MeetOurDoctors />
       <HealthTipsAwareness />
       <FeedbackAndRatings></FeedbackAndRatings>
-      <EmergencyHelpline></EmergencyHelpline>
       <Blog />
       <Gallery />
       <Membership />
+      <EmergencyHelpline></EmergencyHelpline>
       <FAQs></FAQs>
     </Container>
   );

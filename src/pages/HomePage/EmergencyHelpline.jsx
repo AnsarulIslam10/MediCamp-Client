@@ -1,48 +1,148 @@
-import React from "react";
+import React, { useState } from "react";
 import SectionTitle from "../../components/Shared/SectionTitle/SectionTitle";
 import { FaAmbulance, FaPhoneAlt } from "react-icons/fa";
 import { FaUserDoctor, FaEnvelope } from "react-icons/fa6";
+import { TbFidgetSpinner } from "react-icons/tb";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+// Reusable Card Component
+const ContactCard = ({ icon, title, desc, action, href, bgColor }) => (
+  <div className="flex flex-col items-center bg-white dark:bg-slate-900 p-8 rounded-2xl shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 w-full h-full">
+    <div className={`${bgColor} p-4 rounded-full mb-4`}>{icon}</div>
+    <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-2">
+      {title}
+    </h3>
+    <p className="text-description dark:text-gray-300 mb-4 text-center">
+      {desc}
+    </p>
+    <a
+      href={href}
+      aria-label={title}
+      className={`flex items-center justify-center ${bgColor} text-white px-6 py-2 rounded-lg hover:opacity-90 transition w-full`}
+    >
+      {action.icon}
+      <span className="ml-2">{action.label}</span>
+    </a>
+  </div>
+);
 
 const EmergencyHelpline = () => {
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    // Fake submission simulation
+    setTimeout(() => {
+      setLoading(false);
+      toast.success("✅ Your message has been sent successfully!");
+      e.target.reset()
+    }, 2000);
+  };
+
   return (
-    <section className="py-16 mt-0 bg-gray-50 dark:bg-gray-800">
-      <div className="mx-auto text-center">
+    <section className="py-20 bg-gray-50 dark:bg-gray-800 w-full rounded-xl">
+      <div className="mx-auto max-w-7xl w-full">
         <SectionTitle
-          title={"Emergency Contact & Helpline"}
-          sub={"We're available 24/7 to assist you in any medical emergency."}
+          title="Emergency Contact & Helpline"
+          sub="We're available 24/7 to assist you in any medical emergency."
         />
-        <div className="flex flex-col md:flex-row justify-center items-center gap-8 mt-10 px-10">
-          <div className="flex flex-col items-center bg-white dark:bg-slate-900 p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300 w-full md:w-1/3">
-            <div className="bg-primary p-4 rounded-full mb-4">
-              <FaAmbulance className="text-4xl text-white" />
-            </div>
-            <h3 className="text-xl font-semibold text-secondary dark:text-primary mb-2">
-              Ambulance Service
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mt-12 w-full">
+          {/* Contact Form */}
+          <div className="bg-white dark:bg-slate-900 p-8 rounded-2xl shadow-md w-full h-full">
+            <h3 className="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-6">
+              Send Us a Message
             </h3>
-            <p className="text-description dark:text-gray-200 mb-4">Emergency medical help</p>
-            <a
-              href="tel:+88017391212121"
-              className="flex items-center justify-center bg-primary text-secondary px-6 py-2 rounded-lg hover:bg-primary-dark transition-colors duration-300"
-            >
-              <FaPhoneAlt className="mr-2" />
-              017391212121
-            </a>
+            <form className="space-y-4 w-full" onSubmit={handleSubmit}>
+              <div>
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                >
+                  Full Name
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
+                  placeholder="Enter your name"
+                  className="mt-1 w-full px-4 py-2 border rounded-lg dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100 focus:ring-2 focus:ring-primary outline-none"
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                >
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  placeholder="Enter your email"
+                  className="mt-1 w-full px-4 py-2 border rounded-lg dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100 focus:ring-2 focus:ring-primary outline-none"
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="message"
+                  className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                >
+                  Message
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="4"
+                  required
+                  placeholder="Write your message..."
+                  className="mt-1 w-full px-4 py-2 border rounded-lg dark:bg-gray-800 h-44 dark:border-gray-700 dark:text-gray-100 focus:ring-2 focus:ring-primary outline-none"
+                />
+              </div>
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full bg-primary text-white py-3 rounded-lg hover:bg-primary-dark transition disabled:opacity-70 flex items-center justify-center"
+              >
+                {loading ? (
+                  <TbFidgetSpinner className="animate-spin text-2xl" />
+                ) : (
+                  "Send Message"
+                )}
+              </button>
+            </form>
           </div>
-          <div className="flex flex-col items-center bg-white dark:bg-slate-900 p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300 w-full md:w-1/3">
-            <div className="bg-secondary p-4 rounded-full mb-4">
-              <FaUserDoctor className="text-4xl text-white" />
-            </div>
-            <h3 className="text-xl font-semibold text-secondary dark:text-primary mb-2">
-              Doctor Assistance
-            </h3>
-            <p className="text-description dark:text-gray-200 mb-4">Contact our medical team</p>
-            <a
+
+          {/* Contact Cards */}
+          <div className="flex flex-col gap-8 w-full h-full">
+            <ContactCard
+              icon={<FaAmbulance className="text-4xl text-white" />}
+              title="Ambulance Service"
+              desc="Quick emergency medical response at your doorstep."
+              href="tel:+88017391212121"
+              bgColor="bg-secondary"
+              action={{
+                icon: <FaPhoneAlt />,
+                label: "017391212121",
+              }}
+            />
+            <ContactCard
+              icon={<FaUserDoctor className="text-4xl text-white" />}
+              title="Doctor Assistance"
+              desc="Connect with our experienced medical team instantly."
               href="mailto:help@medicamp.com"
-              className="flex items-center justify-center bg-secondary text-white px-6 py-2 rounded-lg hover:bg-secondary-dark transition-colors duration-300"
-            >
-              <FaEnvelope className="mr-2" />
-              Email Us
-            </a>
+              bgColor="bg-secondary"
+              action={{
+                icon: <FaEnvelope />,
+                label: "Email Us",
+              }}
+            />
           </div>
         </div>
       </div>
