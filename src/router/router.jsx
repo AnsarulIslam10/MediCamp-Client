@@ -22,6 +22,7 @@ import ParticipantRoute from "./ParticipantRoute";
 import ErrorPage from "../components/Shared/ErrorPage/ErrorPage";
 import OrganizerOverview from "../pages/Dashboard/OrganizerOverview/OrganizerOverview";
 import ParticipantOverview from "../pages/Dashboard/ParticipantOverview/ParticipantOverview";
+import About from "../pages/About/About";
 
 export const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ export const router = createBrowserRouter([
       {
         path: "/available-camps",
         element: <AvailableCamps></AvailableCamps>,
+      },
+      {
+        path: "/about",
+        element: <About></About>,
       },
       {
         path: "/camp-details/:id",

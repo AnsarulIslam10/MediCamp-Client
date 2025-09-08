@@ -62,6 +62,18 @@ const Navbar = () => {
           Available Camps
         </NavLink>
       </li>
+      <li>
+        <NavLink
+          className={({ isActive }) =>
+            `btn btn-sm btn-ghost text-xl rounded-none hover:bg-primary-hover ${
+              isActive ? "bg-primary" : ""
+            }`
+          }
+          to={"/about"}
+        >
+          About
+        </NavLink>
+      </li>
       {user ? (
         isAdmin ? (
           <>
