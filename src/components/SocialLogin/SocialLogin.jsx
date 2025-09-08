@@ -25,7 +25,7 @@ const SocialLogin = () => {
       .catch((err) => console.log(err));
   };
   return (
-    <div onClick={handleGoogleSignIn} className="text-xl btn btn-outline border-primary hover:bg-transparent hover:border-primary-hover hover:text-black border-2 justify-center flex items-center">
+    <div onClick={handleGoogleSignIn} className="text-xl btn btn-outline border-primary hover:bg-transparent hover:border-primary-hover hover:text-black border-2 justify-center flex items-center dark:text-white">
       <FcGoogle className="text-3xl" /> Google
     </div>
   );
