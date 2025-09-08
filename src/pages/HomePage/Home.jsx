@@ -11,6 +11,7 @@ import MeetOurDoctors from "./MeetOurDoctors";
 import OurServices from "./OurServices";
 import PopularCamps from "./PopularCamps";
 import Membership from "./Membership";
+import Banner from "./Banner";
 
 const Home = () => {
   return (
@@ -18,7 +19,8 @@ const Home = () => {
       <Helmet>
         <title>MediCamp | Home</title>
       </Helmet>
-      <Carousel></Carousel>
+      {/* <Carousel></Carousel> */}
+      <Banner />
       <PopularCamps></PopularCamps>
       <OurServices />
       <MeetOurDoctors />
