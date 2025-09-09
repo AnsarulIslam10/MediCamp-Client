@@ -146,7 +146,7 @@ const Navbar = () => {
         {/* Mega Menu */}
         <div
           tabIndex={0}
-          className="dropdown-content bg-white dark:bg-slate-900 rounded-box w-[600px] shadow absolute left-1/2 top-5 -translate-x-1/2 mt-2 p-6"
+          className="dropdown-content bg-white dark:bg-slate-900 rounded-box w-[600px] shadow absolute left-1/2 top-5 -translate-x-1/2 mt-2 p-6 hover:bg-white hover:dark:bg-slate-900"
         >
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             <button
