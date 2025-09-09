@@ -9,7 +9,7 @@ import logo from "../../../assets/Logo/MediCamp.svg";
 
 const Footer = () => {
   return (
-    <footer className="bg-cyan-50 dark:bg-slate-800 pt-10">
+    <footer id="footer" className="bg-cyan-50 dark:bg-slate-800 pt-10">
       <Container>
         <section className="footer">
           <aside>

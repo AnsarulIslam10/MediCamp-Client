@@ -215,6 +215,12 @@ const Navbar = () => {
             >
               FAQs
             </button>
+            <button
+              className="btn btn-sm btn-ghost text-xl justify-start hover:bg-primary-hover"
+              onClick={() => handleScroll("footer")}
+            >
+              Footer
+            </button>
           </div>
         </div>
       </li>
