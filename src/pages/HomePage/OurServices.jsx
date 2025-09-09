@@ -9,7 +9,7 @@ import {
 
 const OurServices = () => {
   return (
-    <section className="my-8 lg:my-16">
+    <section id="services" className="my-8 lg:my-16">
       <div className="mx-auto">
         <SectionTitle title={"Our Services"} sub={"Check out our services"} />
 

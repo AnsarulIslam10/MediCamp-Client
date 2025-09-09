@@ -43,7 +43,7 @@ const EmergencyHelpline = () => {
   };
 
   return (
-    <section className="py-20 bg-gray-50 dark:bg-gray-800 w-full rounded-xl px-2">
+    <section id="contact" className="py-20 bg-gray-50 dark:bg-gray-800 w-full rounded-xl px-2">
       <div className="mx-auto max-w-7xl w-full">
         <SectionTitle
           title="Emergency Contact & Helpline"

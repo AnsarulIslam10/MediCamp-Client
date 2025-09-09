@@ -34,7 +34,7 @@ const Membership = () => {
   ];
 
   return (
-    <section className="py-16 dark:bg-slate-900">
+    <section id="member" className="py-16 dark:bg-slate-900">
       <SectionTitle
         title="Become a Member"
         sub="Choose the plan that fits you and enjoy exclusive health benefits."

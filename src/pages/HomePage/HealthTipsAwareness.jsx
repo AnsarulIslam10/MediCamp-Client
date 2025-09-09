@@ -6,7 +6,7 @@ import SectionTitle from "../../components/Shared/SectionTitle/SectionTitle";
 
 const HealthTipsAwareness = () => {
   return (
-    <section className="py-16">
+    <section id="health" className="py-16">
       <SectionTitle
         title={"Health Tips & Awareness"}
         sub={

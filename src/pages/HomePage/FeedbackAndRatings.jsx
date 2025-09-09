@@ -19,7 +19,7 @@ const FeedbackAndRatings = () => {
   });
 
   return (
-    <div id="feedback-ratings" className="my-12 lg:my-20 px-4">
+    <div id="feedback" className="my-12 lg:my-20 px-4">
       <SectionTitle
         title={"Feedback & Ratings"}
         sub={"Voices of Our Happy Participants"}

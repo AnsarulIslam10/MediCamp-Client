@@ -5,6 +5,7 @@ import useAdmin from "../../../hooks/useAdmin";
 import { MdExitToApp } from "react-icons/md";
 import { FaBars } from "react-icons/fa6";
 import { useEffect, useState } from "react";
+import { IoMdArrowDropdown } from "react-icons/io";
 const Navbar = () => {
   const { user, signOutUser } = useAuth();
   const [isAdmin] = useAdmin();
@@ -133,29 +134,89 @@ const Navbar = () => {
       ) : (
         ""
       )}
-      <li>
-        <button
+      <li className="dropdown dropdown-hover hidden lg:block relative">
+        <div
+          tabIndex={0}
+          role="button"
           className="btn btn-sm btn-ghost text-xl rounded-none hover:bg-primary-hover"
-          onClick={() => handleScroll("doctors")}
         >
-          Doctors
-        </button>
-      </li>
-      <li>
-        <button
-          className="btn btn-sm btn-ghost text-xl rounded-none hover:bg-primary-hover"
-          onClick={() => handleScroll("blog")}
+          Sections <IoMdArrowDropdown />
+        </div>
+
+        {/* Mega Menu */}
+        <div
+          tabIndex={0}
+          className="dropdown-content bg-white dark:bg-slate-900 rounded-box w-[600px] shadow absolute left-1/2 top-5 -translate-x-1/2 mt-2 p-6"
         >
-          Blog
-        </button>
-      </li>
-      <li>
-        <button
-          className="btn btn-sm btn-ghost text-xl rounded-none hover:bg-primary-hover"
-          onClick={() => handleScroll("gallery")}
-        >
-          Gallery
-        </button>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            <button
+              className="btn btn-sm btn-ghost text-xl justify-start hover:bg-primary-hover"
+              onClick={() => handleScroll("banner")}
+            >
+              Banner
+            </button>
+            <button
+              className="btn btn-sm btn-ghost text-xl justify-start hover:bg-primary-hover"
+              onClick={() => handleScroll("popular-camps")}
+            >
+              Popular Camps
+            </button>
+            <button
+              className="btn btn-sm btn-ghost text-xl justify-start hover:bg-primary-hover"
+              onClick={() => handleScroll("services")}
+            >
+              Services
+            </button>
+            <button
+              className="btn btn-sm btn-ghost text-xl justify-start hover:bg-primary-hover"
+              onClick={() => handleScroll("doctors")}
+            >
+              Doctors
+            </button>
+            <button
+              className="btn btn-sm btn-ghost text-xl justify-start hover:bg-primary-hover"
+              onClick={() => handleScroll("health")}
+            >
+              Health Tips
+            </button>
+            <button
+              className="btn btn-sm btn-ghost text-xl justify-start hover:bg-primary-hover"
+              onClick={() => handleScroll("feedback")}
+            >
+              Feedback
+            </button>
+            <button
+              className="btn btn-sm btn-ghost text-xl justify-start hover:bg-primary-hover"
+              onClick={() => handleScroll("Blog")}
+            >
+              Blogs
+            </button>
+            <button
+              className="btn btn-sm btn-ghost text-xl justify-start hover:bg-primary-hover"
+              onClick={() => handleScroll("memories")}
+            >
+              Memories
+            </button>
+            <button
+              className="btn btn-sm btn-ghost text-xl justify-start hover:bg-primary-hover"
+              onClick={() => handleScroll("member")}
+            >
+              Member
+            </button>
+            <button
+              className="btn btn-sm btn-ghost text-xl justify-start hover:bg-primary-hover"
+              onClick={() => handleScroll("contact")}
+            >
+              Contact
+            </button>
+            <button
+              className="btn btn-sm btn-ghost text-xl justify-start hover:bg-primary-hover"
+              onClick={() => handleScroll("faq")}
+            >
+              FAQs
+            </button>
+          </div>
+        </div>
       </li>
     </>
   );
